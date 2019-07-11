@@ -1,0 +1,155 @@
+/** stylechooser **/
+
+#stylechooser { position: fixed; top: 13%; left: -1px; width: 243px; min-height: 0; z-index: 99999; padding: 0;-webkit-box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2);-moz-box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2);box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2);background-color: rgba(255, 255, 255, 0.9);}
+#stylechooser  #styleToggle { position: absolute; top: 0px; right: -49px; cursor: pointer; font-size: 0; color: transparent; width: 49px; height: 48px; margin: 0;-webkit-box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2);-moz-box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2);box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2);background-color: rgba(255, 255, 255, 0.9);}
+#stylechooser  #styleToggle i:before { font-size: 24px; color: #737373; top: 12px; left: 13px; position: absolute; }
+#stylechooser .easyBox.flat { padding: 0 0 0 20px; width: 292px; }
+
+#stylechooser .easyBox { margin: 0; padding: 0; background: #fff; }
+
+#stylechooser hr { margin: 0; }
+#stylechooser label { margin-bottom: 20px; }
+#stylechooser label.animation { margin-right: 20px; margin-top: 5px; display: block; float: left}
+
+#stylechooser .mkSpace {
+    padding: 10px 20px;
+}
+#stylechooser .demoList { margin: 0 0 0 -10px; padding:0; list-style: none; }
+#stylechooser .demoList li { margin: 0 0 10px 10px; float: left; position: relative; }
+
+#stylechooser .demoColor { display: block; width: 25px; height: 25px; background: transparent; }
+#stylechooser .demoActive:before {
+    content: "\f00c";
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    font: 12px/1em 'FontAwesome';
+    font-style: normal;
+    color: #fff;
+    text-shadow: 0 0 1px rgba(0, 0, 0, .75);
+}
+
+#stylechooser .light { margin: 0; line-height: 46px; }
+#stylechooser .btn.btn-small { margin-bottom: 5px; }
+
+@media (max-width: 767px) {
+    #stylechooser {
+        display: none !important;
+    }
+}
+
+.iconBox .media > .pull-left:hover i {
+	color: #FFF !important;
+}
+footer .socialIcons.bigIcons > li > a,
+.prefooter .socialIcons.bigIcons > li > a {
+	color: #FFF !important;
+}
+body .iconBox.type3 .media > .pull-left i {
+	color: #FFF;
+}
+body .iconBox.type3 .media > .pull-left:hover {
+	background: #333;
+}
+body .iconBox.type4 .media > .pull-left i {
+	color: #FFF;
+}
+body .iconBox.type4 .media > .pull-left:hover {
+	background:#333;
+}
+body .priceBox.type2 .fa:hover {
+	color:#fff;
+}
+
+body .socialIcons.bigIcons.type2 > li > a:hover {
+	background: #2A272E;
+	color:#fff;
+}
+
+#stylechooser .btn, #stylechooser .btn:hover{
+    color: #ffffff;
+}
+
+#stylechooser .btn-primary{
+    background-color: #00a3d9;
+    border-color: #00a3d9;
+}
+
+#stylechooser .btn-primary:hover{
+    background-color: #006699;
+    border-color: #006699;
+}
+
+/*
+body.hasCtBar #themeSwitcher  a {
+ border-bottom:0 !important;
+}
+body.hasCtBar #themeSwitcher .dd-option {
+ border-bottom: solid 1px #454545;
+}
+
+body.hasCtBar #themeSwitcher ul li + li {
+ margin-top:0;
+}
+body.hasCtBar #themeSwitcher a > *:hover {
+color: inherit;
+}
+
+body.hasCtBar #MainNav:before {
+ height: 110px;
+}
+body.hasCtBar .theme-qtip-custom {
+ height: 212px;
+}
+*/
+
+.switch-animations{
+    float: right;
+}
+
+.onoffswitch {
+    position: relative; width: 91px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #FFFFFF; border-radius: 0px;
+}
+.onoffswitch-inner {
+    width: 200%; margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 10px;
+    background-color: #EEEEEE; color: #999999;
+}
+.onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 10px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+}
+.onoffswitch-switch {
+    width: 30px; margin: 0px;
+    background: #00a3d9;
+    border: 2px solid #FFFFFF; border-radius: 0px;
+    position: absolute; top: 0; bottom: 0; right: 59px;
+    -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+}
