@@ -1,6 +1,6 @@
 <head>
     <meta charset="UTF-8">
-    <title> REDIES - @yield('htmlheader_title', '') </title>
+    <title> SGD UGEL YUNGAY - @yield('htmlheader_title', '') </title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -23,7 +23,7 @@
     <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Merienda:700" rel="stylesheet">
 
-<link rel="icon" type="image/png" href="{{ asset('/img/pjicono.png') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('/img/logo-yungay.png') }}" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 html,body{
-background-image: url('../images/fondoLoginEstad2.png');
+background-image: url('../images/fondo.jpg');
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
@@ -24,7 +24,7 @@ background-color: rgba(0,0,0,0.5) !important;
 }
 
 .card{
-height: 430px;
+height: 460px;
 margin-top: auto;
 margin-bottom: auto;
 width: 400px;
@@ -34,11 +34,11 @@ background-color: rgba(0,0,0,0.5) !important;
 .social_icon span{
 font-size: 60px;
 margin-left: 10px;
-color: #FFC312;
+color: #20a6f6;
 }
 
 .social_icon span:hover{
-color: #ed7706;
+color: #1884c5;
 cursor: pointer;
 }
 
@@ -54,8 +54,8 @@ top: -45px;
 
 .input-group-prepend span{
 width: 50px;
-background-color: #FFC312;
-color: black;
+background-color: #20a6f6;
+color: white;
 border:0 !important;
 }
 
@@ -78,14 +78,14 @@ margin-right: 5px;
 }
 
 .login_btn{
-color: black;
-background-color: #FFC312;
+color: white;
+background-color: #20a6f6;
 width: 100px;
 }
 
 .login_btn:hover{
 color: white;
-background-color: #ed7706;
+background-color: #1884c5;
 }
 
 .links{

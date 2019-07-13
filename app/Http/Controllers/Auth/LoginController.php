@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-use App\Iniciosesion;
+
 
 
 class LoginController extends Controller
@@ -130,23 +130,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {   
 
-            $fec=date("Y-m-d");
-            $hra=date("H:i:s");
-
-            $ip=$request->ip();
-            $mac= '';
-         $newinicio=new Iniciosesion();
-
-             $newinicio->fecha=$fec;
-             $newinicio->hora=$hra;
-             $newinicio->recordar='0';
-             $newinicio->ip=$ip;
-             $newinicio->mac=$mac;
-             $newinicio->activo='1';
-             $newinicio->borrado='0';
-             $newinicio->users_id=$user->id;
-
-             $newinicio->save();
+   
     }
 
     protected function sendFailedLoginResponse(Request $request)

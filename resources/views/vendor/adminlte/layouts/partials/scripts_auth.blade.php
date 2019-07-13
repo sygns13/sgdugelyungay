@@ -2,45 +2,21 @@
 <script src="{{ asset('/js/app.js') }}"></script>
 
 
-    <script src="{{ asset('/assets3/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js')}}" type="text/javascript"></script>
 
-    <script src="{{ asset('/assets3/js/hoverIntent.js') }}"></script>
+<script src="{{ asset('js/mostrarMenu.js')}}"  type="text/javascript"></script>
 
-    <script src="{{ asset('/assets3/js/jquery.parallax.js') }}"></script>
-
-    <script src="{{ asset('/assets3/js/jquery.fitvids.js') }}"></script>
-
-    <script src="{{ asset('/assets3/js/masonry.min.js') }}"></script>
-
-    <script src="{{ asset('/assets3/js/jquery.flexslider-min.js') }}"></script>
-
-    <script src="{{ asset('/assets3/js/moment.min.js') }}"></script>
-    <script src="{{ asset('/assets3/js/fullcalendar.min.js') }}"></script>
-    <script src="{{ asset('/assets3/js/gcal.js') }}"></script>
-    <script src="{{ asset('/assets3/js/jquery-ui.custom.min.js') }}"></script>
-
-    <script src="{{ asset('/assets3/js/jquery.browser.min.js') }}"></script>
-
-    <script src="{{ asset('/assets3/js/jquery.appear.js') }}"></script>
-
-    <script src="{{ asset('/assets3/js/jquery.placeholder.min.js') }}"></script>
-
-    <script src="{{ asset('/assets3/js/jquery.spritely.js') }}"></script>
-
-    <script src="{{ asset('/assets3/js/datepicker/bootstrap-datepicker.js') }}"></script>
-
-    <script src="{{ asset('/assets3/twitter/js/jquery.tweet.js') }}"></script>
-
-    <script src="{{ asset('/assets3/form/js/contact-form.js') }}"></script>
-
-       <script src="{{ asset('/assets3/js/jquery.magnific-popup.min.js') }}"></script>
-
-    <script src="{{ asset('/assets3/js/main.js') }}"></script>
-
-
-
-
-    <!-- EDIT THIS FILE TO CHANGE THE CALENDAR EVENTS -->
-    <script src="{{ asset('/assets3/js/calendar.js') }}"></script>
-
-    <script src="{{ asset('/assets3/js/less.min.js') }}"></script>
+<script src="{{ asset('js/jquery.prettyPhoto.js')}}" type="text/javascript"></script>
+<script src="{{ asset('js/jquery.dataTables.min.js')}}"  type="text/javascript"></script>
+<script src="{{ asset('js/dataTables.bootstrap.min.js')}}" type="text/javascript"></script>
+<script src="{{ asset('js/sweetalert2.min.js')}}" type="text/javascript"></script>
+<script src="{{ asset('js/select2.full.min.js')}}" type="text/javascript"></script>
+<script src="{{ asset('js/bootstrap-datepicker.js')}}" type="text/javascript"></script>
+<script src="{{ asset('js/alertify.js')}}" type="text/javascript"></script>
+<script src="{{ asset('js/jquery.PrintArea.js')}}" type="text/javascript"></script>
+<script src="{{ asset('js/fileinput.js')}}" type="text/javascript"></script>
+<script src="{{ asset('js/locales/es.js')}}" type="text/javascript"></script>
+<script src="{{ asset('iCheck/icheck.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('Ckeditor/ckeditor.js')}}"></script>
+<script src="{{ asset('js/bootstrap-colorpicker.js')}}"  type="text/javascript"></script>
+<script src="{{ asset('js/axios.js')}}"  type="text/javascript"></script>
