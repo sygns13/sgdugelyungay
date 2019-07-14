@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Persona;
 use App\User;
-use App\Tipouser;
-use App\Provincias;
-use App\Magistrado;
+use Mail;
 
 use Validator;
 use Auth;
 use DB;
 use Storage;
+use Illuminate\Support\Facades\Input;
 
+use App\Mail\SendMail;
 
 class PersonaController extends Controller
 {
@@ -116,7 +116,284 @@ class PersonaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function resetclave(Request $request)
+    {   
+        $result='1';
+        $msj='';
+        $selector='';
+        $errors="";
+
+        $dni=$request->txtdniE;
+        $email=$request->txtemailE;
+
+        $request->tipomail="2";
+        $request->archivo="";
+
+        $request->nombres='';
+        $request->apellidos='';
+        $request->dni='';
+        $request->name='';
+        $request->password='';
+
+        $input3  = array('dni' => $dni);
+        $reglas3 = array('dni' => 'required');
+
+        $input7  = array('email' => $email);
+        $reglas7 = array('email' => 'required');
+
+        $validator3 = Validator::make($input3, $reglas3);
+        $validator7 = Validator::make($input7, $reglas7);
+
+        $validate = Validator::make(Input::all(), [
+            'g-recaptcha-response' => 'required|captcha'
+        ]);
+
+        
+        if ($validate->fails())
+        {
+            $result='2';
+            $msj='Captcha error! Debe de completar el Captcha requerido';
+            $selector='captcha';
+
+            $errors=$validate->errors();
+        }
+
+        elseif ($validator3->fails()) {
+            $result='0';
+            $msj='Debe de completar su Nª de DNI';
+            $selector='txtdniE';
+        }
+        elseif ($validator7->fails()) {
+            $result='0';
+            $msj='Debe de completar su Email';
+            $selector='txtemailE';
+        }else{
+            $usuario=DB::select("select u.id,u.name, u.email,p.nombres,p.apellidos,p.dni from personas p
+            inner join users u on p.id=u.persona_id
+            where p.dni='".$dni."' and u.email='".$email."';");
+
+            $aux=0;
+            $idU="";
+            foreach ($usuario as $key => $dato) {
+                $aux=1;
+
+                $request->nombres=$dato->nombres;
+                $request->apellidos=$dato->apellidos;
+                $request->dni=$dato->dni;
+                $request->name=$dato->name;
+
+                $idU=$dato->id;
+
+            }
+
+
+
+            if($aux==0){
+                $result='0';
+                $msj='Los Datos Ingresados no corresponden a un Usuario Registrado en el Sistema';
+                $selector='txtdniE';
+            }else{
+
+                $password="";
+
+                $caracteres = '123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-.#!';
+                    for($x = 0; $x < 10; $x++){
+                        $password = substr(str_shuffle($caracteres), 0, 10);
+                    }
+
+                $request->password=$password;
+
+                $edutUser =User::findOrFail($idU);
+                $edutUser->password=bcrypt($password);
+                $edutUser->save();
+
+
+                Mail::send(new SendMail());
+
+                $msj='Password de Usuario reseteado y enviado al email ingresado, Proceda a Iniciar Sesión';
+
+
+            }
+
+        }
+        return response()->json(["result"=>$result,'msj'=>$msj,'selector'=>$selector,'errors'=>$errors]);
+    }
+
     public function store(Request $request)
+    {
+        $result='1';
+        $msj='';
+        $selector='';
+        $errors="";
+
+        $nombres=$request->txtnombres;
+        $apellidos=$request->txtapellidos;
+        $dni=$request->txtdni;
+        $genero=$request->cbugenero;
+        $direccion=$request->txtdir;
+
+        $name=$request->txtuser;
+        $password=$request->txtclave;
+        $email=$request->txtemail;
+
+        $request->tipomail="1";
+        $request->archivo="";
+
+
+        $input1  = array('nombres' => $nombres);
+        $reglas1 = array('nombres' => 'required');
+
+        $input2  = array('apellidos' => $apellidos);
+        $reglas2 = array('apellidos' => 'required');
+
+        $input3  = array('dni' => $dni);
+        $reglas3 = array('dni' => 'required');
+
+        $input4  = array('dni' => $dni);
+        $reglas4 = array('dni' => 'unique:personas,dni'.',1,borrado');
+
+        $input5  = array('name' => $name);
+        $reglas5 = array('name' => 'required');
+
+        $input6  = array('password' => $password);
+        $reglas6 = array('password' => 'required');
+
+        $input7  = array('email' => $email);
+        $reglas7 = array('email' => 'required');
+
+        $input8  = array('name' => $name);
+        $reglas8 = array('name' => 'unique:users,name');
+
+        $input9  = array('email' => $email);
+        $reglas9 = array('email' => 'unique:users,email');
+
+        $input10  = array('email' => $email);
+        $reglas10 = array('email' => 'regex:/^.+@.+$/i');
+
+        $validator1 = Validator::make($input1, $reglas1);
+        $validator2 = Validator::make($input2, $reglas2);
+        $validator3 = Validator::make($input3, $reglas3);
+        $validator4 = Validator::make($input4, $reglas4);
+        $validator5 = Validator::make($input5, $reglas5);
+        $validator6 = Validator::make($input6, $reglas6);
+        $validator7 = Validator::make($input7, $reglas7);
+        $validator8 = Validator::make($input8, $reglas8);
+        $validator9 = Validator::make($input9, $reglas9);
+        $validator10 = Validator::make($input10, $reglas10);
+  
+
+
+
+        $validate = Validator::make(Input::all(), [
+            'g-recaptcha-response' => 'required|captcha'
+        ]);
+
+        
+        if ($validate->fails())
+        {
+            $result='2';
+            $msj='Captcha error! Debe de completar el Captcha requerido';
+            $selector='captcha';
+
+            $errors=$validate->errors();
+        }
+        elseif ($validator1->fails()) {
+            $result='0';
+            $msj='Debe de completar sus nombres';
+            $selector='txtnombres';
+        }
+        elseif ($validator2->fails()) {
+            $result='0';
+            $msj='Debe de completar sus apellidos';
+            $selector='txtapellidos';
+        }
+        elseif ($validator3->fails()) {
+            $result='0';
+            $msj='Debe de completar su Nª de DNI';
+            $selector='txtdni';
+        }
+        elseif (strlen($dni)!=8) {
+            $result='0';
+            $msj='Su N° de DNI debe de tener 08 dígitos';
+            $selector='txtdni';
+        }
+        elseif ($validator4->fails()) {
+            $result='0';
+            $msj='El N° de DNI ingresado ya se encuentra registrado';
+            $selector='txtdni';
+        }
+        elseif ($validator5->fails()) {
+            $result='0';
+            $msj='Debe de completar su nombre de Usuario';
+            $selector='txtuser';
+        }
+        elseif ($validator6->fails()) {
+            $result='0';
+            $msj='Debe de completar su Password';
+            $selector='txtclave';
+        }
+        elseif ($validator7->fails()) {
+            $result='0';
+            $msj='Debe de completar su Email';
+            $selector='txtemail';
+        }
+        elseif ($validator8->fails()) {
+            $result='0';
+            $msj='El nombre de Usuario ingresado ya se encuentra registrado';
+            $selector='txtuser';
+        }
+        elseif ($validator9->fails()) {
+            $result='0';
+            $msj='El email ingresado ya se encuentra registrado';
+            $selector='txtemail';
+        }
+        elseif ($validator10->fails()) {
+            $result='0';
+            $msj='El Email no cuenta con un formato correcto: example@dominio.com';
+            $selector='txtemail';
+        }
+
+        else{
+
+            $newPersona = new Persona();
+
+            $newPersona->nombres=$nombres;
+            $newPersona->apellidos=$apellidos;
+            $newPersona->dni=$dni;
+            $newPersona->genero=$genero;
+            $newPersona->direccion=$direccion;
+            $newPersona->imagen='';
+
+            $newPersona->activo='1';
+            $newPersona->borrado='0';
+
+            $newPersona->save();
+
+
+            $newUser = new User();
+
+                $newUser->name=$name;
+                $newUser->email=$email;
+                $newUser->password=bcrypt($password);
+                $newUser->persona_id=$newPersona->id;
+                $newUser->tipouser_id='3';
+                $newUser->activo='1';
+                $newUser->borrado='0';                   
+
+            $newUser->save();
+
+
+            Mail::send(new SendMail());
+
+            $msj='Nuevo Usuario Registrado con éxito, se envió un Correo Electrónico a su Email Registrado confirmando su registro, Proceda a Iniciar Sesión';
+
+
+        }
+
+        return response()->json(["result"=>$result,'msj'=>$msj,'selector'=>$selector,'errors'=>$errors]);
+    }
+    /* public function store(Request $request)
     {
         $result='1';
         $msj='';
@@ -301,7 +578,7 @@ class PersonaController extends Controller
 
         return response()->json(["result"=>$result,'msj'=>$msj,'selector'=>$selector]);
     }
-
+ */
     /**
      * Display the specified resource.
      *

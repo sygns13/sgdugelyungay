@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 	<meta charset="utf-8">
-	<title>Mail From REDIES</title>
+	<title>Mail From SGD UGEL YUNGAY</title>
 </head>
 <body>
 

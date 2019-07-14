@@ -63,13 +63,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
   @if($modulo=="inicioAdmin")
     @include('inicio.vue')
 
-  @elseif($modulo=="especialidad")
-      @include('especialidades.vue')
-   
+  @elseif($modulo=="tipodocumento")
+      @include('tipodocumento.vue')
 
+    @elseif($modulo=="formarecepcion")
+      @include('formarecepcion.vue')
+ 
+    @elseif($modulo=="unidadorganica")
+      @include('unidadorganica.vue')
 
-    @elseif($modulo=="subespecialidad")
-      @include('subespecialidades.vue')
+    @elseif($modulo=="iniciousuario")
+      @include('iniciousuario.vue')
  
 
   @endif

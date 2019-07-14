@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Persona;
 use App\User;
-use App\Tipouser;
-use App\Provincias;
+
 
 use Validator;
 use Auth;

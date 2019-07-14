@@ -32,6 +32,10 @@ Route::get('loginn','Auth\LoginController@showLoginForm');
 Route::post('loginn','Auth\LoginController@login');
 
 
+Route::post('crearusuario','PersonaController@store');
+Route::post('resetclave','PersonaController@resetclave');
+
+
 
 Route::group(['middleware' => 'auth'], function () {
 
@@ -46,6 +50,43 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('send','mailController@send');
     
         Route::get('sendSMS','SmsController@sendSms');
+
+
+
+        Route::get('tipodocumento','TipodocumentoController@index1');
+        Route::get('formarecepcion','FormarecepcionController@index1');
+        Route::get('unidadorganica','UnidadorganicaController@index1');
+
+
+
+
+
+        Route::resource('tipodocumentos','TipodocumentoController');
+        Route::resource('formarecepcions','FormarecepcionController');
+        Route::resource('unidadorganicas','UnidadorganicaController');
+        Route::resource('enviarMail','MailController');
+        Route::resource('enviarSMS','SmsController');
+        Route::resource('usuariomail','UsermailController');
+        Route::resource('usuariosms','UsersmsController');
+
+
+
+
+
+
+
+
+
+
+        Route::get('tipodocumentos/altabaja/{id}/{var}','TipodocumentoController@altabaja');
+        Route::get('formarecepcions/altabaja/{id}/{var}','FormarecepcionController@altabaja');
+        Route::get('unidadorganicas/altabaja/{id}/{var}','UnidadorganicaController@altabaja');
+
+
+        
+
+
+
 
 
 

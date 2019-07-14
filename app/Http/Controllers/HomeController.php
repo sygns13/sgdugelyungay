@@ -66,6 +66,11 @@ class HomeController extends Controller
                 return view('inicio.home',compact('tipouser','modulo','iduser'));
 
             }
+            elseif (accesoUser([3])) {
+               
+                $modulo="iniciousuario";
+                return view('iniciousuario.home',compact('tipouser','modulo','iduser'));
+            }
             
 
 

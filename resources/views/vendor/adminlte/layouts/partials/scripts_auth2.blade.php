@@ -20,3 +20,4 @@
 <script src="{{asset('Ckeditor/ckeditor.js')}}"></script>
 <script src="{{ asset('js/bootstrap-colorpicker.js')}}"  type="text/javascript"></script>
 <script src="{{ asset('js/axios.js')}}"  type="text/javascript"></script>
+{!! NoCaptcha::renderJs() !!}
