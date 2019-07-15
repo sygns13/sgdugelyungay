@@ -72,8 +72,29 @@ data:{
 
 
 
-   newforma:'',
-   newEstado:'1',
+   newPrioridad:1,
+   newOrigen:2,
+   newTipo:false,
+   newUnidadDestino:'',
+   newfirma:'',
+   newcargo:'',
+   newfecha:'',
+   newtipodoc:0,
+   newNumero:'',
+   newSiglas:'',
+   newForma:0,
+   uploadReady:true,
+   archivo:null,
+   newFolios:'',
+   newAsunto:'',
+   newClasificacion:4,
+   newDias:'',
+   newForma:false,
+   newUnidadOrganica:0,
+   newDetalle:'',
+   newProveido:'',
+
+   newUsuario:'',
 
 
 
@@ -115,6 +136,19 @@ computed:{
 },
 
 methods: {
+
+    getArchivo:function(event){
+                //Asignamos la imagen a  nuestra data
+
+                if (!event.target.files.length)
+                {
+                  this.archivo=null;
+                }
+                else{
+                this.archivo = event.target.files[0];
+                }
+            },
+
    getFormaRecepcion: function (page) {
        var busca=this.buscar;
        var url = 'formarecepcions?page='+page+'&busca='+busca;
