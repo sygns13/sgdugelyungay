@@ -1,5 +1,5 @@
 <head>
-    <meta charset="UTF-8">
+        <meta charset = "UTF-8" />
     <title> SGD UGEL YUNGAY - <?php echo $__env->yieldContent('htmlheader_title', ''); ?> </title>
     <link rel="icon" type="image/png" href="<?php echo e(asset('/img/logo-yungay.png')); ?>" />
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
@@ -9,6 +9,9 @@
     <link href="<?php echo e(asset('login/css/bootstrapF.css')); ?>" rel="stylesheet" type="text/css" />
     <link href="<?php echo e(asset('login/css/all.css')); ?>" rel="stylesheet" type="text/css" />
     <link href="<?php echo e(asset('login/css/styles.css')); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('/css/alertify.css')); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('css/spinkit.min.css')); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('/css/sweetalert2.min.css')); ?>" rel="stylesheet" type="text/css" /> 
 
 
 

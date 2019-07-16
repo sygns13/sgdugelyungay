@@ -6,7 +6,7 @@ html,body{
 background-image: url('../images/fondo.jpg');
 background-size: cover;
 background-repeat: no-repeat;
-height: 100%;
+background-repeat: repeat;
 font-family: 'Numans', sans-serif;
 }
 
@@ -87,6 +87,19 @@ background-color: #20a6f6;
 color: white;
 background-color: #1884c5;
 }
+
+
+
+.login2_btn{
+	color: white;
+	background-color: #20a6f6;
+	/*width: 100px;*/
+	}
+	
+	.login2_btn:hover{
+	color: white;
+	background-color: #1884c5;
+	}
 
 .links{
 color: white;

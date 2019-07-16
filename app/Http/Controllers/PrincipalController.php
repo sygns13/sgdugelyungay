@@ -30,14 +30,18 @@ class PrincipalController extends Controller
     {
         $buscar=$request->busca;
 
-        $tipodocumentos = Tipodocumento::where('borrado','0')->where('activo','0')->orderBy('id')->get();
-        $formarecepcions = Formarecepcion::where('borrado','0')->where('activo','0')->orderBy('id')->get();
-        $prioridads = Prioridad::where('borrado','0')->where('activo','0')->orderBy('id')->get();
-        $unidadorganicas = Unidadorganica::where('borrado','0')->where('activo','0')->orderBy('id')->get();
+        $tipodocumentos = Tipodocumento::where('borrado','0')->where('activo','1')->orderBy('id')->get();
+        $formarecepcions = Formarecepcion::where('borrado','0')->where('activo','1')->orderBy('id')->get();
+        $prioridads = Prioridad::where('borrado','0')->where('activo','1')->orderBy('id')->get();
+        $unidadorganicas = Unidadorganica::where('borrado','0')->where('activo','1')->orderBy('id')->get();
 
         return [
 
-            'formarecepcions'=>$formarecepcions
+            'tipodocumentos'=>$tipodocumentos,
+            'formarecepcions'=>$formarecepcions,
+            'prioridads'=>$prioridads,
+            'unidadorganicas'=>$unidadorganicas,
+
         ];
     }
     /**
@@ -45,6 +49,35 @@ class PrincipalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function consultadni(Request $request)
+    {
+        $dni=$request->dni;
+
+        $res=1;
+
+        error_reporting(E_ALL ^ E_NOTICE);
+
+        $consulta = file_get_contents('http://aplicaciones007.jne.gob.pe/srop_publico/Consulta/Afiliado/GetNombresCiudadano?DNI='.$dni);
+
+        $partes = explode("|", $consulta);
+
+
+$datos = array(
+		0 => $dni, 
+		1 => $partes[0], 
+		2 => $partes[1],
+		3 => $partes[2],
+);
+
+
+if(strlen($datos[1])==0 && strlen($datos[2])==0 && strlen($datos[3])==0){
+    $res=0;
+}
+
+
+return response()->json(["datos"=>$datos,"res"=>$res]);
+    }
+
     public function create()
     {
         //

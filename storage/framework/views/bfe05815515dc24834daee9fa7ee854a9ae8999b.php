@@ -55,13 +55,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <?php if($modulo=="inicioAdmin"): ?>
     <?php echo $__env->make('inicio.vue', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
-  <?php elseif($modulo=="especialidad"): ?>
-      <?php echo $__env->make('especialidades.vue', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-   
+  <?php elseif($modulo=="tipodocumento"): ?>
+      <?php echo $__env->make('tipodocumento.vue', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
+    <?php elseif($modulo=="formarecepcion"): ?>
+      <?php echo $__env->make('formarecepcion.vue', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+ 
+    <?php elseif($modulo=="unidadorganica"): ?>
+      <?php echo $__env->make('unidadorganica.vue', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
-    <?php elseif($modulo=="subespecialidad"): ?>
-      <?php echo $__env->make('subespecialidades.vue', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php elseif($modulo=="iniciousuario"): ?>
+      <?php echo $__env->make('iniciousuario.vue', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
  
 
   <?php endif; ?>

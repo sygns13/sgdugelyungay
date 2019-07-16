@@ -20,3 +20,4 @@
 <script src="<?php echo e(asset('Ckeditor/ckeditor.js')); ?>"></script>
 <script src="<?php echo e(asset('js/bootstrap-colorpicker.js')); ?>"  type="text/javascript"></script>
 <script src="<?php echo e(asset('js/axios.js')); ?>"  type="text/javascript"></script>
+<?php echo NoCaptcha::renderJs(); ?>

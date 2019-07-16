@@ -2,7 +2,7 @@
     let app = new Vue({
 el: '#app',
 data:{
-       titulo:"Nueva Solicitud de Tramite",
+       titulo:"Solicitud de Tramite",
        subtitulo: "Principal",
        subtitulo2: "Principal",
 
@@ -151,19 +151,25 @@ methods: {
 
    getFormaRecepcion: function (page) {
        var busca=this.buscar;
-       var url = 'formarecepcions?page='+page+'&busca='+busca;
+       var url = 'principal?page='+page+'&busca='+busca;
 
        axios.get(url).then(response=>{
-           this.formarecepcions= response.data.formarecepcions.data;
-           this.pagination= response.data.pagination;
 
-           if(this.formarecepcions.length==0 && this.thispage!='1'){
-               var a = parseInt(this.thispage) ;
-               a--;
-               this.thispage=a.toString();
-               this.changePage(this.thispage);
-           }
-       })
+           //console.log(response.data);
+           this.prioridads= response.data.prioridads;
+           this.formarecepcions= response.data.formarecepcions;
+           this.unidadorganicas= response.data.unidadorganicas;
+           this.tipodocumentos= response.data.tipodocumentos;
+
+
+           this.$nextTick(function () {
+                this.newPrioridad=1;
+                this.newtipodoc=0;
+                this.newForma=0;
+                this.newUnidadOrganica=0;
+                })
+
+        })
    },
    changePage:function (page) {
        this.pagination.current_page=page;

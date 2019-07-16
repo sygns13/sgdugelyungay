@@ -198,8 +198,8 @@ class PersonaController extends Controller
                 $password="";
 
                 $caracteres = '123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-.#!';
-                    for($x = 0; $x < 10; $x++){
-                        $password = substr(str_shuffle($caracteres), 0, 10);
+                    for($x = 0; $x < 4; $x++){
+                        $password = substr(str_shuffle($caracteres), 0, 4);
                     }
 
                 $request->password=$password;

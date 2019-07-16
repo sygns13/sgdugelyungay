@@ -34,6 +34,7 @@ Route::post('loginn','Auth\LoginController@login');
 
 Route::post('crearusuario','PersonaController@store');
 Route::post('resetclave','PersonaController@resetclave');
+Route::post('principal/consultadni','PrincipalController@consultadni');
 
 
 
@@ -69,6 +70,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('usuariomail','UsermailController');
         Route::resource('usuariosms','UsersmsController');
 
+        Route::resource('principal','PrincipalController');
+
 
 
 
@@ -81,6 +84,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('tipodocumentos/altabaja/{id}/{var}','TipodocumentoController@altabaja');
         Route::get('formarecepcions/altabaja/{id}/{var}','FormarecepcionController@altabaja');
         Route::get('unidadorganicas/altabaja/{id}/{var}','UnidadorganicaController@altabaja');
+
+
+        
 
 
         

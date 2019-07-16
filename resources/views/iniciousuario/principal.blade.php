@@ -1,11 +1,11 @@
-<div class="box box-primary">
+{{--  <div class="box box-primary">
     <div class="box-header with-border">
       <h3 class="box-title">Formulario de Solicitud de Trámite</h3>
     </div>
   
     <div class="box-body">
 
-      {{--  
+      
       <div class="form-group">
         <button type="button" class="btn btn-primary" id="btncrearArea" @click.prevent="nuevo()"><i class="fa fa-plus-square-o" aria-hidden="true" ></i> Nuevo Registro</button>
       </div>
@@ -17,11 +17,11 @@
           <button type="button" class="btn btn-primary" onclick="enviarMSj();" id="btnEnviarMsj"><i class="fa fa-envelope-o" aria-hidden="true" ></i> Enviar Mensaje</button>
           <div id="divCarga0" style="display: inline-block;"><div id="dcarga0" style="display: none;"><img src="{{ asset('/img/ajax-loader.gif')}}"/></div></div>
         </div>
-        --}}
+        
   
       </div>
   
-    </div>
+    </div>--}}
   
     <div class="box box-success">
       <div class="box-header with-border" >
@@ -40,8 +40,8 @@
   
             <div class="col-sm-2">
                 <select class="form-control" id="cbuprioridad" name="cbuprioridad" v-model="newPrioridad">
-                  <option value="1">NORMAL</option>
-                  <option value="2">URGENTE</option>
+                <option v-for="prioridad, key in prioridads"  v-bind:value="prioridad.id">@{{prioridad.prioridad}}</option>
+
                 </select>
               </div>
           </div>
@@ -143,7 +143,7 @@
                     <div class="col-sm-4">
                       <select class="form-control" id="cbuTipoDoc" name="cbuTipoDoc" v-model="newtipodoc">
                         <option value="0" disabled>Seleccione Tipo de Documento</option>
-                        <option value="1">Desactivado</option>
+                        <option v-for="tipodoc, key in tipodocumentos"  v-bind:value="tipodoc.id">@{{tipodoc.tipo}}</option>
                       </select>
                     </div>
                   </div>
@@ -171,7 +171,7 @@
                         <div class="col-sm-4">
                           <select class="form-control" id="cbuFormaRecep" name="cbuFormaRecep" v-model="newForma">
                             <option value="0" disabled>Seleccione Forma de Recepción</option>
-                            <option value="1">Desactivado</option>
+                            <option v-for="formarep, key in formarecepcions"  v-bind:value="formarep.id">@{{formarep.forma}}</option>
                           </select>
                         </div>
                       </div>
@@ -292,7 +292,7 @@
                   <div class="col-sm-4">
                     <select class="form-control" id="cbuUnidadOrganica" name="cbuUnidadOrganica" v-model="newUnidadOrganica">
                       <option value="0" disabled>Seleccione Unidad Orgánica</option>
-                      <option value="1">Desactivado</option>
+                      <option v-for="unidadorg, key in unidadorganicas"  v-bind:value="unidadorg.id">@{{unidadorg.nombre}}</option>
                     </select>
                   </div>
                 </div>

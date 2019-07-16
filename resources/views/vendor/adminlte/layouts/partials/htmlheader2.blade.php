@@ -11,6 +11,7 @@
     <link href="{{ asset('login/css/styles.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/css/alertify.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/spinkit.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/css/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" /> 
 
 
 

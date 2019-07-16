@@ -48,9 +48,9 @@
             <li class="treeview" v-bind:class="classMenu1">
                 <a href="#"><i class='fa fa-list-alt'></i> <span>Tablas Maestras</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo e(URL::to('#')); ?>"><i class='fa fa-gg'></i> <span>Tipo de Documentos</span></a></li>
-                    <li><a href="<?php echo e(URL::to('#')); ?>"><i class='fa fa-gg'></i> <span>Forma de Recepción</span></a></li>
-                    <li><a href="<?php echo e(URL::to('#')); ?>"><i class='fa fa-gg'></i> <span>Unidad Orgánico</span></a></li>
+                    <li><a href="<?php echo e(URL::to('tipodocumento')); ?>"><i class='fa fa-gg'></i> <span>Tipo de Documentos</span></a></li>
+                    <li><a href="<?php echo e(URL::to('formarecepcion')); ?>"><i class='fa fa-gg'></i> <span>Forma de Recepción</span></a></li>
+                    <li><a href="<?php echo e(URL::to('unidadorganica')); ?>"><i class='fa fa-gg'></i> <span>Unidad Orgánica</span></a></li>
                 </ul>
             </li>
 
@@ -61,12 +61,12 @@
 
 <?php if(accesoUser([1])): ?>
         <li class="treeview" v-bind:class="classMenu2">
-            <a href="<?php echo e(URL::to('#')); ?>"><i class='fa fa-file-text'></i> <span>Procesar Trámites</span> <i class="fa fa-angle-left pull-right"></i></a>
+            <a href="<?php echo e(URL::to('#')); ?>"><i class='fa fa-file-text'></i> <span>Procesar Trámites</span> </a>
         </li>
 
 
         <li class="treeview" v-bind:class="classMenu3">
-            <a href="<?php echo e(URL::to('#')); ?>"><i class='fa fa-archive'></i> <span>Reporte Histórico</span> <i class="fa fa-angle-left pull-right"></i></a>
+            <a href="<?php echo e(URL::to('#')); ?>"><i class='fa fa-archive'></i> <span>Reporte Histórico</span> </a>
         </li>
 
 <?php endif; ?>
@@ -81,6 +81,38 @@
                   <li><a href="<?php echo e(URL::to('#')); ?>"><i class='fa fa-gg'></i> <span>Envío de Email</span></a></li>
                 </ul>
             </li>
+<?php endif; ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php if(accesoUser([3])): ?>
+
+            
+<li class="header">MENÚ USUARIO</li>
+
+<li v-bind:class="classMenu0"><a href="<?php echo e(url('home')); ?>"><i class='fa fa-home'></i> <span>Inicio</span></a></li>
+
+<li class="treeview" v-bind:class="classMenu1">
+    <a href="#"><i class='fa fa-list-alt'></i> <span>Gestión de Trámites</span> <i class="fa fa-angle-left pull-right"></i></a>
+    <ul class="treeview-menu">
+        <li><a href="<?php echo e(URL::to('#')); ?>"><i class='fa fa-gg'></i> <span>Seguimiento de Trámites</span></a></li>
+        <li><a href="<?php echo e(URL::to('#')); ?>"><i class='fa fa-gg'></i> <span>Histórico de Trámites</span></a></li>
+    </ul>
+</li>
+
+
+
 <?php endif; ?>
 
 
