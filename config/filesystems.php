@@ -69,7 +69,7 @@ return [
         ],
         'infoFile' => [
            'driver' => 'local',
-           'root' => public_path('archivosExcel'), // miproyecto.com/public/defaults/
+           'root' => public_path('archivosadjuntos'), // miproyecto.com/public/defaults/
            'visibility' => 'public',
         ],
         'perfil' => [

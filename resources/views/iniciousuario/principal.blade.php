@@ -36,7 +36,7 @@
         <div class="col-md-12" >
   
           <div class="form-group">
-            <label for="cbuprioridad" class="col-sm-2 control-label">PRIORIDAD:*</label>
+            <label for="cbuprioridad" class="col-sm-2 control-label">PRIORIDAD:</label>
   
             <div class="col-sm-2">
                 <select class="form-control" id="cbuprioridad" name="cbuprioridad" v-model="newPrioridad">
@@ -53,7 +53,7 @@
         <div class="col-md-12" style="padding-bottom: 15px; "> <h4 style="font-weight:bold; font-size:16px;">ORIGEN</h4> </div>
 
 
-        <div class="col-md-12" >
+       {{--  <div class="col-md-12" >
   
           <div class="form-group">
             <label for="radioOrigen" class="col-sm-2 control-label">ORIGEN:*</label>
@@ -70,10 +70,10 @@
              
             </div>
           </div>
-        </div>
+        </div> --}}
 
 
-        <div class="col-md-12" style="padding-top: 15px;" >
+      {{--   <div class="col-md-12" style="padding-top: 15px;" >
   
             <div class="form-group">
               <label for="checktipo" class="col-sm-2 control-label">TIPO:</label>
@@ -83,13 +83,40 @@
               </div>
             </div>
           </div>
-
+ --}}
 
           <div class="col-md-12" style="padding-top: 15px;">
               <div class="form-group">
-                <label for="txtUnidadDestino" class="col-sm-2 control-label">UNIDAD ORGÁNICA:*</label>
+                <label for="txtcodEntidad" class="col-sm-2 control-label">ENTIDAD:</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="txtUnidadDestino" name="txtUnidadDestino" placeholder="" maxlength="500" v-model="newUnidadDestino" required>
+                    <input type="text" class="form-control" id="txtcodEntidad" name="txtcodEntidad" placeholder="" maxlength="20" v-model="codEntidad" style="width: 100px; display:inline-block;" onkeypress="return soloNumeros(event);" @keyup="$event.keyCode === 13 ? buscarEntidad() : false">
+
+                    <button type="button" class="btn btn-warning" id="btnBuscarEntidad" style="display:inline-block;margin-bottom: 5px;" @click.prevent="buscarEntidad()"><i class="fa fa-search"></i></button>
+
+                    <select class="form-control" id="cbuentidad" name="cbuentidad" v-model="newentidad">
+                      <option value="0" disabled>------ Seleccione Opción ------</option>
+                      <template v-for="entidad, key in entidads">
+                        <option   v-bind:value="entidad.id">@{{entidad.nombre}} - (@{{entidad.codigo}})</option>
+
+                        <input type="hidden" class="clsentidades" v-bind:id="'ident'+entidad.id" v-bind:value="entidad.codigo">
+
+                      </template>
+                    </select>
+
+                  </div>
+                </div>
+              </div>
+
+
+
+
+              <div class="col-md-12" style="padding-top: 15px;">
+  
+                <div class="form-group">
+                  <label for="txtdetalle" class="col-sm-2 control-label">DETALLE:</label>
+        
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="txtdetalle" name="txtdetalle" placeholder="" maxlength="500" v-model="newDetalle" >
                   </div>
                 </div>
               </div>
@@ -98,10 +125,10 @@
         <div class="col-md-12" style="padding-top: 15px;">
   
             <div class="form-group">
-              <label for="txtfirma" class="col-sm-2 control-label">FIRMA:*</label>
+              <label for="txtfirma" class="col-sm-2 control-label">FIRMA:</label>
     
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="txtfirma" name="txtfirma" placeholder="" maxlength="500" v-model="newfirma" required>
+                <input type="text" class="form-control" id="txtfirma" name="txtfirma" placeholder="" maxlength="500" v-model="newfirma" >
               </div>
             </div>
           </div>
@@ -109,10 +136,10 @@
           <div class="col-md-12" style="padding-top: 15px;">
   
               <div class="form-group">
-                <label for="txtcargo" class="col-sm-2 control-label">CARGO:*</label>
+                <label for="txtcargo" class="col-sm-2 control-label">CARGO:</label>
       
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="txtcargo" name="txtcargo" placeholder="" maxlength="500" v-model="newcargo" required>
+                  <input type="text" class="form-control" id="txtcargo" name="txtcargo" placeholder="" maxlength="500" v-model="newcargo" >
                 </div>
               </div>
             </div>
@@ -165,7 +192,7 @@
                     </div>
                   </div>
 
-                  <div class="col-md-12" style="padding-top: 15px;">
+                {{--   <div class="col-md-12" style="padding-top: 15px;">
                       <div class="form-group">
                         <label for="cbuFormaRecep" class="col-sm-2 control-label">FORMA DE RECEPCIÓN:*</label>
                         <div class="col-sm-4">
@@ -175,7 +202,7 @@
                           </select>
                         </div>
                       </div>
-                    </div>
+                    </div> --}}
 
 
                     <div class="col-md-12" style="padding-top: 15px;">
@@ -184,8 +211,8 @@
                           <label for="archivo" class="col-sm-2 control-label">ARCHIVO:*</label>
                 
                           <div class="col-sm-4">
-                              <input v-if="uploadReady" name="archivo2" type="file" id="archivo" class="archivo form-control" required @change="getArchivo" 
-                              accept=".csv, .CSV "/>
+                              <input v-if="uploadReady" name="archivo2" type="file" id="archivo" class="archivo form-control" @change="getArchivo" 
+                              accept=".pdf, .doc, .docx, .xls, .xlsx, ppt, .pptx, .PDF, .DOC, .DOCX, .XLS, .XLSX, .PPT, .PTTX"/>
                           </div>
                         </div>
                       </div>
@@ -210,7 +237,7 @@
                     
                               <div class="col-sm-8">
 
-                                <textarea name="txtasunto" id="txtasunto" rows="4" class="form-control" v-model="newAsunto" required></textarea>
+                                <textarea name="txtasunto" id="txtasunto" rows="4" class="form-control" v-model="newAsunto"></textarea>
                               </div>
                             </div>
                           </div>
@@ -220,7 +247,7 @@
                               <hr>
                             </div>
 
-       <div class="col-md-12" style="padding-bottom: 15px; "> <h4 style="font-weight:bold; font-size:16px;">CLASIFICACIÓN TUPA</h4> </div>
+     {{--   <div class="col-md-12" style="padding-bottom: 15px; "> <h4 style="font-weight:bold; font-size:16px;">CLASIFICACIÓN TUPA</h4> </div>
 
 
        <div class="col-md-12" style="padding-top: 15px;">
@@ -265,11 +292,11 @@
                 <input type="text" class="form-control" id="txtnumdias" name="txtnumdias" placeholder="" maxlength="20" v-model="newDias" required>
               </div>
             </div>
-          </div>
+          </div> 
 
           <div class="col-md-12" >
               <hr>
-            </div>
+            </div>--}}
 
           <div class="col-md-12" style="padding-bottom: 15px; "> <h4 style="font-weight:bold; font-size:16px;">DESTINO(S) - DERIVACIÓN DEL DOCUMENTO</h4> </div>
 
@@ -289,10 +316,25 @@
             <div class="col-md-12" style="padding-top: 15px;">
                 <div class="form-group">
                   <label for="cbuUnidadOrganica" class="col-sm-2 control-label">UNIDAD ORGÁNICA:*</label>
-                  <div class="col-sm-4">
-                    <select class="form-control" id="cbuUnidadOrganica" name="cbuUnidadOrganica" v-model="newUnidadOrganica">
+                  <div class="col-sm-8">
+
+                      <input type="text" class="form-control" id="cbuUnidadOrganica" name="cbuUnidadOrganica" placeholder="" maxlength="20" v-model="codUndOrg" required style="width: 100px; display:inline-block;" onkeypress="return soloNumeros(event);" @keyup="$event.keyCode === 13 ? buscarUnidadOrganica() : false">
+
+
+                      <button type="button" class="btn btn-warning" id="btnBuscarUnidOrg" style="display:inline-block;margin-bottom: 5px;" @click.prevent="buscarUnidadOrganica()"><i class="fa fa-search"></i></button>
+
+
+                    <select class="form-control" id="cbuUnidadOrganica" name="cbuUnidadOrganica" v-model="newUnidadOrganica" style="display:inline-block; width: 80%;">
                       <option value="0" disabled>Seleccione Unidad Orgánica</option>
-                      <option v-for="unidadorg, key in unidadorganicas"  v-bind:value="unidadorg.id">@{{unidadorg.nombre}}</option>
+                      <template v-for="unidadorg, key in unidadorganicas">
+                          <option   v-bind:value="unidadorg.id">@{{unidadorg.nombre}} - (@{{unidadorg.codigo}})</option>
+  
+                          <input type="hidden" class="clsunidadorges" v-bind:id="'idorg'+unidadorg.id" v-bind:value="unidadorg.codigo">
+  
+                        </template>
+
+
+
                     </select>
                   </div>
                 </div>
@@ -303,16 +345,16 @@
               <div class="col-md-12" style="padding-top: 15px;">
   
                   <div class="form-group">
-                    <label for="txtDetalle" class="col-sm-2 control-label">DETALLE:*</label>
+                    <label for="txtDetalleUO" class="col-sm-2 control-label">DETALLE:*</label>
           
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" id="txtDetalle" name="txtDetalle" placeholder="" maxlength="500" v-model="newDetalle" >
+                      <input type="text" class="form-control" id="txtDetalleUO" name="txtDetalleUO" placeholder="" maxlength="500" v-model="newDetalleDestino" >
                     </div>
                   </div>
                 </div>
 
 
-                <div class="col-md-12" style="padding-top: 15px;">
+{{--                 <div class="col-md-12" style="padding-top: 15px;">
   
                     <div class="form-group">
                       <label for="txtusuario" class="col-sm-2 control-label">USUARIO:*</label>
@@ -335,7 +377,7 @@
                         <textarea name="txtproveido" id="txtproveido" rows="4" class="form-control" v-model="newProveido" ></textarea>
                       </div>
                     </div>
-                  </div>
+                  </div> --}}
 
 
 

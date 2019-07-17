@@ -11,6 +11,7 @@
     <link href="<?php echo e(asset('login/css/styles.css')); ?>" rel="stylesheet" type="text/css" />
     <link href="<?php echo e(asset('/css/alertify.css')); ?>" rel="stylesheet" type="text/css" />
     <link href="<?php echo e(asset('css/spinkit.min.css')); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('/css/sweetalert2.min.css')); ?>" rel="stylesheet" type="text/css" /> 
 
 
 

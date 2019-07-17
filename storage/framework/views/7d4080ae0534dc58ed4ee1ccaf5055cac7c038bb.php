@@ -105,7 +105,7 @@
                     </div>
                     <div class="form-group">
 
-                        <button type="button" class="btn float-right login_btn" style="margin-left:10px;" @click.prevent="registrarse()">Registrarse</button>
+                        <button type="button" class="btn float-right btn-warning" style="margin-left:10px; color:white;" @click.prevent="registrarse()">Registrarse</button>
                         <input type="submit" value="Ingresar" class="btn float-right login_btn">
                         
                     </div>
@@ -117,15 +117,82 @@
                 </form>
             </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <div id="appregister" style="display:none;" >
+
+
+    
 
                     <form v-on:submit.prevent="create" id="formulariocrear" method="post">
                             <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+
+
+
+
+
+
+                        <div class="input-group form-group" >
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-credit-card"></i></span>
+                                    </div>
+                        <input type="text" name="txtdni" id="txtdni" class="form-control" placeholder="DNI" v-model="newDNI" required maxlength="8" onkeypress="return soloNumeros(event);" @keyup="$event.keyCode === 13 ? ValidarDNI() : false">
+
+                        <button type="button" id="btnValidar" class="btn float-right btn-info" style="margin-left:10px;" @click.prevent="ValidarDNI">Validar</button>        
+                        </div>
+
+
+
+        <div class="sk-circle" v-show="divloaderNuevo3">
+                <div class="sk-circle1 sk-child"></div>
+                <div class="sk-circle2 sk-child"></div>
+                <div class="sk-circle3 sk-child"></div>
+                <div class="sk-circle4 sk-child"></div>
+                <div class="sk-circle5 sk-child"></div>
+                <div class="sk-circle6 sk-child"></div>
+                <div class="sk-circle7 sk-child"></div>
+                <div class="sk-circle8 sk-child"></div>
+                <div class="sk-circle9 sk-child"></div>
+                <div class="sk-circle10 sk-child"></div>
+                <div class="sk-circle11 sk-child"></div>
+                <div class="sk-circle12 sk-child"></div>
+              </div>
+
+
+
+
+
+
+
+
+
+
                         <div class="input-group form-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-edit"></i></span>
                                 </div>
-                                <input type="text" name="txtnombres" id="txtnombres" class="form-control" placeholder="Nombres" v-model="newnombres" required >
+                                <input type="text" name="txtnombres" id="txtnombres" class="form-control" placeholder="Nombres" v-model="newnombres"  readonly >
                         </div>
                 
 
@@ -134,31 +201,23 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-edit"></i></span>
                                 </div>
-                                <input type="text" name="txtapellidos" id="txtapellidos" class="form-control" placeholder="Apellidos" v-model="newapellidos" required>
+                                <input type="text" name="txtapellidos" id="txtapellidos" class="form-control" placeholder="Apellidos" v-model="newapellidos"  readonly>
                         </div>
    
-                        <div class="input-group form-group" style="width:200px;">
-                                <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas     fa-credit-card"></i></span>
-                                    </div>
-                                    <input type="text" name="txtdni" id="txtdni" class="form-control" placeholder="DNI" v-model="newDNI" required>
 
-                                    
-                        </div>
-                                
                     
 
                                 <div class="form-group" >
                                         
 
-                                        <select class="form-control" id="cbugenero" name="cbugenero" v-model="newGenero" style="width:200px;">
+                                        <select class="form-control" id="cbugenero" name="cbugenero" v-model="newGenero" style="width:200px; display:none;">
                                                 <option value="0">Género</option>
                                                 <option value="1">Masculino</option>
                                                 <option value="2">Femenino</option>
                                               </select>
                                     </div>
 
-                                    <div class="input-group form-group" >
+                                    <div class="input-group form-group" style="padding-top:50px;">
                                             <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-home"></i></span>
                                                 </div>
@@ -211,7 +270,7 @@
 
 
                                     <div class="form-group">
-                                            <button type="button" id="btniniciar" class="btn float-right login_btn" style="margin-left:10px;" @click.prevent="iniciarSesion()">Iniciar Sesión</button>
+                                            <button type="button" id="btniniciar" class="btn float-right btn-danger" style="margin-left:10px; color:white;" @click.prevent="iniciarSesion()">Volver Atrás</button>
 
                                             <button type="submit" id="btncrear" class="btn float-right login_btn" style="margin-left:10px;" >Registrar Datos</button>
 
@@ -267,7 +326,7 @@
                                 <div class="form-group row">
          
                                         <span class="help-block text-danger" role="alert" style="font-size: 15px;">
-                                        <strong style="color:red;">Complete su N° de DNI y el correo con el que registró su Cuenta para enviarle un Nuevo Password a su Email</strong>
+                                        <strong style="color:#20a6f6;">Complete su N° de DNI y el correo con el que registró su Cuenta para enviarle un Nuevo Password a su Email</strong>
                                         </span>
                                 
                                     </div>
@@ -277,7 +336,7 @@
                                     <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas     fa-credit-card"></i></span>
                                         </div>
-                                        <input type="text" name="txtdniE" id="txtdniE" class="form-control" placeholder="DNI" v-model="newDNI" required>
+                                        <input type="text" name="txtdniE" id="txtdniE" class="form-control" placeholder="DNI" v-model="newDNI" maxlength="8" required>
     
                                         
                             </div>
@@ -294,8 +353,7 @@
     
                                         <div class="form-group row">
                                             <div class="col-md-6 col-md-6 offset-md-4">
-                                                <?php echo NoCaptcha::display(); ?>
-
+                                                    <div id="example2"></div>
                                             </div>
     
              
@@ -307,7 +365,7 @@
     
     
                                         <div class="form-group">
-                                                <button type="button" id="btniniciarE" class="btn float-right login_btn" style="margin-left:10px;" @click.prevent="iniciarSesion()">Volver</button>
+                                                <button type="button" id="btniniciarE" class="btn float-right btn-danger" style="margin-left:10px; color:white;" @click.prevent="iniciarSesion()">Volver Atrás</button>
     
                                                 <button type="submit" id="btncrearE" class="btn float-right login_btn" style="margin-left:10px;" >Resetear Password</button>
     
@@ -355,12 +413,39 @@
     <?php echo $__env->make('vendor.adminlte.layouts.partials.scripts_auth2', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 
-
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
 
 
 </body>
+<script type="text/javascript">
+
+function soloNumeros(e){
+  var key = window.Event ? e.which : e.keyCode
+  return ((key >= 48 && key <= 57) || (key==8) || (key==35) || (key==34) || (key==46));
+}
+
+
+var verifyCallback = function(response) {
+        alert(response);
+      };
+
+      var widgetId2;
+
+var onloadCallback = function() {
+
+    widgetId2 = grecaptcha.render(document.getElementById('example2'), {
+          'sitekey' : '6Lc6iK0UAAAAAAleCv5QiRu23dfy5Ny1qEVYtvya'
+        });
+
+};
+
+
+  </script>
+
 
 <script type="text/javascript">
+
+
     const app = new Vue({
         el: '#app',
         data:{
@@ -397,6 +482,9 @@
             divregistrar:true,
             divolvidoclave:false,
 
+
+            divloaderNuevo3:false,
+
         },
 
         created:function () {
@@ -409,7 +497,76 @@
         },
 
         methods: {
+
+
+            ValidarDNI:function(){
+
+                this.newnombres='';
+                this.newapellidos='';
+
+                if(String(this.newDNI).length!=8)
+                {
+                    alertify
+                    .alert('Error de DNI',"Complete adecuadamente su DNI: 08 Caracteres", function(){
+                        //alertify.message('OK');
+                        //$("#txtdni").focus();
+                    });
+                }
+                else
+                {
+                    var url='principal/consultadni';
+       $("#btncrearE").attr('disabled', true);
+       $("#btniniciarE").attr('disabled', true);
+       $("#txtdni").attr('disabled', true);
+       $("#btnValidar").attr('disabled', true);
+       
+       this.divloaderNuevo3=true;
+       axios.post(url,{dni:this.newDNI }).then(response=>{
+           //console.log(response.data);
+
+           $("#btncrearE").removeAttr("disabled");
+           $("#btniniciarE").removeAttr("disabled");
+           $("#txtdni").removeAttr("disabled");
+           $("#btnValidar").removeAttr("disabled");
+
+           this.divloaderNuevo3=false;
+
+           if(response.data.res=='1'){
+
+            alertify.success('DNI Válido, continúe ingresando los datos');
+
+            this.newnombres=response.data.datos[3];
+            this.newapellidos=response.data.datos[1]+' '+response.data.datos[2];
+
+            $("#txtdir").focus();
+
+           }
+           else {
+
+            alertify.error('DNI No válido, no correspodne a ninguna persona');
+            $("#txtdni").focus();
+           }
+       }).catch(error=>{
+           //this.errors=error.response.data
+       })
+                }
+
+            },
+
             registrarse:function () {
+
+
+            this.newnombres='';
+            this.newapellidos='';
+            this.newDNI='';
+            this.newGenero=0;
+            this.newDirección='';
+
+            this.newuser='';
+            this.newclave='';
+            this.newemail='';
+
+                this.errorcaptcha='';
 
             this.divolvidoclave=false,
             this.$nextTick(function () {
@@ -419,13 +576,16 @@
                 $("#appnoclave").hide('fast');
                 $("#appregister").show('slow');
 
-                $("#txtnombres").focus();
+                $("#txtdni").focus();
                  })
                  })
    
             },
 
             iniciarSesion:function () {
+
+
+                this.msjusercreado='',
                 
                 $("#appregister").hide('fast');
                 $("#appnoclave").hide('fast');
@@ -435,6 +595,19 @@
             },
 
             olvidoClave:function () {
+
+
+                this.newnombres='';
+            this.newapellidos='';
+            this.newDNI='';
+            this.newGenero=0;
+            this.newDirección='';
+
+            this.newuser='';
+            this.newclave='';
+            this.newemail='';
+
+                this.errorcaptcha='';
 
                 this.divregistrar=false,
                 this.$nextTick(function () {
@@ -477,7 +650,7 @@
 
               $("#formularioresetclave").trigger("reset");
               $("#divmsjsuccess").show();
-              grecaptcha.reset();
+              javascript:grecaptcha.reset(widgetId2);
               app.errorcaptcha='';
 
 
@@ -497,7 +670,7 @@
 
                $('#'+response.data.selector).focus();
               // toastr.error(response.data.msj);
-              grecaptcha.reset();
+              javascript:grecaptcha.reset(widgetId2);
               app.errorcaptcha=response.data.msj;
               app.msjusercreado='';
            }

@@ -2,7 +2,7 @@
     let app = new Vue({
 el: '#app',
 data:{
-       titulo:"Nueva Solicitud de Tramite",
+       titulo:"Solicitud de Tramite",
        subtitulo: "Principal",
        subtitulo2: "Principal",
 
@@ -48,6 +48,7 @@ data:{
    formarecepcions: [],
    unidadorganicas: [],
    tipodocumentos: [],
+   entidads: [],
 
    errors:[],
 
@@ -73,11 +74,15 @@ data:{
 
 
    newPrioridad:1,
+
    newOrigen:2,
    newTipo:false,
-   newUnidadDestino:'',
+   codEntidad:'',
+   newentidad:0,
+   newDetalle:'',
    newfirma:'',
    newcargo:'',
+
    newfecha:'',
    newtipodoc:0,
    newNumero:'',
@@ -87,13 +92,17 @@ data:{
    archivo:null,
    newFolios:'',
    newAsunto:'',
+
    newClasificacion:4,
    newDias:'',
-   newForma:false,
-   newUnidadOrganica:0,
-   newDetalle:'',
-   newProveido:'',
 
+
+   newForma:false,
+   codUndOrg:'',
+   newUnidadOrganica:0,
+   newDetalleDestino:'',
+   
+   newProveido:'',
    newUsuario:'',
 
 
@@ -101,6 +110,11 @@ data:{
 },
 created:function () {
    this.getFormaRecepcion(this.thispage);
+
+   this.$nextTick(function () {
+    $("#txtcodEntidad").focus();
+                })
+   
 },
 mounted: function () {
    this.divloader0=false;
@@ -137,6 +151,56 @@ computed:{
 
 methods: {
 
+    buscarEntidad:function(){
+
+        $(".clsentidades").each(function( index ) {
+            //console.log( index + ": " + $( this ).val() );
+
+            var nent=$( this ).attr("id");
+
+            var cant=nent.length;
+            var finCad=nent.substring(5,cant);
+
+
+            if(app.codEntidad==$( this ).val())
+            {
+                app.newentidad=finCad;
+
+                $("#txtdetalle").focus();
+                return false;
+            }
+
+
+    });
+
+    },
+
+
+    buscarUnidadOrganica:function(){
+
+$(".clsunidadorges").each(function( index ) {
+    //console.log( index + ": " + $( this ).val() );
+
+    var nent=$( this ).attr("id");
+
+    var cant=nent.length;
+    var finCad=nent.substring(5,cant);
+
+
+    if(app.codUndOrg==$( this ).val())
+    {
+        app.newUnidadOrganica=finCad;
+
+        $("#txtDetalleUO").focus();
+        return false;
+    }
+
+
+});
+
+},
+    
+
     getArchivo:function(event){
                 //Asignamos la imagen a  nuestra data
 
@@ -151,19 +215,26 @@ methods: {
 
    getFormaRecepcion: function (page) {
        var busca=this.buscar;
-       var url = 'formarecepcions?page='+page+'&busca='+busca;
+       var url = 'principal?page='+page+'&busca='+busca;
 
        axios.get(url).then(response=>{
-           this.formarecepcions= response.data.formarecepcions.data;
-           this.pagination= response.data.pagination;
 
-           if(this.formarecepcions.length==0 && this.thispage!='1'){
-               var a = parseInt(this.thispage) ;
-               a--;
-               this.thispage=a.toString();
-               this.changePage(this.thispage);
-           }
-       })
+           //console.log(response.data);
+           this.prioridads= response.data.prioridads;
+           this.formarecepcions= response.data.formarecepcions;
+           this.unidadorganicas= response.data.unidadorganicas;
+           this.tipodocumentos= response.data.tipodocumentos;
+           this.entidads= response.data.entidads;
+
+
+           this.$nextTick(function () {
+                this.newPrioridad=1;
+                this.newtipodoc=0;
+                this.newForma=0;
+                this.newUnidadOrganica=0;
+                })
+
+        })
    },
    changePage:function (page) {
        this.pagination.current_page=page;
