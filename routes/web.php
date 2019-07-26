@@ -60,6 +60,12 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
+        //Rutas Usuarios
+        Route::get('mistramites','TramiteController@index1');
+        Route::resource('mitramite','TramiteController');
+
+
+
 
 
         Route::resource('tipodocumentos','TipodocumentoController');
@@ -71,6 +77,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('usuariosms','UsersmsController');
 
         Route::resource('principal','PrincipalController');
+
+        
 
 
 

@@ -4,6 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Tipodocumento;
+use App\Formarecepcion;
+use App\Prioridad;
+use App\Unidadorganica;
+use App\Entidad;
+use App\Expediente;
+use App\Tramite;
+use Validator;
+use Auth;
+use DB;
+use Storage;
+
+use App\Persona;
+use App\Alumno;
+use App\Tipouser;
+use App\User;
 
 class TramiteController extends Controller
 {

@@ -11,9 +11,23 @@ use DB;
 use Auth;
 use Storage;
 use Validator;
+
+use App\Tipodocumento;
+use App\Formarecepcion;
+use App\Prioridad;
+use App\Unidadorganica;
+use App\Entidad;
+use App\Expediente;
+use App\Tramite;
+use App\Detalletramite;
+
+use App\Persona;
+use App\Alumno;
+use App\Tipouser;
 use App\User;
 
 ini_set('memory_limit','256M');
+ini_set('max_execution_time', '300');
 
 class SendMail extends Mailable
 {
@@ -99,6 +113,116 @@ class SendMail extends Mailable
 
 
             return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunto)->from("sgdugelyungay@gmail.com");
+
+        }
+
+
+        elseif(strval($data->tipomail)=="3"){
+
+            $prioridad_id=$data->prioridad_id;
+            $entidad_id=$data->entidad_id;
+            $detalle=$data->detalle;
+            $firma=$data->firma;
+            $cargo=$data->cargo;
+            $fechadoc=$data->fechadoc;
+            $tipodocumento_id=$data->tipodocumento_id;
+            $numero=$data->numero;
+            $siglas=$data->siglas;
+    
+    
+            $folios=$data->folios;
+            $asunto=$data->asunto;
+            $formacopia=$data->formacopia;
+            $unidadorganica_id=$data->unidadorganica_id;
+            $detalledestino=$data->detalledestino;
+
+            $fecha=Date("Y-m-d");
+
+        $iduser=Auth::user()->id;
+
+        $Persona=DB::select("select p.id, p.nombres, p.apellidos, p.dni FROM personas p
+        inner join users u on p.id=u.persona_id
+        where u.id='".$iduser."';");
+
+        $idPersona="";
+
+        $apellidos="";
+        $nombres="";
+        $dni="";
+        foreach ($Persona as $key => $dato) {
+            $idPersona=$dato->id;
+            $apellidos=$dato->apellidos;
+            $nombres=$dato->nombres;
+            $dni=$dato->dni;
+        }
+
+        $entidad=Entidad::find($entidad_id);
+        
+        $prioridad=Prioridad::find($prioridad_id);
+
+        $unidadorg=Unidadorganica::find($unidadorganica_id);
+
+
+            $asunt="Plataforma SGD UGEL YUNGAY INICIO DE TRÁMIE";
+
+            $mensaje="Estimado (a): ".$apellidos.", ".$nombres;
+
+            $mensaje.="<br><br>";
+            $mensaje.="Mediante el presente mensaje de correo electrónico se le remite la confirmación de registro del siguiente trámite<br><br>";
+
+            $mensaje.="<b>DOCUMENTO:".$numero." - ".$siglas."</b><br><br>";
+            $mensaje.="Fecha del Documento: ".pasFechaVista($fechadoc)."<br>";
+            $mensaje.='N° de Expediente: "Pendiente"<br>';
+            $mensaje.="N° de Folios: ".$folios."<br>";
+            $mensaje.="Asunto: ".$asunto."<br>";
+            $mensaje.="Estado: Ingresado<br>";
+
+            $mensaje.="<br><br>";
+
+            $mensaje.="<b>Datos de Origen</b><br>";
+            $mensaje.="Entidad : ".$entidad->nombre."<br>";
+            $mensaje.="Firma : ".$firma."<br>";
+            $mensaje.="Cargo : ".$cargo."<br>";
+            $mensaje.="Detalle : ".$detalle."<br>";
+
+            $mensaje.="<br><br>";
+
+            $mensaje.="<b>Datos de Destino - UGEL YUNGAY</b><br>";
+            $mensaje.="Unidad Orgánica : ".$unidadorg->nombre."<br>";
+
+            if($formacopia==1)
+            {
+                $mensaje.="Forma : Copia<br>";
+            }
+            
+            $mensaje.="Detalle : ".$detalledestino."<br>";
+
+
+            $mensaje.="<br><br>";
+            $mensaje.="<b>Nota: Se adjunta en el presente correo el archivo adjunto ingresado en el trámite</b>";
+            $mensaje.="<br><br>";
+            $mensaje.="<br><br>";
+            $mensaje.="<br><br>";
+
+            $mensaje.="Este es un mensaje automático del sistema, por favor no responda este mensaje, si tuviera alguna dificultad para ingresar a la plataforma del Sistema de Gestión Documental, acérquese a la UGEL Yungay y reporte su problema.";
+
+
+            $user=User::find(Auth::user()->id);
+
+
+            if(strlen($data->rutafile)>0)
+                {
+                    $adjunto=public_path('archivosadjuntos')."/".$data->rutafile;
+                    return $this->view('mail1',['msg'=>$mensaje])->attach($adjunto)->to($user->email)->subject($asunt)->from("sgdugelyungay@gmail.com");
+                }
+
+                else{
+
+                    return $this->view('mail1',['msg'=>$mensaje])->to($user->email)->subject($asunt)->from("sgdugelyungay@gmail.com");
+                }
+
+
+            
 
         }
 
