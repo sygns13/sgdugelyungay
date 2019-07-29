@@ -1,17 +1,16 @@
-@include('usuariosmail.componentes')
-@include('usuariosalert.filesaverjs')
+<?php echo $__env->make('usuariosmail.componentes', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 <script type="text/javascript">
    let app = new Vue({
     el: '#app',
     data:{
-        tipouserPerfil:'{{ $tipouser->nombre }}',
-        userPerfil:'{{ Auth::user()->name }}',
-        mailPerfil:'{{ Auth::user()->email }}',
+        tipouserPerfil:'<?php echo e($tipouser->nombre); ?>',
+        userPerfil:'<?php echo e(Auth::user()->name); ?>',
+        mailPerfil:'<?php echo e(Auth::user()->email); ?>',
 
 
         titulo:"Usuarios",
-        subtitulo:"Envio de Alertas",
+        subtitulo:"Envio de Email",
         subtitle2:false,
         subtitulo2:"",
         divloader0:true,
@@ -31,8 +30,8 @@
         classMenu1:'',
         classMenu2:'',
         classMenu3:'',
-        classMenu4:'',
-        classMenu5:'active',
+        classMenu4:'active',
+        classMenu5:'',
         classMenu6:'',
         classMenu7:'',
         classMenu8:'',
@@ -49,12 +48,11 @@
         persona:[],
         user:[],
         users:[],
-        provincias:[],
         useremail:[],
         errors:[],
-        fillPersona:{'id':'', 'dni':'', 'nombres':'', 'apellidos':'', 'genero':'', 'telf':'', 'direccion':'', 'imagen':'', 'tipodocu':'1'},
+        fillPersona:{'id':'', 'dni':'', 'nombres':'', 'apellidos':'', 'genero':'', 'direccion':'', 'imagen':''},
 
-        filluser:{'id':'', 'name':'', 'email':'', 'password':'', 'tipouser_id':'', 'activo':'', 'token2':'','provincia_id':''},
+        filluser:{'id':'', 'name':'', 'email':'', 'password':'', 'tipouser_id':'', 'activo':''},
 
         pagination: {
             'total': 0,
@@ -122,10 +120,6 @@
 
         uploadReady:true,
 
-        datos:[],
-
-        importar:'',
-
 
 
     },
@@ -170,17 +164,16 @@
     methods: {
         getUsuarios: function (page) {
             var busca=this.buscar;
-            var urlUsuarios = 'usuarioalert?page='+page+'&busca='+busca;
+            var urlUsuarios = 'usuariomail?page='+page+'&busca='+busca;
 
             axios.get(urlUsuarios).then(response=>{
 
                 this.usuarios= response.data.usuarios.data;
                 this.tipousers= response.data.tipousers;
                 this.pagination= response.data.pagination;
-                this.provincias= response.data.provincias;
                 this.mostrarPalenIni=true;
 
-                this.usuarios2=response.data.usuarios2;
+                this.usuarios2= response.data.usuarios2;
 
                 if(this.usuarios.length==0 && this.thispage!='1'){
                     var a = parseInt(this.thispage) ;
@@ -229,26 +222,23 @@
                 $.each(app.usuarios2, function( index, value ) {
                   //alert( index + ": " + value );
                  //console.log(value.email);
-                 var username=value.username;
-                 var ape=value.apePer;
-                 var nom=value.nombresPer;
-                 var iduser=value.iduser;
-                 // app.users.push({value.name});
-                 app.users.push({username,ape,nom,iduser});
+                 var email=value.email;
+                 // app.users.push({value.email});
+                 app.users.push({email});
                 });
                 
             })
 
              $("#btnCargarMail").blur();
      },  
-     seleccionarUser:function (username, ape, nom,iduser) {
+     seleccionarUser:function (email) {
 
         $(".btn").blur();
 
-        const resultado = app.users.find( user => user.username === username );
+        const resultado = app.users.find( user => user.email === email );
 
         if (typeof resultado === "undefined") {
-            this.users.push({username,ape,nom,iduser});
+            this.users.push({email});
         }
       
       this.div1=false;
@@ -267,7 +257,6 @@
     this.uploadReady = false
 
     this.$nextTick(() => {
-
           this.uploadReady = true;
           $('#txtasunto').focus();
           CKEDITOR.instances['editor'].setData("");
@@ -305,35 +294,21 @@ tipouserE:function () {
             },
 
 
-    exportartxt:function () {
-       /*     var url='exportartxt';
-
-             axios.get(url).then(response=>{
-                console.log("descargando datos");
-                 }).catch(error=>{
-                //this.errors=error.data;
-            })
-            */
-
-            var blob = new Blob([String(this.importar)], {type: "text/plain;charset=utf-8"});
-  saveAs(blob, "testfile1.txt");
-
-        },
-    enviarAlerta:function () {
-            var url='usuarioalert';
+    enviarMail:function () {
+            var url='enviarMail';
             $("#btnGuardar").attr('disabled', true);
             $("#btnCancel").attr('disabled', true);
             $("#btnCargarMail").attr('disabled', true);
             this.divloaderNuevo=true;
 
-            var idusers= [];
+            var mails= [];
 
             var cont=0;
 
             $.each(app.users, function( index, value ) {
                   //alert( index + ": " + value.email );
 
-                  idusers[cont]=value.iduser;
+                  mails[cont]=value.email;
                   cont++;
 
                 });
@@ -342,10 +317,11 @@ tipouserE:function () {
             var data = new  FormData();
 
 
-            data.append('titulo', this.newAsunto);
-            data.append('alerta', CKEDITOR.instances['editor'].getData());
-            data.append('idUsers', JSON.stringify(idusers));
-
+            data.append('asunto', this.newAsunto);
+            data.append('mensaje', CKEDITOR.instances['editor'].getData());
+            data.append('mails', JSON.stringify(mails));
+            data.append('archivo', this.archivo);
+            data.append('tipomail', '7');
 
 
             const config = { headers: { 'Content-Type': 'multipart/form-data' } };
@@ -362,17 +338,8 @@ tipouserE:function () {
                 this.divloaderNuevo=false;
 
                 if(response.data.result=='1'){
-
-                    this.datos=response.data.datos;
-                    this.importar=response.data.importar;
                     toastr.success(response.data.msj);
                     this.cancelFormUsuario();
-
-                    this.$nextTick(() => {
-                        if(idusers.length>0){
-                        this.exportartxt();
-                        }
-                        })
 
                 }
                  if(response.data.result=='0'){

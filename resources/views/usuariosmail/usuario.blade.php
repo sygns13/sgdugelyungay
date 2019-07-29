@@ -113,34 +113,27 @@
   <div class="box-body table-responsive">
     <table class="table table-hover table-bordered" id="tabla">
       <tbody><tr>
-         <th style="font-size: 12px; padding: 5px; width: 3%;">#</th>
-                  <th style="font-size: 12px; padding: 5px; width: 9%;">Tipo de Usuario</th>
-                  <th style="font-size: 12px; padding: 5px; width: 8%;">Provincia</th>
-                  <th style="font-size: 12px; padding: 5px; width: 8%;">Distrito</th>
-                  <th style="font-size: 12px; padding: 5px; width: 16%;">Dependencia</th>
-                  <th style="font-size: 12px; padding: 5px; width: 14%;">Apellidos y Nombres</th>
-                  <th style="font-size: 12px; padding: 5px; width: 6%;">DNI</th>
-                  <th style="font-size: 12px; padding: 5px; width: 6%;">Teléfono</th>
-                  <th style="font-size: 12px; padding: 5px; width: 7%;">Usuario</th>
-                  <th style="font-size: 12px; padding: 5px; width: 13%;">Email</th>
-                  <th style="font-size: 12px; padding: 5px; width: 5%;">Estado</th>
+        <th style="font-size: 12px; padding: 5px; width: 4%;">#</th>
+        <th style="font-size: 12px; padding: 5px; width: 15%;">Tipo de Usuario</th>
+        <th style="font-size: 12px; padding: 5px; width: 22%;">Apellidos y Nombres</th>
+        <th style="font-size: 12px; padding: 5px; width: 8%;">DNI</th>
+        <th style="font-size: 12px; padding: 5px; width: 15%;">Usuario</th>
+        <th style="font-size: 12px; padding: 5px; width: 22%;">Email</th>
+        <th style="font-size: 12px; padding: 5px; width: 9%;">Estado</th>
                   <th style="font-size: 12px; padding: 5px; width: 5%;">Seleccione</th>
                 </tr>
                 <tr v-for="usuario, key in usuarios">
                   <td style="font-size: 12px; padding: 5px;">@{{key+pagination.from}}</td>
                   <td style="font-size: 12px; padding: 5px;">@{{ usuario.tipouser }}</td>
-                  <td style="font-size: 12px; padding: 5px;">@{{ usuario.provincia }}</td>
-                  <td style="font-size: 12px; padding: 5px;">@{{ usuario.distrito }}</td>
-                  <td style="font-size: 12px; padding: 5px;">@{{ usuario.dependencia }}</td>
                   <td style="font-size: 12px; padding: 5px;">@{{ usuario.apePer }}, @{{ usuario.nombresPer }}</td>
-                  <td style="font-size: 12px; padding: 5px;">@{{ usuario.doc }}</td>
-                  <td style="font-size: 12px; padding: 5px;">@{{ usuario.telefono }}</td>
+                  <td style="font-size: 12px; padding: 5px;">@{{ usuario.dni }}</td>
                   <td style="font-size: 12px; padding: 5px;">@{{ usuario.username }}</td>
                   <td style="font-size: 12px; padding: 5px;">@{{ usuario.email }}</td>
                   <td style="font-size: 12px; padding: 5px;">
-                    <span class="label label-success" v-if="usuario.activo=='1'">Activo</span>
-                    <span class="label label-warning" v-if="usuario.activo=='0'">Inactivo</span>
+                  	<span class="label label-success" v-if="usuario.activo=='1'">Activo</span>
+                  	<span class="label label-warning" v-if="usuario.activo=='0'">Inactivo</span>
                   </td>
+
        <td style="font-size: 12px; padding: 5px;">
         <center>
           <a href="#" class="btn btn-info btn-sm" v-on:click.prevent="seleccionarUser(usuario.email)" data-placement="top" data-toggle="tooltip" title="Seleccionar Usuario"><i class="fa fa-check-circle"></i></a>

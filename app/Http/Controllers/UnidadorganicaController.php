@@ -49,8 +49,9 @@ class UnidadorganicaController extends Controller
             $query->where('nombre', 'like', '%'.$buscar.'%');
             $query->orWhere('codigo', 'like', '%'.$buscar.'%');
             $query->orWhere('siglas', 'like', '%'.$buscar.'%');
+            $query->orWhere('abreviatura', 'like', '%'.$buscar.'%');
         })
-        ->orderBy('id')->paginate(20);
+        ->orderBy('id')->paginate(50);
 
         return [
             'pagination'=>[
@@ -85,6 +86,7 @@ class UnidadorganicaController extends Controller
     {
         $codigo=$request->codigo;
         $siglas=$request->siglas;
+        $abreviatura=$request->abreviatura;
         $nombre=$request->nombre;
         $activo=$request->activo;
 
@@ -126,6 +128,7 @@ class UnidadorganicaController extends Controller
             $newTipoDoc->siglas=$siglas;
             $newTipoDoc->nombre=$nombre;
             $newTipoDoc->activo=$activo;
+            $newTipoDoc->abreviatura=$abreviatura;
             $newTipoDoc->borrado='0';
 
             $newTipoDoc->save();
@@ -169,6 +172,7 @@ class UnidadorganicaController extends Controller
     {
         $codigo=$request->codigo;
         $siglas=$request->siglas;
+        $abreviatura=$request->abreviatura;
         $nombre=$request->nombre;
         $activo=$request->activo;
 
@@ -211,6 +215,7 @@ class UnidadorganicaController extends Controller
             $newTipoDoc->siglas=$siglas;
             $newTipoDoc->nombre=$nombre;
             $newTipoDoc->activo=$activo;
+            $newTipoDoc->abreviatura=$abreviatura;
 
             $newTipoDoc->save();
 

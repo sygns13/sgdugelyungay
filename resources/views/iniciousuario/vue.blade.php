@@ -239,7 +239,7 @@ $(".clsunidadorges").each(function( index ) {
 
    cancelForm: function () {
 
-    newPrioridad:1,
+    this.newPrioridad=1;
 
 this.newOrigen=2;
 this.newTipo=false;
@@ -249,27 +249,38 @@ this.newDetalle='';
 this.newfirma='';
 this.newcargo='';
 
-this.newfecha='',
-this.newtipodoc=0,
-this.newNumero='',
-this.newSiglas='',
+this.newfecha='';
+this.newtipodoc=0;
+this.newNumero='';
+this.newSiglas='';
 
-this.uploadReady=true,
-this.archivo=null,
-this.newFolios='',
-this.newAsunto='',
+this.uploadReady=false;
+this.archivo=null;
+this.newFolios='';
+this.newAsunto='';
 
-this.newClasificacion=4,
-this.newDias='',
+this.newClasificacion=4;
+this.newDias='';
 
 
-this.newForma=false,
-this.codUndOrg='',
-this.newUnidadOrganica=0,
-this.newDetalleDestino='',
+this.newForma=false;
+this.codUndOrg='';
+this.newUnidadOrganica=0;
+this.newDetalleDestino='';
 
-this.newProveido='',
-this.newUsuario='',
+this.newProveido='';
+this.newUsuario='';
+
+
+
+
+this.$nextTick(function () {
+    this.uploadReady=true;
+    $('#cbuentidad').val('0').trigger('change');
+$('#cbuTipoDoc').val('0').trigger('change');
+$('#cbuUnidadOrganica').val('0').trigger('change');
+     })
+
 
        $('#txtcodEntidad').focus();
        

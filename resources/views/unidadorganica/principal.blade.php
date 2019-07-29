@@ -1,6 +1,6 @@
 <div class="box box-primary">
     <div class="box-header with-border">
-      <h3 class="box-title">Gestión de Unidades Orgánicas</h3>
+      <h3 class="box-title">Gestión de Unidades Orgánicas de la UGEL YUNGAY</h3>
       <a style="float: right;" type="button" class="btn btn-default" href="{{URL::to('home')}}"><i class="fa fa-reply-all" aria-hidden="true"></i> 
       Volver</a>
     </div>
@@ -41,6 +41,19 @@
               </div>
             </div>
           </div>
+
+          <div class="col-md-12" style="padding-top: 15px;">
+    
+            <div class="form-group">
+              <label for="txtcodigo" class="col-sm-2 control-label">Código:*</label>
+    
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtcodigo" name="txtcodigo" placeholder="Código" maxlength="45"  v-model="newcodigo">
+              </div>
+            </div>
+          
+          </div>
+
   
   
           <div class="col-md-12" style="padding-top: 15px;">
@@ -53,19 +66,20 @@
                 </div>
               </div>
             </div>
-  
+
+
             <div class="col-md-12" style="padding-top: 15px;">
     
-                <div class="form-group">
-                  <label for="txtcodigo" class="col-sm-2 control-label">Código:*</label>
-        
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control" id="txtcodigo" name="txtcodigo" placeholder="Código" maxlength="45"  v-model="newcodigo">
-                  </div>
+              <div class="form-group">
+                <label for="txtabrev" class="col-sm-2 control-label">Abreviatura:*</label>
+      
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="txtabrev" name="txtabrev" placeholder="Abreviatura" maxlength="45"  v-model="newAbreviatura">
                 </div>
-              
               </div>
+            </div>
   
+            
     
     
           <div class="col-md-12" style="padding-top: 15px;">
@@ -135,17 +149,19 @@
       <table class="table table-hover table-bordered" >
         <tbody><tr>
           <th style="padding: 5px; width: 5%;">#</th>
-          <th style="padding: 5px; width: 45%;">Unidad Orgánica</th>
-          <th style="padding: 5px; width: 10%;">SIGLAS</th>
+          <th style="padding: 5px; width: 25%;">Unidad Orgánica</th>
           <th style="padding: 5px; width: 15%;">Código</th>
+          <th style="padding: 5px; width: 15%;">SIGLAS</th>
+          <th style="padding: 5px; width: 15%;">Abreviatura</th>
           <th style="padding: 5px; width: 10%;">Estado</th>
           <th style="padding: 5px; width: 15%;">Gestión</th>
         </tr>
         <tr v-for="unidadorganica, key in unidadorganicas">
           <td style="font-size: 12px; padding: 5px;">@{{key+pagination.from}}</td>
           <td style="font-size: 12px; padding: 5px;">@{{ unidadorganica.nombre }}</td>
-          <td style="font-size: 12px; padding: 5px;">@{{ unidadorganica.siglas }}</td>
           <td style="font-size: 12px; padding: 5px;">@{{ unidadorganica.codigo }}</td>
+          <td style="font-size: 12px; padding: 5px;">@{{ unidadorganica.siglas }}</td>
+          <td style="font-size: 12px; padding: 5px;">@{{ unidadorganica.abreviatura }}</td>
           <td style="font-size: 12px; padding: 5px;">
            <span class="label label-success" v-if="unidadorganica.activo=='1'">Activo</span>
            <span class="label label-warning" v-if="unidadorganica.activo=='0'">Inactivo</span>
@@ -208,7 +224,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="desEditarTitulo" style="font-weight: bold;text-decoration: underline;">EDITAR FORMA DE RECEPCIÓN</h4>
+            <h4 class="modal-title" id="desEditarTitulo" style="font-weight: bold;text-decoration: underline;">EDITAR UNIDAD ORGÁNICA</h4>
   
           </div> 
           <div class="modal-body">
@@ -218,7 +234,7 @@
   
               <div class="box" id="o" style="border:0px; box-shadow:none;" >
                 <div class="box-header with-border">
-                  <h3 class="box-title" id="boxTitulo">Forma de Recepción:</h3>
+                  <h3 class="box-title" id="boxTitulo">Unidad Orgánica:</h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
@@ -236,6 +252,18 @@
                           </div>
                         </div>
                       </div>
+
+                      <div class="col-md-12" style="padding-top: 15px;">
+                
+                        <div class="form-group">
+                          <label for="txtcodigoE" class="col-sm-2 control-label">Código:*</label>
+                
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" id="txtcodigoE" name="txtcodigoE" placeholder="Código" maxlength="45"  v-model="fillunidadorganica.codigo">
+                          </div>
+                        </div>
+                      
+                      </div>
               
               
                       <div class="col-md-12" style="padding-top: 15px;">
@@ -248,18 +276,19 @@
                             </div>
                           </div>
                         </div>
-              
+
                         <div class="col-md-12" style="padding-top: 15px;">
-                
-                            <div class="form-group">
-                              <label for="txtcodigoE" class="col-sm-2 control-label">Código:*</label>
-                    
-                              <div class="col-sm-8">
-                                <input type="text" class="form-control" id="txtcodigoE" name="txtcodigoE" placeholder="Código" maxlength="45"  v-model="fillunidadorganica.codigo">
-                              </div>
+    
+                          <div class="form-group">
+                            <label for="txtabrevE" class="col-sm-2 control-label">Abreviatura:*</label>
+                  
+                            <div class="col-sm-8">
+                              <input type="text" class="form-control" id="txtabrevE" name="txtabrevE" placeholder="Abreviatura" maxlength="45"  v-model="fillunidadorganica.abreviatura">
                             </div>
-                          
                           </div>
+                        </div>
+              
+                        
               
                 
                 

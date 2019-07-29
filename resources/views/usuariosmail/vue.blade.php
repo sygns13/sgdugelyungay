@@ -30,8 +30,8 @@
         classMenu1:'',
         classMenu2:'',
         classMenu3:'',
-        classMenu4:'',
-        classMenu5:'active',
+        classMenu4:'active',
+        classMenu5:'',
         classMenu6:'',
         classMenu7:'',
         classMenu8:'',
@@ -48,12 +48,11 @@
         persona:[],
         user:[],
         users:[],
-        provincias:[],
         useremail:[],
         errors:[],
-        fillPersona:{'id':'', 'dni':'', 'nombres':'', 'apellidos':'', 'genero':'', 'telf':'', 'direccion':'', 'imagen':'', 'tipodocu':'1'},
+        fillPersona:{'id':'', 'dni':'', 'nombres':'', 'apellidos':'', 'genero':'', 'direccion':'', 'imagen':''},
 
-        filluser:{'id':'', 'name':'', 'email':'', 'password':'', 'tipouser_id':'', 'activo':'', 'token2':'','provincia_id':''},
+        filluser:{'id':'', 'name':'', 'email':'', 'password':'', 'tipouser_id':'', 'activo':''},
 
         pagination: {
             'total': 0,
@@ -172,7 +171,6 @@
                 this.usuarios= response.data.usuarios.data;
                 this.tipousers= response.data.tipousers;
                 this.pagination= response.data.pagination;
-                this.provincias= response.data.provincias;
                 this.mostrarPalenIni=true;
 
                 this.usuarios2= response.data.usuarios2;
@@ -323,6 +321,7 @@ tipouserE:function () {
             data.append('mensaje', CKEDITOR.instances['editor'].getData());
             data.append('mails', JSON.stringify(mails));
             data.append('archivo', this.archivo);
+            data.append('tipomail', '7');
 
 
             const config = { headers: { 'Content-Type': 'multipart/form-data' } };

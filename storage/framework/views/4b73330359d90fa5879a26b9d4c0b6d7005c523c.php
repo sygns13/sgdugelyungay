@@ -49,8 +49,10 @@
                 <a href="#"><i class='fa fa-list-alt'></i> <span>Tablas Maestras</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="<?php echo e(URL::to('tipodocumento')); ?>"><i class='fa fa-gg'></i> <span>Tipo de Documentos</span></a></li>
-                    <li><a href="<?php echo e(URL::to('formarecepcion')); ?>"><i class='fa fa-gg'></i> <span>Forma de Recepción</span></a></li>
-                    <li><a href="<?php echo e(URL::to('unidadorganica')); ?>"><i class='fa fa-gg'></i> <span>Unidad Orgánica</span></a></li>
+                    
+                    <li><a href="<?php echo e(URL::to('unidadorganica')); ?>"><i class='fa fa-gg'></i> <span>Unidades Orgánicas</span></a></li>
+                    <li><a href="<?php echo e(URL::to('entidad')); ?>"><i class='fa fa-gg'></i> <span>Gestión de Entidades</span></a></li>
+                    <li><a href="<?php echo e(URL::to('prioridad')); ?>"><i class='fa fa-gg'></i> <span>Gestión de Prioridades</span></a></li>
                 </ul>
             </li>
 
@@ -61,13 +63,11 @@
 
 <?php if(accesoUser([1])): ?>
         <li class="treeview" v-bind:class="classMenu2">
-            <a href="<?php echo e(URL::to('#')); ?>"><i class='fa fa-file-text'></i> <span>Procesar Trámites</span> </a>
+            <a href="<?php echo e(URL::to('procetramites')); ?>"><i class='fa fa-cogs'></i> <span>Procesar Trámites</span> </a>
         </li>
 
 
-        <li class="treeview" v-bind:class="classMenu3">
-            <a href="<?php echo e(URL::to('#')); ?>"><i class='fa fa-archive'></i> <span>Reporte Histórico</span> </a>
-        </li>
+
 
 <?php endif; ?>
 
@@ -77,8 +77,8 @@
             <li class="treeview" v-bind:class="classMenu4">
                 <a href="#"><i class='fa fa-user-secret'></i> <span>Administrar Usuarios</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                  <li><a href="<?php echo e(URL::to('#')); ?>"><i class='fa fa-gg'></i> <span>Gestión de Usuarios</span></a></li>
-                  <li><a href="<?php echo e(URL::to('#')); ?>"><i class='fa fa-gg'></i> <span>Envío de Email</span></a></li>
+                  <li><a href="<?php echo e(URL::to('usuarios')); ?>"><i class='fa fa-gg'></i> <span>Gestión de Usuarios</span></a></li>
+                  <li><a href="<?php echo e(URL::to('usuariosmail')); ?>"><i class='fa fa-gg'></i> <span>Envío de Email</span></a></li>
                 </ul>
             </li>
 <?php endif; ?>
@@ -106,8 +106,8 @@
 <li class="treeview" v-bind:class="classMenu1">
     <a href="#"><i class='fa fa-list-alt'></i> <span>Gestión de Trámites</span> <i class="fa fa-angle-left pull-right"></i></a>
     <ul class="treeview-menu">
-        <li><a href="<?php echo e(URL::to('#')); ?>"><i class='fa fa-gg'></i> <span>Seguimiento de Trámites</span></a></li>
-        <li><a href="<?php echo e(URL::to('#')); ?>"><i class='fa fa-gg'></i> <span>Histórico de Trámites</span></a></li>
+        <li><a href="<?php echo e(URL::to('mistramites')); ?>"><i class='fa fa-gg'></i> <span>Seguimiento de Trámites</span></a></li>
+        <li><a href="<?php echo e(URL::to('reghistoricos')); ?>"><i class='fa fa-gg'></i> <span>Registros Históricos</span></a></li>
     </ul>
 </li>
 

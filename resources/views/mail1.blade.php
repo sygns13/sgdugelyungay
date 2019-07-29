@@ -13,8 +13,8 @@ Mensaje:
 <br>
 Atte:<br>
 ---------------------<br>
-<h4>Sistema de Gestión Documental</h4>
-<h4>UGEL YUNGAY</h4>
-<h4>Mensaje Automático Enviado mediante la plataforma SGD - Ugel Yungay</h4>
+<h4 style="margin: 0px;">Sistema de Registro de Trámites Documentarios</h4>
+<h4 style="margin: 0px;">UGEL YUNGAY</h4>
+<h4 style="margin: 0px;">Mensaje Automático Enviado mediante la plataforma Web - Ugel Yungay</h4>
 </body>
 </html>

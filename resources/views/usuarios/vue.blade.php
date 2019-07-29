@@ -28,8 +28,8 @@
         classMenu1:'',
         classMenu2:'',
         classMenu3:'',
-        classMenu4:'',
-        classMenu5:'active',
+        classMenu4:'active',
+        classMenu5:'',
         classMenu6:'',
         classMenu7:'',
         classMenu8:'',
@@ -45,9 +45,9 @@
         persona:[],
         user:[],
         errors:[],
-        fillPersona:{'id':'', 'dni':'', 'nombres':'', 'apellidos':'', 'genero':'', 'telf':'', 'direccion':'', 'imagen':'', 'tipodocu':'1'},
+        fillPersona:{'id':'', 'dni':'', 'nombres':'', 'apellidos':'', 'genero':'', 'direccion':'', 'imagen':''},
 
-        filluser:{'id':'', 'name':'', 'email':'', 'password':'', 'tipouser_id':'', 'activo':'', 'token2':'','dependencia_id':''},
+        filluser:{'id':'', 'name':'', 'email':'', 'password':'', 'tipouser_id':'', 'activo':''},
 
         pagination: {
         'total': 0,
@@ -67,10 +67,8 @@
         newNombres:'',
         newApellidos:'',
         newGenero:'1',
-        newTelefono:'',
         newDireccion:'',
 
-        newTipoDocu:'1',
 
         newTipoUser:'',
         newEstado:'1',
@@ -101,29 +99,9 @@
         thispage:'1',
 
 
-        newProvincia:'',
-
-        prov:'',
-        dist:'',
-        dept:'',
+        editarClave:0,
 
 
-        dependencias: [],
-        provincias: [],
-        distritos: [],
-
-        dependenciasE: [],
-        provinciasE: [],
-        distritosE: [],
-
-         idProv1:'',
-        idDis1:'',
-        newDependencia:'',
-
-        idProv1E:'',
-        idDis1E:'',
-
-        idProv1Backup:'',
 
 
 
@@ -178,28 +156,7 @@
                 this.pagination= response.data.pagination;
                 this.mostrarPalenIni=true;
 
-
-                this.dependencias= response.data.dependencias;
-                this.provincias= response.data.provincias;
-                this.distritos= response.data.distritos;
-
-                this.dependenciasE= response.data.dependencias;
-                this.provinciasE= response.data.provincias;
-                this.distritosE= response.data.distritos;
-
-                this.idProv1=response.data.idP1;
-                this.idProv1Backup=response.data.idP1;
-                this.idDis1=response.data.idD1;
-                this.newDependencia='';
-
-                this.idProv1E=response.data.idP1;
-                this.idDis1E=response.data.idD1;
-
-
                 this.$nextTick(function () { 
-                        this.changeDis2(response.data.idP1,response.data.idD1,'1');
-                        this.idProv1E=response.data.idP1;
-                        this.idDis1E=response.data.idD1;
                         this.divusuario=true;
                         this.divloader0=false;
 
@@ -248,9 +205,8 @@
             this.newNombres='';
             this.newApellidos='';
             this.newGenero='1';
-            this.newTelefono='';
             this.newDireccion='';
-            this.newTipoDocu='1';
+
 
             this.newUsername='';
             this.newEmail='';
@@ -268,12 +224,7 @@
             this.newEstado='1';
             this.divEditUsuario=false;
 
-            this.newProvincia='';
 
-            this.idProv1=this.idProv1Backup;
-            this.$nextTick(function () {
-                this.changeDis();
-            })
 
 
         },
@@ -292,69 +243,31 @@
 
                 this.idUser=response.data.idUser;
                 
-                if(this.idUser=="0")
+                if(this.idPersona=="0")
                     {
 
-                this.idPersona=response.data.id;
-                this.persona=response.data.persona;
+                        if(response.data.res=='1'){
 
+                        alertify.success('DNI Válido, continúe ingresando los datos');
 
+                        this.newNombres=response.data.datos[3];
+                        this.newApellidos=response.data.datos[1]+' '+response.data.datos[2];
 
-                if(this.idPersona!='0'){
-                    //toastr.success("te encontre");
-                    //console.log(this.persona);
-                    $.each(this.persona, function( index, dato ) {
-                     //console.log(dato.nombres);
-
-                        app.newDNI=dato.dni;
-                        app.newNombres=dato.nombres;
-                        app.newApellidos=dato.apellidos;
-                        app.newGenero=dato.genero;
-                        app.newTelefono=dato.telefono;
-                        app.newDireccion=dato.direccion;
-
-                   // console.log(dato.imagen);
-
-                    
-
-    
-
-                        if(dato.imagen!=null && dato.imagen.length>0)
-                        {
-                            auximg=dato.imagen;
-                            app.oldImagen=dato.imagen;
-                            
-                        }
-                        
-
-
-                    });
-
-
-                  this.$nextTick(function () {
                         this.formularioCrear=true;
                         this.$nextTick(function () {
+                            this.validated='1';
+                            $("#cbuGenero").focus();
 
-                           /* if(auximg.length>0){
-                                $("#ImgPerfilNuevo").attr("src","{{ asset('/img/perfil/')}}"+"/"+auximg);
-                            }*/
-        
-                             this.validated='1';
-                             $('#txtnombres').focus();
+                        })
 
-                            })
-                            })
+                        
 
-                }else{
+                        }
+                        else {
 
-
-                    this.formularioCrear=true;
-                this.$nextTick(function () {
-                     this.validated='1';
-                     $('#txtnombres').focus();
-
-                })
-                }
+                        alertify.error('DNI No válido, no correspodne a ninguna persona');
+                        $("#txtDNI").focus();
+                        }
 
 
                 }
@@ -378,17 +291,7 @@
             
 
         },
-       /* getImage(event){
-                //Asignamos la imagen a  nuestra data
 
-                if (!event.target.files.length)
-                {
-                  this.imagen=null;
-                }
-                else{
-                this.imagen = event.target.files[0];
-                }
-            },*/
         createUsuario:function () {
             var url='usuario';
 
@@ -401,16 +304,13 @@
 
             var data = new  FormData();
 
-            data.append('idPersona', this.idPersona);
-            data.append('idUser', this.idUser);
+
             data.append('newDNI', this.newDNI);
             data.append('newNombres', this.newNombres);
             data.append('newApellidos', this.newApellidos);
             data.append('newGenero', this.newGenero);
-            data.append('newTelefono', this.newTelefono);
             data.append('newDireccion', this.newDireccion);
             data.append('imagen', this.imagen);
-            data.append('newTipoDocu', this.newTipoDocu);
 
             data.append('newUsername', this.newUsername);
             data.append('newEmail', this.newEmail);
@@ -419,7 +319,7 @@
 
             data.append('newEstado', this.newEstado);
             data.append('newTipoUser', this.newTipoUser);
-            data.append('newDependencia', this.newDependencia);
+
 
             
             const config = { headers: { 'Content-Type': 'multipart/form-data' } };
@@ -470,43 +370,26 @@
                         
                     }).catch(swal.noop);
         },
-       /* getImageE(event){
-                //Asignamos la imagen a  nuestra data
 
-                if (!event.target.files.length)
-                {
-                  this.imagen=null;
-                }
-                else{
-                this.imagen = event.target.files[0];
-                }
-            },*/
         editUsuario:function (usuario) {
 
 
-if(String(usuario.dependencia_id)!='null'){
-            this.changeDis2(usuario.idProv,usuario.idDis,usuario.idDep);
-
-                    this.$nextTick(function () {
-
             this.fillPersona.id=usuario.idper;
-            this.fillPersona.dni=usuario.doc;
+            this.fillPersona.dni=usuario.dni;
             this.fillPersona.nombres=usuario.nombresPer;
             this.fillPersona.apellidos=usuario.apePer;
-            this.fillPersona.telf=usuario.telefono;
             this.fillPersona.direccion=usuario.direccion;
-            //this.fillPersona.imagen=usuario.imagen;
-            this.fillPersona.tipodocu=usuario.tipodoc;
             this.fillPersona.genero=usuario.genero;
 
 
             this.filluser.id=usuario.iduser;
             this.filluser.name=usuario.username;
             this.filluser.email=usuario.email;
-            this.filluser.token2=usuario.token2;
 
             this.filluser.tipouser_id=usuario.idtipo;
             this.filluser.activo=usuario.activo;
+
+            this.editarClave=0;
 
             this.divNuevoUsuario=false;
             this.divEditUsuario=true;
@@ -514,49 +397,12 @@ if(String(usuario.dependencia_id)!='null'){
 
             this.$nextTick(function () {
                      this.validated='1';
-                     $('#txtnombresE').focus();
+                     $('#cbuGeneroE').focus();
 
 
             });
 
-               /* if(usuario.imagen.length>0){
-                    $("#ImgPerfilNuevoE").attr("src","{{ asset('/img/perfil/')}}"+"/"+usuario.imagen);
-                }*/
-
-                });
-        }
-        else{
-
-            this.fillPersona.id=usuario.idper;
-            this.fillPersona.dni=usuario.doc;
-            this.fillPersona.nombres=usuario.nombresPer;
-            this.fillPersona.apellidos=usuario.apePer;
-            this.fillPersona.telf=usuario.telefono;
-            this.fillPersona.direccion=usuario.direccion;
-            //this.fillPersona.imagen=usuario.imagen;
-            this.fillPersona.tipodocu=usuario.tipodoc;
-            this.fillPersona.genero=usuario.genero;
-
-
-            this.filluser.id=usuario.iduser;
-            this.filluser.name=usuario.username;
-            this.filluser.email=usuario.email;
-            this.filluser.token2=usuario.token2;
-
-            this.filluser.tipouser_id=usuario.idtipo;
-            this.filluser.activo=usuario.activo;
-
-            this.divNuevoUsuario=false;
-            this.divEditUsuario=true;
-            this.divloaderEdit=false;
-
-            this.$nextTick(function () {
-                     this.validated='1';
-                     $('#txtnombresE').focus();
-
-
-            });
-        }
+       
 
 
         },
@@ -565,8 +411,8 @@ if(String(usuario.dependencia_id)!='null'){
             this.divEditUsuario=false;
 
             this.$nextTick(function () {
-            this.fillPersona={'id':'', 'dni':'', 'nombres':'', 'apellidos':'', 'genero':'', 'telf':'', 'direccion':'', 'imagen':'', 'tipodocu':'1'};
-            this.filluser={'id':'', 'name':'', 'email':'', 'password':'', 'tipouser_id':'', 'activo':'', 'token2':'','dependencia_id':''};
+            this.fillPersona={'id':'', 'dni':'', 'nombres':'', 'apellidos':'', 'genero':'', 'direccion':'', 'imagen':''};
+            this.filluser={'id':'', 'name':'', 'email':'', 'password':'', 'tipouser_id':'', 'activo':''};
           })
 
         },
@@ -582,19 +428,17 @@ if(String(usuario.dependencia_id)!='null'){
         data.append('editNombres', this.fillPersona.nombres);
         data.append('editApellidos', this.fillPersona.apellidos);
         data.append('editGenero',  this.fillPersona.genero);
-        data.append('editTelefono', this.fillPersona.telf);
         data.append('editDireccion', this.fillPersona.direccion);
         data.append('imagen', this.imagen);
-        data.append('editTipoDocu', this.fillPersona.tipodocu);
 
 
+        data.append('editarClave', this.editarClave);
         data.append('editUsername', this.filluser.name);
         data.append('editEmail', this.filluser.email);
         data.append('editPassword',  this.filluser.token2);
         data.append('oldImagen', this.fillPersona.imagen);
 
         data.append('idtipo', this.filluser.tipouser_id);
-        data.append('dependencia_id', this.filluser.dependencia_id);
         data.append('activo', this.filluser.activo);
 
         data.append('_method', 'PUT');
@@ -677,16 +521,12 @@ if(String(usuario.dependencia_id)!='null'){
                     }).catch(swal.noop);
         },
         impFicha:function (usuario) {
+ 
 
-            
-
-            this.fillPersona.dni=usuario.doc;
+            this.fillPersona.dni=usuario.dni;
             this.fillPersona.nombres=usuario.nombresPer;
             this.fillPersona.apellidos=usuario.apePer;
-            this.fillPersona.telf=usuario.telefono;
             this.fillPersona.direccion=usuario.direccion;
-
-            this.fillPersona.tipodocu=usuario.tipodocu;
             this.fillPersona.genero=usuario.genero;
 
 
@@ -694,15 +534,9 @@ if(String(usuario.dependencia_id)!='null'){
             this.filluser.id=usuario.iduser;
             this.filluser.name=usuario.username;
             this.filluser.email=usuario.email;
-            this.filluser.token2=usuario.token2;
-
             this.tipoUser=usuario.tipouser;
             
-            if(String(usuario.dependencia_id)!='null'){
-                 this.prov=usuario.provincia;
-                 this.dist=usuario.distrito;
-                 this.dept=usuario.dependencia;
-            }
+
 
             //this.fillPersona.imagen=usuario.imagen;
 
@@ -725,93 +559,7 @@ if(String(usuario.dependencia_id)!='null'){
         Imprimir:function (usuario) {
             $("#FichaUsuario").printArea();
         },
-        tipouser:function () {
-            if(String(this.newTipoUser)=="1"){
-                this.newProvincia='';
-            }
-        },
-        tipouserE:function () {
-            if(String(this.filluser.tipouser_id)=="1"){
-                this.filluser.provincia_id='';
-            }
-        },
 
-                      changeDis:function () {
-          var idProv=this.idProv1;
-
-          var url = 'organojudicials/changeProv2/'+idProv+'';
-                            axios.get(url).then(response=>{
-                                this.distritos=response.data.distritos;
-                                this.dependencias=response.data.dependencias;
-                                this.idDis1=response.data.idD1;
-                                this.newDependencia='';
-                       });
-
-
-        },
-      changeDep:function () {
-          var idDis=this.idDis1;
-
-          var url = 'organojudicials/changeDis2/'+idDis+'';
-                            axios.get(url).then(response=>{
-                                this.dependencias=response.data.dependencias;
-                                this.newDependencia='';
-                       });
-
-
-      },
-
-
-      changeDisE:function () {
-          var idProv=this.idProv1E;
-
-          var url = 'organojudicials/changeProv2/'+idProv+'';
-                            axios.get(url).then(response=>{
-                                this.distritosE=response.data.distritos;
-                                this.dependenciasE=response.data.dependencias;
-                                this.idDis1E=response.data.idD1;
-                                this.filluser.dependencia_id='';
-                       });
-
-
-        },
-      changeDepE:function () {
-          var idDis=this.idDis1E;
-
-          var url = 'organojudicials/changeDis2/'+idDis+'';
-                            axios.get(url).then(response=>{
-                                this.dependenciasE=response.data.dependencias;
-                                this.filluser.dependencia_id='';
-                       });
-
-
-      },
-
-
-      changeDis2:function (idProv,idDis,idDep) {
-
-            this.idProv1E=idProv;
-          var url = 'organojudicials/changeProv2/'+idProv+'';
-                            axios.get(url).then(response=>{
-                                this.distritosE=response.data.distritos;
-                                this.changeDep2(idDis,idDep);
-
-                       });
-
-
-        },
-
-        changeDep2:function (idDis,idDep) {
-
-            this.idDis1E=idDis;
-          var url = 'organojudicials/changeDis2/'+idDis+'';
-                            axios.get(url).then(response=>{
-                                this.dependenciasE=response.data.dependencias;
-                                this.filluser.dependencia_id=idDep;
-                       });
-
-
-      },
     }
 });
 </script>

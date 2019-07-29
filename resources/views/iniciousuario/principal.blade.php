@@ -27,12 +27,367 @@
       <div class="box-header with-border" >
         <h3 class="box-title" id="tituloAgregar">Complete el Formulario para Inicializar un Trámite</h3>
 
+        <a style="float: right;    margin-left: 10px;" type="button" class="btn btn-warning" href="{{URL::to('reghistoricos')}}"><i class="fa fa-archive" aria-hidden="true"></i> 
+          Registros Históricos</a>
+
         <a style="float: right;" type="button" class="btn btn-info" href="{{URL::to('mistramites')}}"><i class="fa fa-search" aria-hidden="true"></i> 
-          Ver Mis Trámites</a>
+          Seguimiento de Trámites</a>
+
+          
       </div>
   
       <form v-on:submit.prevent="create">
        <div class="box-body">
+
+
+          <table width="100%" height="81%" border="0" cellpadding="0" cellspacing="10" class="backform">
+              <tbody>
+                <tr style="height: 30px;"><td></td></tr><tr>
+  
+                <td valign="top" style="border-right: 2px #006699 solid;"> 
+              <table class="frmline" width="720" align="center" border="0" cellpadding="0" cellspacing="0">
+          
+                <tbody><tr>
+                  <td colspan="7" style="    border-right: 2px #006699 solid;">
+                    <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
+                    <tbody><tr>
+                      <td width="100%" colspan="3">
+                            <table width="100%" cellspacing="0" cellpadding="3" border="0">
+                    <tbody><tr>
+                                          <th bgcolor="#6600FF" width="20%" align="left">
+                                  </th>
+                      <th width="70%" height="26">
+                      DOCUMENTOS EN PROCESO :: [Nuevo Registro]				</th>	
+                          <th width="25%" align="right">
+                                
+                            </th>				
+                      </tr>
+                      </tbody></table>
+                      </td>
+                    </tr>
+                    </tbody></table>
+                    </td></tr>
+  
+
+                    <tr>
+                        <td colspan="5" style="    border-right: 2px #006699 solid;"><table cellspacing="0" border="0" cellpadding="0"><tbody><tr><td width="10" background="{{ asset('/img/sisgedo/titulo1.jpg') }}" height="10">&nbsp;</td><td width="90%" align="left" class="marco seccion">&nbsp;DATOS DEL REGISTRO</td><td background="{{ asset('/img/sisgedo/titulo3.jpg') }}" height="20" align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></tbody></table></td>
+                    </tr>	
+  
+
+  
+                    <tr valign="middle">
+                        <td width="1%" class="marco">&nbsp;</td>	
+                          <td width="22%" class="etiqueta" align="right">Prioridad&nbsp;&nbsp;</td>
+                          <td width="1%" class="objeto">&nbsp;</td>
+                          <td width="78%" class="objeto">	
+
+                          <select class="cajatexto" id="cbuprioridad" name="cbuprioridad" v-model="newPrioridad" style="width: 160px;">
+                                  <option v-for="prioridad, key in prioridads"  v-bind:value="prioridad.id">@{{prioridad.prioridad}}</option>
+                  
+                          </select>
+                        </td>
+                          <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
+                    </tr>
+  
+  
+                    <tr><td colspan="5" style="    border-right: 2px #006699 solid;" class="marco seccionblank">&nbsp;</td></tr>
+                    <tr>
+                        <td colspan="5" style="    border-right: 2px #006699 solid;"><table cellspacing="0" border="0" cellpadding="0"><tbody><tr><td width="10" background="{{ asset('/img/sisgedo/titulo1.jpg') }}" height="10">&nbsp;</td><td width="90%" align="left" class="marco seccion">&nbsp;ORIGEN</td><td background="{{ asset('/img/sisgedo/titulo3.jpg') }}" height="20" align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></tbody></table></td>
+                    </tr>	
+  
+       
+                    <tr valign="middle">
+                        <td width="1%" class="marco" >&nbsp;</td>	
+                          <td width="22%" class="etiqueta" align="right">Entidad&nbsp;&nbsp;</td>
+                          <td width="1%" class="objeto">&nbsp;</td>
+                          <td width="78%" class="objeto" valign="top">	
+                                                     
+              
+                             <input type="text" class="cajatexto" id="txtcodEntidad" name="txtcodEntidad" placeholder="" maxlength="20" v-model="codEntidad" style="width: 100px; display:inline-block;" onkeypress="return soloNumeros(event);" @keyup="$event.keyCode === 13 ? buscarEntidad() : false" size="6">
+  
+                           <img src="{{ asset('/img/sisgedo/search.gif') }}" alt="Buscar" height="14" width="16" border="0" style="cursor:pointer" @click.prevent="buscarEntidad()"> 
+                          &nbsp; <br>
+  
+                              <select class="cajatexto" id="cbuentidad" name="cbuentidad" v-model="newentidad" style="width: 470px;">
+                                  <option value="0" disabled>------ Seleccione Opción ------</option>
+                                  <template v-for="entidad, key in entidads">
+                                    <option   v-bind:value="entidad.id">@{{entidad.nombre}} - (@{{entidad.codigo}})</option>
+            
+                                    <input type="hidden" class="clsentidades" v-bind:id="'ident'+entidad.id" v-bind:value="entidad.codigo">
+            
+                                  </template>
+                                </select>
+                        </td>
+                          <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
+                    </tr>	
+  
+  
+                    <tr valign="middle">
+                        <td width="1%" class="marco" >&nbsp;</td>	
+                          <td width="22%" class="etiqueta" align="right">Detalle&nbsp;&nbsp;</td>
+                          <td width="1%" class="objeto">&nbsp;</td>
+                          <td width="78%" class="objeto" >	
+                                                    
+                          <input type="text" class="cajatexto" id="txtdetalle" name="txtdetalle" placeholder="" maxlength="500" v-model="newDetalle" size="53">
+                          &nbsp;
+  
+                            </td>
+                          <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
+                    </tr>	
+  
+                    <tr valign="middle">
+                        <td width="1%" class="marco" >&nbsp;</td>	
+                          <td width="22%" class="etiqueta" align="right">Firma&nbsp;&nbsp;</td>
+                          <td width="1%" class="objeto">&nbsp;</td>
+                          <td width="78%" class="objeto" >	
+  
+                           <input type="text" class="cajatexto" id="txtfirma" name="txtfirma" placeholder="" maxlength="500" v-model="newfirma" size="53">
+                          &nbsp;
+  
+                            </td>
+                          <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
+                    </tr>	
+  
+                    <tr valign="middle">
+                        <td width="1%" class="marco" >&nbsp;</td>	
+                          <td width="22%" class="etiqueta" align="right">Cargo&nbsp;&nbsp;</td>
+                          <td width="1%" class="objeto">&nbsp;</td>
+                          <td width="78%" class="objeto" >	
+                                                     
+                           <input type="text" class="cajatexto" id="txtcargo" name="txtcargo" placeholder="" maxlength="500" v-model="newcargo" size="53">
+                           &nbsp;
+  
+                            </td>
+                          <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
+                    </tr>	
+  
+  
+                    <tr><td colspan="5" style="    border-right: 2px #006699 solid;" class="marco seccionblank">&nbsp;</td></tr>
+                    <tr>
+                        <td colspan="5" style="    border-right: 2px #006699 solid;"><table cellspacing="0" border="0" cellpadding="0"><tbody><tr><td width="10" background="{{ asset('/img/sisgedo/titulo1.jpg') }}" height="10">&nbsp;</td><td width="90%" align="left" class="marco seccion">&nbsp;DATOS DEL DOCUMENTO</td><td background="{{ asset('/img/sisgedo/titulo3.jpg') }}" height="20" align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></tbody></table></td>
+                    </tr>	
+  
+                    <tr valign="middle">
+                        <td width="1%" class="marco" >&nbsp;</td>	
+                          <td width="22%" class="etiqueta" align="right">Fecha de Documento&nbsp;&nbsp;</td>
+                          <td width="1%" class="objeto">&nbsp;</td>
+                          <td width="78%" class="objeto" >	    									
+  
+                           <input type="date"  id="txtfecha" name="txtfecha" placeholder="dd/mm/aaaa" maxlength="10" v-model="newfecha" required size="10" style="line-height: 1;">
+                            </td>
+                          <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
+                    </tr>	
+  
+  
+                    <tr valign="middle">
+                        <td width="1%" class="marco">&nbsp;</td>	
+                          <td width="22%" class="etiqueta" align="right">Tipo de Documento&nbsp;&nbsp;</td>
+                          <td width="1%" class="objeto">&nbsp;</td>
+                          <td width="78%" class="objeto">	
+                                           
+                        <select class="cajatexto" id="cbuTipoDoc" name="cbuTipoDoc" v-model="newtipodoc" style="width: 300px;">
+                            <option value="0" disabled>Seleccione Tipo de Documento</option>
+                            <option v-for="tipodoc, key in tipodocumentos"  v-bind:value="tipodoc.id">@{{tipodoc.tipo}}</option>
+                          </select>
+
+                        </td>
+                          <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
+                    </tr>
+  
+  
+  
+                    <tr valign="middle">
+                        <td width="1%" class="marco" >&nbsp;</td>	
+                          <td width="22%" class="etiqueta" align="right">Número y Siglas&nbsp;&nbsp;</td>
+                          <td width="1%" class="objeto">&nbsp;</td>
+                          <td width="78%" class="objeto" valign="top">	
+                                                     
+                        <input type="text" class="cajatexto" id="txtnumero" name="txtnumero" placeholder="" maxlength="20" v-model="newNumero" required size="10">
+
+                        <input type="text" class="cajatexto" id="txtsiglas" name="txtsiglas" placeholder="" maxlength="500" v-model="newSiglas" required size="53">
+
+
+  
+                        </td>
+                          <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
+                    </tr>	
+   
+                    <tr valign="middle">
+                        <td width="1%" class="marco" >&nbsp;</td>	
+                          <td width="22%" class="etiqueta" align="right">Archivo&nbsp;&nbsp;</td>
+                          <td width="1%" class="objeto">&nbsp;</td>
+                          <td width="78%" class="objeto" >
+                              <input v-if="uploadReady" name="archivo2" type="file" id="archivo" class="archivo" @change="getArchivo" 
+                              accept=".pdf, .doc, .docx, .xls, .xlsx, ppt, .pptx, .PDF, .DOC, .DOCX, .XLS, .XLSX, .PPT, .PTTX"/>
+
+  
+                            </td>
+                          <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
+                    </tr>	
+
+  
+  
+  
+                    <tr valign="middle">
+                        <td width="1%" class="marco" >&nbsp;</td>	
+                          <td width="22%" class="etiqueta" align="right">Folios&nbsp;&nbsp;</td>
+                          <td width="1%" class="objeto">&nbsp;</td>
+                          <td width="78%" class="objeto" valign="top">	
+  
+                        <input type="text" class="cajatexto" id="txtfolios" name="txtfolios" placeholder="" maxlength="20" v-model="newFolios" required size="10">
+
+                        </td>
+                          <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
+                    </tr>	
+  
+  
+  
+                    <tr valign="middle">
+                        <td width="1%" class="marco">&nbsp;</td>	
+                          <td width="22%" class="etiqueta" align="right">Asunto&nbsp;&nbsp;</td>
+                          <td width="1%" class="objeto">&nbsp;</td>
+                          <td width="78%" class="objeto">	
+                            <textarea name="txtasunto" id="txtasunto" cols="60" rows="4" class="cajatexto" v-model="newAsunto"></textarea>
+                          </td>
+                          <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
+                    </tr>
+  
+
+
+  
+  
+  
+                    <tr><td colspan="5" style="    border-right: 2px #006699 solid;" class="marco seccionblank">&nbsp;</td></tr>
+                    <tr>
+                        <td colspan="5" style="    border-right: 2px #006699 solid;"><table cellspacing="0" border="0" cellpadding="0"><tbody><tr><td width="10" background="{{ asset('/img/sisgedo/titulo1.jpg') }}" height="10">&nbsp;</td><td width="90%" align="left" class="marco seccion">&nbsp;DESTINO(S) - DERIVACION DEL DOCUMENTO</td><td background="{{ asset('/img/sisgedo/titulo3.jpg') }}" height="20" align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></tbody></table></td>
+                    </tr>	
+  
+  
+                    <tr valign="middle">
+                        <td width="1%" class="marco" >&nbsp;</td>	
+                          <td width="22%" class="etiqueta" align="right">Forma&nbsp;&nbsp;</td>
+                          <td width="1%" class="objeto">&nbsp;</td>
+                          <td width="78%" class="objeto" valign="top">	
+  
+  
+                              <label for="radioInterno" style="color: #006699!important;">Copia</label>
+                                                     
+                              <input type="checkbox" id="CHECKFORMA" v-model="newForma" style="display:inline-block;">
+
+  
+  
+                        </td>
+                          <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
+                    </tr>	
+  
+  
+  
+                    <tr valign="middle">
+                        <td width="1%" class="marco" >&nbsp;</td>	
+                          <td width="22%" class="etiqueta" align="right">Unidad Orgánica&nbsp;&nbsp;</td>
+                          <td width="1%" class="objeto">&nbsp;</td>
+                          <td width="78%" class="objeto" valign="top">	
+                                                                         
+                             <input type="text" class="cajatexto" id="txtUnidadOrganica" name="txtUnidadOrganica" placeholder="" maxlength="20" v-model="codUndOrg"  style="width: 100px; display:inline-block;" onkeypress="return soloNumeros(event);" @keyup="$event.keyCode === 13 ? buscarUnidadOrganica() : false" size="6">
+
+
+  
+                           <img src="{{ asset('/img/sisgedo/search.gif') }}" alt="Buscar" height="14" width="16" border="0" style="cursor:pointer" @click.prevent="buscarUnidadOrganica()"> 
+                       
+                    <select class="cajatexto" id="cbuUnidadOrganica" name="cbuUnidadOrganica" v-model="newUnidadOrganica" style="width:450px;">
+                      <option value="0" disabled>Seleccione Unidad Orgánica</option>
+                      <template v-for="unidadorg, key in unidadorganicas">
+                          <option   v-bind:value="unidadorg.id">@{{unidadorg.nombre}} - (@{{unidadorg.codigo}})</option>
+                          <input type="hidden" class="clsunidadorges" v-bind:id="'idorg'+unidadorg.id" v-bind:value="unidadorg.codigo">
+                        </template>
+                    </select>
+
+
+  
+                        </td>
+                          <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
+                    </tr>	
+  
+  
+  
+  
+                    <tr valign="middle">
+                        <td width="1%" class="marco" >&nbsp;</td>	
+                          <td width="22%" class="etiqueta" align="right">Detalle&nbsp;&nbsp;</td>
+                          <td width="1%" class="objeto">&nbsp;</td>
+                          <td width="78%" class="objeto" valign="top">	
+                             <input type="text" class="cajatexto" id="txtDetalleUO" name="txtDetalleUO" placeholder="" maxlength="500" v-model="newDetalleDestino" size="60"> 
+                        </td>
+                          <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
+                    </tr>	
+  
+                    <tr><td colspan="5" style="    border-right: 2px #006699 solid;" class="marco seccionblank">&nbsp;</td></tr>
+  
+  
+                    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+             
+                    
+  
+  
+  
+                    
+              
+              </tbody></table>
+              </td></tr>
+              <tr style="height: 30px;"><td></td></tr><tr>
+              </tbody></table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{-- 
+
+
 
           <div class="col-md-12" style="padding-bottom: 15px; "> <h4 style="font-weight:bold; font-size:16px;">DATOS DEL REGISTRO</h4> </div>
   
@@ -56,37 +411,6 @@
         <div class="col-md-12" style="padding-bottom: 15px; "> <h4 style="font-weight:bold; font-size:16px;">ORIGEN</h4> </div>
 
 
-       {{--  <div class="col-md-12" >
-  
-          <div class="form-group">
-            <label for="radioOrigen" class="col-sm-2 control-label">ORIGEN:</label>
-  
-            <div class="col-sm-1">
-                <input type="radio" id="radioInterno" value="1" v-model="newOrigen">
-                <label for="radioInterno">Interno</label>
-             
-            </div>
-
-            <div class="col-sm-1">
-                <input type="radio" id="radioExterno" value="2" v-model="newOrigen">
-                <label for="radioExterno">Externo</label>
-             
-            </div>
-          </div>
-        </div> --}}
-
-
-      {{--   <div class="col-md-12" style="padding-top: 15px;" >
-  
-            <div class="form-group">
-              <label for="checktipo" class="col-sm-2 control-label">TIPO:</label>
-    
-              <div class="col-sm-8">
-                 <label for="checktipo" style="display:inline-block;">Documento Personal:</label>  <input type="checkbox" id="checktipo" v-model="newTipo" style="display:inline-block;">
-              </div>
-            </div>
-          </div>
- --}}
 
           <div class="col-md-12" style="padding-top: 15px;">
               <div class="form-group">
@@ -197,17 +521,6 @@
                     </div>
                   </div>
 
-                {{--   <div class="col-md-12" style="padding-top: 15px;">
-                      <div class="form-group">
-                        <label for="cbuFormaRecep" class="col-sm-2 control-label">FORMA DE RECEPCIÓN:</label>
-                        <div class="col-sm-4">
-                          <select class="form-control" id="cbuFormaRecep" name="cbuFormaRecep" v-model="newForma">
-                            <option value="0" disabled>Seleccione Forma de Recepción</option>
-                            <option v-for="formarep, key in formarecepcions"  v-bind:value="formarep.id">@{{formarep.forma}}</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div> --}}
 
 
                     <div class="col-md-12" style="padding-top: 15px;">
@@ -251,57 +564,6 @@
                           <div class="col-md-12" >
                               <hr>
                             </div>
-
-     {{--   <div class="col-md-12" style="padding-bottom: 15px; "> <h4 style="font-weight:bold; font-size:16px;">CLASIFICACIÓN TUPA</h4> </div>
-
-
-       <div class="col-md-12" style="padding-top: 15px;">
-  
-          <div class="form-group">
-            <label for="radioOrigen" class="col-sm-2 control-label">CLASIFICACIÓN:</label>
-  
-            <div class="col-sm-2">
-                <input type="radio" id="radioSilencioPositivo" value="1" v-model="newClasificacion">
-                <label for="radioSilencioPositivo">Silencio Positivo</label>
-             
-            </div>
-
-            <div class="col-sm-2">
-                <input type="radio" id="radioSilencioNegativo" value="2" v-model="newClasificacion">
-                <label for="radioSilencioNegativo">Silencio Negativo</label>
-             
-            </div>
-
-            <div class="col-sm-2">
-                <input type="radio" id="radioAutomatico" value="3" v-model="newClasificacion">
-                <label for="radioAutomatico">Automático</label>
-             
-            </div>
-
-            <div class="col-sm-2">
-                <input type="radio" id="radioNinguna" value="4" v-model="newClasificacion">
-                <label for="radioNinguna">Ninguna</label>
-             
-            </div>
-          </div>
-        </div>
-
-
-
-        <div class="col-md-12" style="padding-top: 15px;">
-  
-            <div class="form-group">
-              <label for="txtnumdias" class="col-sm-2 control-label"># de Días de Atención:</label>
-    
-              <div class="col-sm-2">
-                <input type="text" class="form-control" id="txtnumdias" name="txtnumdias" placeholder="" maxlength="20" v-model="newDias" required>
-              </div>
-            </div>
-          </div> 
-
-          <div class="col-md-12" >
-              <hr>
-            </div>--}}
 
           <div class="col-md-12" style="padding-bottom: 15px; "> <h4 style="font-weight:bold; font-size:16px;">DESTINO(S) - DERIVACIÓN DEL DOCUMENTO</h4> </div>
 
@@ -358,41 +620,16 @@
                   </div>
                 </div>
 
-
-{{--                 <div class="col-md-12" style="padding-top: 15px;">
-  
-                    <div class="form-group">
-                      <label for="txtusuario" class="col-sm-2 control-label">USUARIO:</label>
-            
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control" id="txtusuario" name="txtusuario" placeholder="" maxlength="500" v-model="newUsuario" >
-                      </div>
-                    </div>
-                  </div>
-
-
-
-                <div class="col-md-12" style="padding-top: 15px;">
-  
-                    <div class="form-group">
-                      <label for="txtproveido" class="col-sm-2 control-label">PROVEIDO DE ATENCIÓN:</label>
-            
-                      <div class="col-sm-8">
-
-                        <textarea name="txtproveido" id="txtproveido" rows="4" class="form-control" v-model="newProveido" ></textarea>
-                      </div>
-                    </div>
-                  </div> --}}
-
+ --}}
 
 
       </div>
   
       <!-- /.box-body -->
       <div class="box-footer">
-        <button type="submit" class="btn btn-info" id="btnGuardar">Registrar</button>
+        <button type="submit" class="btn btn-primary" id="btnGuardar"><i class="fa fa-save" aria-hidden="true"></i>  Registrar</button>
   
-        <button type="reset" class="btn btn-warning" id="btnCancel" @click="cancelForm()">Cancelar</button>
+        <button type="reset" class="btn btn-warning" id="btnCancel" @click.prevent="cancelForm()"><i class="fa fa-times" aria-hidden="true"></i>  Cancelar</button>
   
         {{-- <button type="button" class="btn btn-default" id="btnClose" @click.prevent="cerrarForm()">Cerrar</button> --}}
   
@@ -419,92 +656,5 @@
     </form>
   </div>
   
-  
-  
-{{--   
-  <div class="box box-info">
-    <div class="box-header">
-      <h3 class="box-title">Listado de Tipos de Documentos</h3>
-  
-      <div class="box-tools">
-        <div class="input-group input-group-sm" style="width: 300px;">
-          <input type="text" name="table_search" class="form-control pull-right" placeholder="Buscar" v-model="buscar" @keyup.enter="buscarBtn()">
-  
-          <div class="input-group-btn">
-            <button type="submit" class="btn btn-default" @click.prevent="buscarBtn()"><i class="fa fa-search"></i></button>
-          </div>
-  
-  
-        </div>
-      </div>
-    </div>
-    <!-- /.box-header -->
-    <div class="box-body table-responsive">
-      <table class="table table-hover table-bordered" >
-        <tbody><tr>
-          <th style="padding: 5px; width: 5%;">#</th>
-          <th style="padding: 5px; width: 70%;">Tipo de Documentos</th>
-          <th style="padding: 5px; width: 10%;">Estado</th>
-          <th style="padding: 5px; width: 15%;">Gestión</th>
-        </tr>
-        <tr v-for="formarecepcion, key in formarecepcions">
-          <td style="font-size: 12px; padding: 5px;">@{{key+pagination.from}}</td>
-          <td style="font-size: 12px; padding: 5px;">@{{ formarecepcion.forma }}</td>
-          <td style="font-size: 12px; padding: 5px;">
-           <span class="label label-success" v-if="formarecepcion.activo=='1'">Activo</span>
-           <span class="label label-warning" v-if="formarecepcion.activo=='0'">Inactivo</span>
-         </td>
-         <td style="font-size: 12px; padding: 5px;">
-  
-           <a href="#" v-if="formarecepcion.activo=='1'" class="btn bg-navy btn-sm" v-on:click.prevent="baja(formarecepcion)" data-placement="top" data-toggle="tooltip" title="Desactivar Tipo de Documento"><i class="fa fa-arrow-circle-down"></i></a>
-  
-           <a href="#" v-if="formarecepcion.activo=='0'" class="btn btn-success btn-sm" v-on:click.prevent="alta(formarecepcion)" data-placement="top" data-toggle="tooltip" title="Activar Tipo de Documento"><i class="fa fa-check-circle"></i></a>
-  
-  
-           <a href="#" class="btn btn-warning btn-sm" v-on:click.prevent="editar(formarecepcion)" data-placement="top" data-toggle="tooltip" title="Editar Tipo de Documento"><i class="fa fa-edit"></i></a>
-           <a href="#" class="btn btn-danger btn-sm" v-on:click.prevent="borrar(formarecepcion)" data-placement="top" data-toggle="tooltip" title="Borrar Tipo de Documento"><i class="fa fa-trash"></i></a>
-         </td>
-       </tr>
-  
-     </tbody></table>
-  
-   </div>
-   <!-- /.box-body -->
-   <div style="padding: 15px;">
-     <div><h5>Registros por Página: @{{ pagination.per_page }}</h5></div>
-     <nav aria-label="Page navigation example">
-       <ul class="pagination">
-        <li class="page-item" v-if="pagination.current_page>1">
-         <a class="page-link" href="#" @click.prevent="changePage(1)">
-          <span><b>Inicio</b></span>
-        </a>
-      </li>
-  
-      <li class="page-item" v-if="pagination.current_page>1">
-       <a class="page-link" href="#" @click.prevent="changePage(pagination.current_page-1)">
-        <span>Atras</span>
-      </a>
-    </li>
-    <li class="page-item" v-for="page in pagesNumber" v-bind:class="[page=== isActived ? 'active' : '']">
-     <a class="page-link" href="#" @click.prevent="changePage(page)">
-      <span>@{{ page }}</span>
-    </a>
-  </li>
-  <li class="page-item" v-if="pagination.current_page< pagination.last_page">
-   <a class="page-link" href="#" @click.prevent="changePage(pagination.current_page+1)">
-    <span>Siguiente</span>
-  </a>
-  </li>
-  <li class="page-item" v-if="pagination.current_page< pagination.last_page">
-   <a class="page-link" href="#" @click.prevent="changePage(pagination.last_page)">
-    <span><b>Ultima</b></span>
-  </a>
-  </li>
-  </ul>
-  </nav>
-  <div><h5>Registros Totales: @{{ pagination.total }}</h5></div>
-  </div>
-  </div>
-   --}}
   
   

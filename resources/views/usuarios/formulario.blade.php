@@ -32,13 +32,13 @@
                   <label for="txtnombres" class="col-sm-1 control-label">Nombres:*</label>
 
                   <div class="col-sm-5">
-                    <input type="text" class="form-control" id="txtnombres" name="txtnombres" placeholder="Nombres" maxlength="225" @keydown="$event.keyCode === 13 ? $event.preventDefault() : false" v-model="newNombres">
+                    <input type="text" class="form-control" id="txtnombres" name="txtnombres" placeholder="Nombres" maxlength="225" @keydown="$event.keyCode === 13 ? $event.preventDefault() : false" v-model="newNombres" disabled>
                   </div>
 
                   <label for="txtapellidos" class="col-sm-1 control-label">Apellidos:*</label>
 
                   <div class="col-sm-5">
-                    <input type="text" class="form-control" id="txtapellidos" name="txtapellidos" placeholder="Apellidos" maxlength="225" @keydown="$event.keyCode === 13 ? $event.preventDefault() : false" v-model="newApellidos">
+                    <input type="text" class="form-control" id="txtapellidos" name="txtapellidos" placeholder="Apellidos" maxlength="225" @keydown="$event.keyCode === 13 ? $event.preventDefault() : false" v-model="newApellidos" disabled>
                   </div>
                 </div>
               </div>
@@ -56,12 +56,7 @@
                   </select>
                    </div>
 
-                     <label for="txtfono" class="col-sm-1 control-label">Teléfono/Cell:</label>
-
-                  <div class="col-sm-2">
-                    <input type="text" class="form-control" id="txtfono" name="txtfono" placeholder="N°" maxlength="25" @keydown="$event.keyCode === 13 ? $event.preventDefault() : false" v-model="newTelefono">
-                  </div>
-
+    
                   <label for="txtDir" class="col-sm-1 control-label">Dirección:</label>
 
                   <div class="col-sm-5">
@@ -88,7 +83,7 @@
                 <div class="form-group">
                   <label for="cbuTipoUser" class="col-sm-1 control-label">Tipo de Usuario:*</label>
                     <div class="col-sm-4">
-                  <select class="form-control" id="cbuTipoUser" name="cbuTipoUser" v-model="newTipoUser" @change="tipouser()">
+                  <select class="form-control" id="cbuTipoUser" name="cbuTipoUser" v-model="newTipoUser">
                     <option disabled value="">Seleccione un Tipo de Usuario</option>
 
                     <option v-for="tipouser, key in tipousers" v-bind:value="tipouser.id">@{{ tipouser.nombre }} </option>
@@ -99,54 +94,6 @@
                 </div>
 
             </div>
-
-
-            <div class="col-md-12" style="padding-top: 15px;" v-if="parseInt(newTipoUser)==2">
-                <div class="form-group">
-                  <label for="cbuProv" class="col-sm-1 control-label">Provincia:*</label>
-
-                  <div class="col-sm-8">
-                  <select class="form-control" id="cbuProv" name="cbuProv" v-model="idProv1" @change="changeDis">
-                    <template v-for="provincia, key in provincias">
-                        <option v-bind:value="provincia.id">@{{ provincia.nombre }}</option>
-                    </template>
-                    
-                  </select>
-                   </div>
-                </div>
-
-</div>
-                       <div class="col-md-12" style="padding-top: 10px;" v-if="parseInt(newTipoUser)==2">
-        <div class="form-group">
-          <label for="cbuDistrito" class="col-sm-1 control-label">Distrtito:*</label>
-          <div class="col-sm-8">
-            <select class="form-control" id="cbuDistrito" name="cbuDistrito" v-model="idDis1" @change="changeDep">
-             <template v-for="distrito in distritos">
-                <option  v-bind:value="distrito.id">@{{distrito.nombre}}</option>
-             </template>
-             
-           </select>
-         </div>
-       </div>
-     </div>
-
-
-
-           <div class="col-md-12" style="padding-top: 10px;" v-if="parseInt(newTipoUser)==2">
-        <div class="form-group">
-          <label for="cbuDependencia" class="col-sm-1 control-label">Dependencia:*</label>
-          <div class="col-sm-8">
-            <select class="form-control" id="cbuDependencia" name="cbuDependencia" v-model="newDependencia">
-             <option value="" disabled="">Seleccione una Dependencia</option>
-             <template v-for="dependencia in dependencias">
-                <option  v-bind:value="dependencia.id">@{{dependencia.cod_sis}} - @{{dependencia.nombre}}</option>
-             </template>
-             
-           </select>
-         </div>
-       </div>
-     </div>
-
 
             
 

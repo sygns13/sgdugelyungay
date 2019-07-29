@@ -74,6 +74,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     @elseif($modulo=="iniciousuario")
       @include('iniciousuario.vue')
+
+    @elseif($modulo=="mistramites")
+      @include('mistramites.vue')
+
+    @elseif($modulo=="reghistoricos")
+      @include('reghistoricos.vue')
+
+    @elseif($modulo=="entidades")
+      @include('entidades.vue')
+
+    @elseif($modulo=="prioridads")
+      @include('prioridads.vue')
+
+    @elseif($modulo=="procetramites")
+      @include('procetramites.vue')
+
+    @elseif($modulo=="usuarios")
+      @include('usuarios.vue')
+
+    @elseif($modulo=="usuariosmail")
+      @include('usuariosmail.vue')
+
+    @elseif($modulo=="miperfil")
+      @include('miperfil.vue')
  
 
   @endif

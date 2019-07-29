@@ -28,11 +28,6 @@
 	@include('inicio.menuAdmin')		
 </template>
 
-@elseif(accesoUser([3]))
-
-<template v-if="divhome" id="divhome" v-show="divhome">
-  @include('inicio.menuAdmin')    
-</template>
 
 			@elseif(accesoUser([2]))
 

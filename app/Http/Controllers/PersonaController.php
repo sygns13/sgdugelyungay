@@ -82,21 +82,45 @@ class PersonaController extends Controller
 
     public function verpersona($dni)
     {
-       $user=Persona::where('doc',$dni)->where('activo','2')->where('borrado','0')->get();
-       $persona=Persona::where('doc',$dni)->get();
+       $persona=Persona::where('dni',$dni)->where('borrado','0')->get();
 
-       $id="0";
-       $idUser="0";
+       $idPersona="0";
+       $datos="";
+       $res=1;
+
 
        foreach ($persona as $key => $dato) {
-          $id=$dato->id;
+          $idPersona=$dato->id;
        }
 
-       foreach ($user as $key => $dato) {
-          $idUser=$dato->id;
+       $nombres="";
+       $apellidos="";
+
+       if( $idPersona=="0")
+       {
+        error_reporting(E_ALL ^ E_NOTICE);
+
+        $consulta = file_get_contents('http://aplicaciones007.jne.gob.pe/srop_publico/Consulta/Afiliado/GetNombresCiudadano?DNI='.$dni);
+
+        $partes = explode("|", $consulta);
+
+
+        $datos = array(
+                0 => $dni, 
+                1 => $partes[0], 
+                2 => $partes[1],
+                3 => $partes[2],
+        );
+
+
+        if(strlen($datos[1])==0 && strlen($datos[2])==0 && strlen($datos[3])==0){
+            $res=0;
+        }
        }
 
-       return response()->json(["persona"=>$persona, "id"=>$id,"user"=>$user, "idUser"=>$idUser]);
+
+
+       return response()->json(["datos"=>$datos,"res"=>$res, "idPersona"=>$idPersona]);
 
     }
 

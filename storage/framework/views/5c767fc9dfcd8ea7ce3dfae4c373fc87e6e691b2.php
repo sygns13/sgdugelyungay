@@ -1,8 +1,6 @@
-@extends('adminlte::layouts.app')
-
-@section('htmlheader_title')
-Gestión de envio de Alertas a Usuarios
-@endsection
+<?php $__env->startSection('htmlheader_title'); ?>
+Gestión de envio de Email de Usuarios
+<?php $__env->stopSection(); ?>
 
 <style type="text/css">         
 
@@ -31,20 +29,22 @@ Gestión de envio de Alertas a Usuarios
 }
 
 </style>
-@section('main-content')
+<?php $__env->startSection('main-content'); ?>
 <div class="container-fluid spark-screen" id="contenidoItem">
 
 	<div class="row">
 
-		@include('adminlte::layouts.partials.loaders')
+		<?php echo $__env->make('adminlte::layouts.partials.loaders', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
-		@if(accesoUser([1]))
+		<?php if(accesoUser([1])): ?>
 
 		<template v-if="divusuario" id="divusuario">
-			@include('usuariosalert.usuario')
+			<?php echo $__env->make('usuariosmail.usuario', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 		</template>
-		@endif
+		<?php endif; ?>
 
 	</div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('adminlte::layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

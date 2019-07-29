@@ -10,7 +10,7 @@
                   <label for="txtDNIE" class="col-sm-1 control-label">DNI:*</label>
 
                   <div class="col-sm-2">
-                    <input type="text" class="form-control" id="txtDNIE" name="txtDNIE" placeholder="N° de DNI" maxlength="8" autofocus v-model="fillPersona.dni" @keydown="$event.keyCode === 13 ? $event.preventDefault() : false"  onkeypress="return soloNumeros(event);">
+                    <input type="text" class="form-control" id="txtDNIE" name="txtDNIE" placeholder="N° de DNI" maxlength="8" autofocus v-model="fillPersona.dni" @keydown="$event.keyCode === 13 ? $event.preventDefault() : false"  onkeypress="return soloNumeros(event);" disabled>
                   </div>
 
                 </div>
@@ -24,13 +24,13 @@
                   <label for="txtnombresE" class="col-sm-1 control-label">Nombres:*</label>
 
                   <div class="col-sm-5">
-                    <input type="text" class="form-control" id="txtnombresE" name="txtnombresE" placeholder="Nombres" maxlength="225" @keydown="$event.keyCode === 13 ? $event.preventDefault() : false" v-model="fillPersona.nombres">
+                    <input type="text" class="form-control" id="txtnombresE" name="txtnombresE" placeholder="Nombres" maxlength="225" @keydown="$event.keyCode === 13 ? $event.preventDefault() : false" v-model="fillPersona.nombres" disabled>
                   </div>
 
                   <label for="txtapellidosE" class="col-sm-1 control-label">Apellidos:*</label>
 
                   <div class="col-sm-5">
-                    <input type="text" class="form-control" id="txtapellidosE" name="txtapellidosE" placeholder="Apellidos" maxlength="225" @keydown="$event.keyCode === 13 ? $event.preventDefault() : false" v-model="fillPersona.apellidos">
+                    <input type="text" class="form-control" id="txtapellidosE" name="txtapellidosE" placeholder="Apellidos" maxlength="225" @keydown="$event.keyCode === 13 ? $event.preventDefault() : false" v-model="fillPersona.apellidos" disabled>
                   </div>
                 </div>
               </div>
@@ -48,11 +48,6 @@
                   </select>
                    </div>
 
-                  <label for="txtfonoE" class="col-sm-1 control-label">Teléfono/Cell:</label>
-
-                  <div class="col-sm-2">
-                    <input type="text" class="form-control" id="txtfonoE" name="txtfonoE" placeholder="N°" maxlength="25" @keydown="$event.keyCode === 13 ? $event.preventDefault() : false" v-model="fillPersona.telf">
-                  </div>
 
                   <label for="txtDirE" class="col-sm-1 control-label">Dirección:</label>
 
@@ -78,7 +73,7 @@
             <div class="form-group">
                   <label for="cbuTipoUserE" class="col-sm-1 control-label">Tipo de Usuario:*</label>
                     <div class="col-sm-4">
-                  <select class="form-control" id="cbuTipoUser" name="cbuTipoUserE" v-model="filluser.tipouser_id" @change="tipouserE()">
+                  <select class="form-control" id="cbuTipoUser" name="cbuTipoUserE" v-model="filluser.tipouser_id">
                     <option disabled value="">Seleccione un Tipo de Usuario</option>
 
                     <option v-for="tipouser, key in tipousers" v-bind:value="tipouser.id">@{{ tipouser.nombre }} </option>
@@ -91,51 +86,6 @@
             </div>
 
 
-  <div class="col-md-12" style="padding-top: 15px;" v-if="parseInt(filluser.tipouser_id)==2">
-                <div class="form-group">
-                  <label for="cbuProvE" class="col-sm-1 control-label">Provincia:*</label>
-
-                  <div class="col-sm-8">
-                  <select class="form-control" id="cbuProvE" name="cbuProvE" v-model="idProv1E" @change="changeDisE">
-                    <template v-for="provincia, key in provinciasE">
-                        <option v-bind:value="provincia.id">@{{ provincia.nombre }}</option>
-                    </template>
-                    
-                  </select>
-                   </div>
-                </div>
-            
-</div>
-
-
-       <div class="col-md-12" style="padding-top: 15px;" v-if="parseInt(filluser.tipouser_id)==2">
-        <div class="form-group">
-          <label for="cbuDistritoE" class="col-sm-1 control-label">Distrtito:*</label>
-          <div class="col-sm-8">
-            <select class="form-control" id="cbuDistritoE" name="cbuDistritoE" v-model="idDis1E" @change="changeDepE">
-             <template v-for="distrito in distritosE">
-                <option  v-bind:value="distrito.id">@{{distrito.nombre}}</option>
-             </template>
-             
-           </select>
-         </div>
-       </div>
-     </div>
-
-           <div class="col-md-12" style="padding-top: 15px;" v-if="parseInt(filluser.tipouser_id)==2">
-        <div class="form-group">
-          <label for="cbuDependenciaE" class="col-sm-1 control-label">Dependencia:*</label>
-          <div class="col-sm-8">
-            <select class="form-control" id="cbuDependenciaE" name="cbuDependenciaE" v-model="filluser.dependencia_id">
-             <option value="" disabled="">Seleccione una Dependencia</option>
-             <template v-for="dependencia in dependenciasE">
-                <option  v-bind:value="dependencia.id">@{{dependencia.cod_sis}} - @{{dependencia.nombre}}</option>
-             </template>
-             
-           </select>
-         </div>
-       </div>
-     </div>
 
 
 
@@ -165,9 +115,27 @@
                 </div>
               </div>
 
+
               <div class="col-md-12" style="padding-top: 15px;">
+
+                <div class="form-group">
+                  <label for="cbuestadoE" class="col-sm-1 control-label">¿Desea modificar el Password del Usuario?:</label>
+
+                  <div class="col-sm-4">
+                  <select class="form-control" id="cbuestadoE" name="cbuestadoE" v-model="editarClave">
+                    <option value="0">No</option>
+                    <option value="1">Si</option>
+                  </select>
+                   </div>
+                </div>
+
+            </div>
+
+
+
+              <div class="col-md-12" style="padding-top: 15px;" v-if="editarClave==1">
                   <div class="form-group">
-                  <label for="txtclaveE" class="col-sm-1 control-label">Password:*</label>
+                  <label for="txtclaveE" class="col-sm-1 control-label">Nuevo Password:*</label>
 
                   <div class="col-sm-4">
                     <input type="password" class="form-control" id="txtclaveE" name="txtclaveE" placeholder="********" maxlength="500"  v-model="filluser.token2">

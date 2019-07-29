@@ -87,7 +87,7 @@ data:{
    newtipodoc:0,
    newNumero:'',
    newSiglas:'',
-   newForma:0,
+
    uploadReady:true,
    archivo:null,
    newFolios:'',
@@ -230,58 +230,103 @@ $(".clsunidadorges").each(function( index ) {
            this.$nextTick(function () {
                 this.newPrioridad=1;
                 this.newtipodoc=0;
-                this.newForma=0;
+                this.newForma=false;
                 this.newUnidadOrganica=0;
                 })
 
         })
    },
-   changePage:function (page) {
-       this.pagination.current_page=page;
-       this.getFormaRecepcion(page);
-       this.thispage=page;
-   },
-   buscarBtn: function () {
-       this.getFormaRecepcion();
-       this.thispage='1';
-   },
-   nuevo:function () {
-       this.divNuevo=true;
 
-       this.$nextTick(function () {
-       this.cancelForm();
+   cancelForm: function () {
+
+    this.newPrioridad=1;
+
+this.newOrigen=2;
+this.newTipo=false;
+this.codEntidad='';
+this.newentidad=0;
+this.newDetalle='';
+this.newfirma='';
+this.newcargo='';
+
+this.newfecha='';
+this.newtipodoc=0;
+this.newNumero='';
+this.newSiglas='';
+
+this.uploadReady=false;
+this.archivo=null;
+this.newFolios='';
+this.newAsunto='';
+
+this.newClasificacion=4;
+this.newDias='';
+
+
+this.newForma=false;
+this.codUndOrg='';
+this.newUnidadOrganica=0;
+this.newDetalleDestino='';
+
+this.newProveido='';
+this.newUsuario='';
+
+
+
+
+this.$nextTick(function () {
+    this.uploadReady=true;
+    $('#cbuentidad').val('0').trigger('change');
+$('#cbuTipoDoc').val('0').trigger('change');
+$('#cbuUnidadOrganica').val('0').trigger('change');
      })
+
+
+       $('#txtcodEntidad').focus();
        
    },
-   cerrarForm: function () {
-       this.divNuevo=false;
-       this.cancelForm();
-   },
-   cancelForm: function () {
-       $('#txtformarecepcion').focus();
-       this.newforma='';
-       this.newEstado='1';
-   },
    create:function () {
-       var url='formarecepcions';
+       var url='principal';
+
+       var data = new  FormData();
+
+       data.append('prioridad_id', this.newPrioridad);
+       data.append('entidad_id', this.newentidad);
+       data.append('detalle', this.newDetalle);
+       data.append('firma', this.newfirma);
+       data.append('cargo', this.newcargo);
+       data.append('fechadoc', this.newfecha);
+       data.append('tipodocumento_id', this.newtipodoc);
+       data.append('numero', this.newNumero);
+       data.append('siglas', this.newSiglas);
+       data.append('archivo', this.archivo);
+       data.append('folios', this.newFolios);
+       data.append('asunto', this.newAsunto);
+       data.append('formacopia', this.newForma);
+       data.append('unidadorganica_id', this.newUnidadOrganica);
+       data.append('detalledestino', this.newDetalleDestino);
+
+
+       const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+
        $("#btnGuardar").attr('disabled', true);
        $("#btnCancel").attr('disabled', true);
-       $("#btnClose").attr('disabled', true);
+       //$("#btnClose").attr('disabled', true);
        this.divloaderNuevo=true;
-       axios.post(url,{forma:this.newforma, activo:this.newEstado }).then(response=>{
+       axios.post(url,data, config).then(response=>{
            //console.log(response.data);
 
            $("#btnGuardar").removeAttr("disabled");
            $("#btnCancel").removeAttr("disabled");
-           $("#btnClose").removeAttr("disabled");
+           //$("#btnClose").removeAttr("disabled");
            this.divloaderNuevo=false;
 
-           console.log(response.data.result);
+           //console.log(response.data.result);
 
            if(String(response.data.result)=='1'){
                this.getFormaRecepcion(this.thispage);
                this.errors=[];
-               this.cerrarForm();
+               this.cancelForm();
                toastr.success(response.data.msj);
            }else{
                $('#'+response.data.selector).focus();
@@ -291,6 +336,21 @@ $(".clsunidadorges").each(function( index ) {
            //this.errors=error.response.data
        })
    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    borrar:function (formarecepcion) {
          swal({
              title: '¿Estás seguro?',

@@ -138,9 +138,11 @@
                           
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                              
+                             <div class="pull-left">
+                                    <a href="<?php echo e(url('miperfil')); ?>" class="btn btn-primary btn-flat">Mi Perfil</a>
+                                </div> 
                                 <div class="pull-right">
-                                    <a href="<?php echo e(url('/salir')); ?>" class="btn btn-default btn-flat"
+                                    <a href="<?php echo e(url('/salir')); ?>" class="btn btn-danger btn-flat"
                                        onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                         <?php echo e(trans('adminlte_lang::message.signout')); ?>

@@ -26,11 +26,6 @@
 	<?php echo $__env->make('inicio.menuAdmin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>		
 </template>
 
-<?php elseif(accesoUser([3])): ?>
-
-<template v-if="divhome" id="divhome" v-show="divhome">
-  <?php echo $__env->make('inicio.menuAdmin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>    
-</template>
 
 			<?php elseif(accesoUser([2])): ?>
 

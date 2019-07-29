@@ -66,6 +66,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <?php elseif($modulo=="iniciousuario"): ?>
       <?php echo $__env->make('iniciousuario.vue', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+    <?php elseif($modulo=="mistramites"): ?>
+      <?php echo $__env->make('mistramites.vue', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+    <?php elseif($modulo=="reghistoricos"): ?>
+      <?php echo $__env->make('reghistoricos.vue', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+    <?php elseif($modulo=="entidades"): ?>
+      <?php echo $__env->make('entidades.vue', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+    <?php elseif($modulo=="prioridads"): ?>
+      <?php echo $__env->make('prioridads.vue', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+    <?php elseif($modulo=="procetramites"): ?>
+      <?php echo $__env->make('procetramites.vue', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+    <?php elseif($modulo=="usuarios"): ?>
+      <?php echo $__env->make('usuarios.vue', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+    <?php elseif($modulo=="usuariosmail"): ?>
+      <?php echo $__env->make('usuariosmail.vue', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+    <?php elseif($modulo=="miperfil"): ?>
+      <?php echo $__env->make('miperfil.vue', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
  
 
   <?php endif; ?>

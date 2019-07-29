@@ -32,7 +32,7 @@
               </h3>
             </div>
        
-        @include('usuarios.formulario')  
+          @include('usuarios.formulario')  
 
          </div>
 
@@ -45,7 +45,7 @@
               </h3>
             </div>
        
-        @include('usuarios.editar')  
+     @include('usuarios.editar')
 
          </div>
 
@@ -70,28 +70,20 @@
             <div class="box-body table-responsive">
               <table class="table table-hover table-bordered" >
                 <tbody><tr>
-                  <th style="font-size: 12px; padding: 5px; width: 3%;">#</th>
-                  <th style="font-size: 12px; padding: 5px; width: 9%;">Tipo de Usuario</th>
-                  <th style="font-size: 12px; padding: 5px; width: 8%;">Provincia</th>
-                  <th style="font-size: 12px; padding: 5px; width: 8%;">Distrito</th>
-                  <th style="font-size: 12px; padding: 5px; width: 12%;">Dependencia</th>
-                  <th style="font-size: 12px; padding: 5px; width: 9%;">Apellidos y Nombres</th>
-                  <th style="font-size: 12px; padding: 5px; width: 6%;">DNI</th>
-                  <th style="font-size: 12px; padding: 5px; width: 6%;">Teléfono</th>
-                  <th style="font-size: 12px; padding: 5px; width: 7%;">Usuario</th>
-                  <th style="font-size: 12px; padding: 5px; width: 13%;">Email</th>
-                  <th style="font-size: 12px; padding: 5px; width: 5%;">Estado</th>
-                  <th style="font-size: 12px; padding: 5px; width: 14%;">Gestión</th>
+                  <th style="font-size: 12px; padding: 5px; width: 4%;">#</th>
+                  <th style="font-size: 12px; padding: 5px; width: 13%;">Tipo de Usuario</th>
+                  <th style="font-size: 12px; padding: 5px; width: 20%;">Apellidos y Nombres</th>
+                  <th style="font-size: 12px; padding: 5px; width: 8%;">DNI</th>
+                  <th style="font-size: 12px; padding: 5px; width: 12%;">Usuario</th>
+                  <th style="font-size: 12px; padding: 5px; width: 20%;">Email</th>
+                  <th style="font-size: 12px; padding: 5px; width: 8%;">Estado</th>
+                  <th style="font-size: 12px; padding: 5px; width: 15%;">Gestión</th>
                 </tr>
                 <tr v-for="usuario, key in usuarios">
                   <td style="font-size: 12px; padding: 5px;">@{{key+pagination.from}}</td>
                   <td style="font-size: 12px; padding: 5px;">@{{ usuario.tipouser }}</td>
-                  <td style="font-size: 12px; padding: 5px;">@{{ usuario.provincia }}</td>
-                  <td style="font-size: 12px; padding: 5px;">@{{ usuario.distrito }}</td>
-                  <td style="font-size: 12px; padding: 5px;">@{{ usuario.dependencia }}</td>
                   <td style="font-size: 12px; padding: 5px;">@{{ usuario.apePer }}, @{{ usuario.nombresPer }}</td>
-                  <td style="font-size: 12px; padding: 5px;">@{{ usuario.doc }}</td>
-                  <td style="font-size: 12px; padding: 5px;">@{{ usuario.telefono }}</td>
+                  <td style="font-size: 12px; padding: 5px;">@{{ usuario.dni }}</td>
                   <td style="font-size: 12px; padding: 5px;">@{{ usuario.username }}</td>
                   <td style="font-size: 12px; padding: 5px;">@{{ usuario.email }}</td>
                   <td style="font-size: 12px; padding: 5px;">
@@ -161,7 +153,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="desEditarTitulo" style="font-weight: bold;text-decoration: underline;">IMPRIMIR FICHA DE ALUMNO</h4>
+        <h4 class="modal-title" id="desEditarTitulo" style="font-weight: bold;text-decoration: underline;">IMPRIMIR FICHA DE USUARIO</h4>
 
       </div> 
       <div class="modal-body">
@@ -176,7 +168,7 @@
             <!-- /.box-header -->
             <!-- form start -->
             <div id="FichaUsuario"> 
-       @include('usuarios.ficha')  
+      @include('usuarios.ficha')
                 
             </div>
           </div>

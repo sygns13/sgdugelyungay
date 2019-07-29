@@ -65,7 +65,7 @@ class SendMail extends Mailable
             $password=$data->txtclave;
             $email=$data->txtemail;
 
-            $asunto="Plataforma SGD UGEL YUNGAY Confirmación de Creación de Usuario";
+            $asunto="Plataforma Web DE REGISTRO DE TRAMITES UGEL YUNGAY - Confirmación de Creación de Usuario";
 
             $mensaje="Estimado (a): ".$apellidos.", ".$nombres;
 
@@ -78,7 +78,7 @@ class SendMail extends Mailable
 
             $mensaje.="<br><br>";
 
-            $mensaje.="Este es un mensaje automático del sistema, por favor no responda este mensaje, si tuviera alguna dificultad para ingresar a la plataforma del Sistema de Gestión Documental, acérquese a la UGEL Yungay y reporte su problema.";
+            $mensaje.="Este es un mensaje automático del sistema, por favor no responda este mensaje, si tuviera alguna dificultad para ingresar a la plataforma de Registro de Nuevo Trámite, acérquese a la UGEL Yungay y reporte su problema.";
 
 
             return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunto)->from("sgdugelyungay@gmail.com");
@@ -96,7 +96,7 @@ class SendMail extends Mailable
             $password=$data->password;
             $email=$data->txtemailE;
 
-            $asunto="Plataforma SGD UGEL YUNGAY Reset de Password";
+            $asunto="Plataforma Web DE REGISTRO DE TRAMITES UGEL YUNGAY - Reset de Password";
 
             $mensaje="Estimado (a): ".$apellidos.", ".$nombres;
 
@@ -109,7 +109,7 @@ class SendMail extends Mailable
 
             $mensaje.="<br><br>";
 
-            $mensaje.="Este es un mensaje automático del sistema, por favor no responda este mensaje, si tuviera alguna dificultad para ingresar a la plataforma del Sistema de Gestión Documental, acérquese a la UGEL Yungay y reporte su problema.";
+            $mensaje.="Este es un mensaje automático del sistema, por favor no responda este mensaje, si tuviera alguna dificultad para ingresar a la plataforma de Registro de Nuevo Trámite, acérquese a la UGEL Yungay y reporte su problema.";
 
 
             return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunto)->from("sgdugelyungay@gmail.com");
@@ -163,7 +163,7 @@ class SendMail extends Mailable
         $unidadorg=Unidadorganica::find($unidadorganica_id);
 
 
-            $asunt="Plataforma SGD UGEL YUNGAY INICIO DE TRÁMIE";
+            $asunt="Plataforma Web DE REGISTRO DE TRAMITES UGEL YUNGAY - INICIO DE TRÁMIE";
 
             $mensaje="Estimado (a): ".$apellidos.", ".$nombres;
 
@@ -198,13 +198,13 @@ class SendMail extends Mailable
             $mensaje.="Detalle : ".$detalledestino."<br>";
 
 
-            $mensaje.="<br><br>";
-            $mensaje.="<b>Nota: Se adjunta en el presente correo el archivo adjunto ingresado en el trámite</b>";
+           // $mensaje.="<br><br>";
+           // $mensaje.="<b>Nota: Se adjunta en el presente correo el archivo adjunto ingresado en el trámite</b>";
             $mensaje.="<br><br>";
             $mensaje.="<br><br>";
             $mensaje.="<br><br>";
 
-            $mensaje.="Este es un mensaje automático del sistema, por favor no responda este mensaje, si tuviera alguna dificultad para ingresar a la plataforma del Sistema de Gestión Documental, acérquese a la UGEL Yungay y reporte su problema.";
+            $mensaje.="Este es un mensaje automático del sistema, por favor no responda este mensaje, si tuviera alguna dificultad para ingresar a la plataforma de Registro de Nuevo Trámite, acérquese a la UGEL Yungay y reporte su problema.";
 
 
             $user=User::find(Auth::user()->id);
@@ -212,8 +212,9 @@ class SendMail extends Mailable
 
             if(strlen($data->rutafile)>0)
                 {
-                    $adjunto=public_path('archivosadjuntos')."/".$data->rutafile;
-                    return $this->view('mail1',['msg'=>$mensaje])->attach($adjunto)->to($user->email)->subject($asunt)->from("sgdugelyungay@gmail.com");
+                   // $adjunto=public_path('archivosadjuntos')."/".$data->rutafile;
+                   // return $this->view('mail1',['msg'=>$mensaje])->attach($adjunto)->to($user->email)->subject($asunt)->from("sgdugelyungay@gmail.com");
+                   return $this->view('mail1',['msg'=>$mensaje])->to($user->email)->subject($asunt)->from("sgdugelyungay@gmail.com");
                 }
 
                 else{
@@ -226,6 +227,411 @@ class SendMail extends Mailable
 
         }
 
+
+
+
+
+
+
+        elseif(strval($data->tipomail)=="4"){
+
+            $tramite=Tramite::find($data->id);
+
+            $prioridad_id=$tramite->prioridad_id;
+            $entidad_id=$tramite->entidad_id;
+            $detalle=$tramite->detalle;
+            $firma=$tramite->firma;
+            $cargo=$tramite->cargo;
+            $fechadoc=$tramite->fechadoc;
+            $tipodocumento_id=$tramite->tipodocumento_id;
+            $numero=$tramite->numero;
+            $siglas=$tramite->siglas;
+    
+    
+            $folios=$tramite->folios;
+            $asunto=$tramite->asunto;
+            $formacopia=$tramite->formacopia;
+            $unidadorganica_id=$tramite->unidadorganica_id;
+            $detalledestino=$tramite->detalledestino;
+
+            $fecha=$tramite->fecha;
+
+        $Persona=DB::select("select p.id, p.nombres, p.apellidos, p.dni, u.email FROM personas p
+        inner join users u on p.id=u.persona_id
+        where p.id='".$data->persona_id."';");
+
+
+
+        $idPersona="";
+
+        $apellidos="";
+        $nombres="";
+        $dni="";
+        $email="";
+        foreach ($Persona as $key => $dato) {
+            $idPersona=$dato->id;
+            $apellidos=$dato->apellidos;
+            $nombres=$dato->nombres;
+            $dni=$dato->dni;
+            $email=$dato->email;
+        }
+
+        $entidad=Entidad::find($entidad_id);
+        
+        $prioridad=Prioridad::find($prioridad_id);
+
+        $unidadorg=Unidadorganica::find($unidadorganica_id);
+
+
+            $asunt="Plataforma Web DE REGISTRO DE TRAMITES UGEL YUNGAY - TRÁMIE RECEPCIONADO";
+
+            $mensaje="Estimado (a): ".$apellidos.", ".$nombres;
+
+            $mensaje.="<br><br>";
+            $mensaje.="Mediante el presente mensaje de correo electrónico se le remite la confirmación de recepción por parte del operador del sistema del siguiente trámite ingresado por usted a la plataforma: <a href='http://tramite.ugelyungay.gob.pe' target='_blank'>http://tramite.ugelyungay.gob.pe</a>. Una vez el operador del sistema haya ingresado su trámite al SISGEDO, se le enviará la confirmación mediante correo electrónico para que pueda realizar el seguimiento de su trámite en el SISGEDO.<br><br>";
+
+            $mensaje.="<b>Fecha de Registro:".pasFechaVista($fecha)."</b><br><br>";
+            $mensaje.="<b>DOCUMENTO:".$numero." - ".$siglas."</b><br><br>";
+
+            $mensaje.="Fecha del Documento: ".pasFechaVista($fechadoc)."<br>";
+            $mensaje.='N° de Expediente: "Pendiente"<br>';
+            $mensaje.="N° de Folios: ".$folios."<br>";
+            $mensaje.="Asunto: ".$asunto."<br>";
+            $mensaje.="Estado: Ingresado<br>";
+
+            $mensaje.="<br><br>";
+
+            $mensaje.="<b>Datos de Origen</b><br>";
+            $mensaje.="Entidad : ".$entidad->nombre."<br>";
+            $mensaje.="Firma : ".$firma."<br>";
+            $mensaje.="Cargo : ".$cargo."<br>";
+            $mensaje.="Detalle : ".$detalle."<br>";
+
+            $mensaje.="<br><br>";
+
+            $mensaje.="<b>Datos de Destino - UGEL YUNGAY</b><br>";
+            $mensaje.="Unidad Orgánica : ".$unidadorg->nombre."<br>";
+
+            if($formacopia==1)
+            {
+                $mensaje.="Forma : Copia<br>";
+            }
+            
+            $mensaje.="Detalle : ".$detalledestino."<br>";
+
+
+
+            $mensaje.="<br><br>";
+            $mensaje.="<br><br>";
+            $mensaje.="<br><br>";
+
+            $mensaje.="Este es un mensaje automático del sistema, por favor no responda este mensaje, si tuviera alguna dificultad para ingresar a la plataforma de Registro de Nuevo Trámite, acérquese a la UGEL Yungay y reporte su problema.";
+
+
+            $user=User::find(Auth::user()->id);
+
+
+            if(strlen($data->rutafile)>0)
+                {
+                   // $adjunto=public_path('archivosadjuntos')."/".$data->rutafile;
+                   // return $this->view('mail1',['msg'=>$mensaje])->attach($adjunto)->to($user->email)->subject($asunt)->from("sgdugelyungay@gmail.com");
+                   return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunt)->from("sgdugelyungay@gmail.com");
+                }
+
+                else{
+
+                    return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunt)->from("sgdugelyungay@gmail.com");
+                }
+
+
+            
+
+        }
+
+
+        elseif(strval($data->tipomail)=="5"){
+
+            $tramite=Tramite::find($data->id);
+
+            $expediente=$tramite->expediente;
+            $prioridad_id=$tramite->prioridad_id;
+            $entidad_id=$tramite->entidad_id;
+            $detalle=$tramite->detalle;
+            $firma=$tramite->firma;
+            $cargo=$tramite->cargo;
+            $fechadoc=$tramite->fechadoc;
+            $tipodocumento_id=$tramite->tipodocumento_id;
+            $numero=$tramite->numero;
+            $siglas=$tramite->siglas;
+    
+    
+            $folios=$tramite->folios;
+            $asunto=$tramite->asunto;
+            $formacopia=$tramite->formacopia;
+            $unidadorganica_id=$tramite->unidadorganica_id;
+            $detalledestino=$tramite->detalledestino;
+
+            $fecha=$tramite->fecha;
+
+        $Persona=DB::select("select p.id, p.nombres, p.apellidos, p.dni, u.email FROM personas p
+        inner join users u on p.id=u.persona_id
+        where p.id='".$data->persona_id."';");
+
+
+
+        $idPersona="";
+
+        $apellidos="";
+        $nombres="";
+        $dni="";
+        $email="";
+        foreach ($Persona as $key => $dato) {
+            $idPersona=$dato->id;
+            $apellidos=$dato->apellidos;
+            $nombres=$dato->nombres;
+            $dni=$dato->dni;
+            $email=$dato->email;
+        }
+
+        $entidad=Entidad::find($entidad_id);
+        
+        $prioridad=Prioridad::find($prioridad_id);
+
+        $unidadorg=Unidadorganica::find($unidadorganica_id);
+
+
+            $asunt="Plataforma Web DE REGISTRO DE TRAMITES UGEL YUNGAY - TRÁMIE INGRESADO AL SISGEDO";
+
+            $mensaje="Estimado (a): ".$apellidos.", ".$nombres;
+
+            $mensaje.="<br><br>";
+            $mensaje.="Mediante el presente mensaje de correo electrónico se le remite la confirmación de ingreso de su trámite al SISGEDO (Sistema de Gestión Documental) por parte del operador del sistema, del siguiente trámite ingresado por usted a la plataforma: <a href='http://tramite.ugelyungay.gob.pe' target='_blank'>http://tramite.ugelyungay.gob.pe</a>. <br><br> 
+                Por lo que desde ahora Puede realizar el seguimiento de su trámite en el SISGEDO empleando su número de Expediente: N° <b color='blue'>".$expediente."</b>. ingresando al sigiente link:  <a href='http://181.65.149.146/sisgedonew/app/main.php' target='_blank'>http://181.65.149.146/sisgedonew/app/main.php.</a> <br><br>";
+
+            $mensaje.="<b>Fecha de Registro:".pasFechaVista($fecha)."</b><br><br>";
+            $mensaje.="<b>DOCUMENTO:".$numero." - ".$siglas."</b><br><br>";
+
+            $mensaje.="Fecha del Documento: ".pasFechaVista($fechadoc)."<br>";
+            $mensaje.='N° de Expediente: '.$expediente.'<br>';
+            $mensaje.="N° de Folios: ".$folios."<br>";
+            $mensaje.="Asunto: ".$asunto."<br>";
+            $mensaje.="Estado: Ingresado<br>";
+
+            $mensaje.="<br><br>";
+
+            $mensaje.="<b>Datos de Origen</b><br>";
+            $mensaje.="Entidad : ".$entidad->nombre."<br>";
+            $mensaje.="Firma : ".$firma."<br>";
+            $mensaje.="Cargo : ".$cargo."<br>";
+            $mensaje.="Detalle : ".$detalle."<br>";
+
+            $mensaje.="<br><br>";
+
+            $mensaje.="<b>Datos de Destino - UGEL YUNGAY</b><br>";
+            $mensaje.="Unidad Orgánica : ".$unidadorg->nombre."<br>";
+
+            if($formacopia==1)
+            {
+                $mensaje.="Forma : Copia<br>";
+            }
+            
+            $mensaje.="Detalle : ".$detalledestino."<br>";
+
+
+
+            $mensaje.="<br><br>";
+            $mensaje.="<br><br>";
+            $mensaje.="<br><br>";
+
+            $mensaje.="Este es un mensaje automático del sistema, por favor no responda este mensaje, si tuviera alguna dificultad para ingresar a la plataforma de Registro de Nuevo Trámite, acérquese a la UGEL Yungay y reporte su problema.";
+
+
+            $user=User::find(Auth::user()->id);
+
+
+            if(strlen($data->rutafile)>0)
+                {
+                   // $adjunto=public_path('archivosadjuntos')."/".$data->rutafile;
+                   // return $this->view('mail1',['msg'=>$mensaje])->attach($adjunto)->to($user->email)->subject($asunt)->from("sgdugelyungay@gmail.com");
+                   return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunt)->from("sgdugelyungay@gmail.com");
+                }
+
+                else{
+
+                    return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunt)->from("sgdugelyungay@gmail.com");
+                }
+
+
+            
+
+        }
+
+
+        elseif(strval($data->tipomail)=="6"){
+
+            $tramite=Tramite::find($data->id);
+
+            $expediente=$tramite->expediente;
+            $prioridad_id=$tramite->prioridad_id;
+            $entidad_id=$tramite->entidad_id;
+            $detalle=$tramite->detalle;
+            $firma=$tramite->firma;
+            $cargo=$tramite->cargo;
+            $fechadoc=$tramite->fechadoc;
+            $tipodocumento_id=$tramite->tipodocumento_id;
+            $numero=$tramite->numero;
+            $siglas=$tramite->siglas;
+    
+    
+            $folios=$tramite->folios;
+            $asunto=$tramite->asunto;
+            $formacopia=$tramite->formacopia;
+            $unidadorganica_id=$tramite->unidadorganica_id;
+            $detalledestino=$tramite->detalledestino;
+
+            $fecha=$tramite->fecha;
+
+        $Persona=DB::select("select p.id, p.nombres, p.apellidos, p.dni, u.email FROM personas p
+        inner join users u on p.id=u.persona_id
+        where p.id='".$data->persona_id."';");
+
+
+
+        $idPersona="";
+
+        $apellidos="";
+        $nombres="";
+        $dni="";
+        $email="";
+        foreach ($Persona as $key => $dato) {
+            $idPersona=$dato->id;
+            $apellidos=$dato->apellidos;
+            $nombres=$dato->nombres;
+            $dni=$dato->dni;
+            $email=$dato->email;
+        }
+
+        $entidad=Entidad::find($entidad_id);
+        
+        $prioridad=Prioridad::find($prioridad_id);
+
+        $unidadorg=Unidadorganica::find($unidadorganica_id);
+
+
+            $asunt="Plataforma Web DE REGISTRO DE TRAMITES UGEL YUNGAY - TRÁMIE ATENDIDO";
+
+            $mensaje="Estimado (a): ".$apellidos.", ".$nombres;
+
+            $mensaje.="<br><br>";
+            $mensaje.="Mediante el presente mensaje de correo electrónico se le remite la confirmación de Atención de su trámite ingresado por usted mediante la plataforma web: <a href='http://tramite.ugelyungay.gob.pe' target='_blank'>http://tramite.ugelyungay.gob.pe</a>. <br><br> 
+                Puede realizar el seguimiento de la atención que se le brindó a su trámite en el SISGEDO (Sistema de Gestión Documental) empleando su número de Expediente: N° <b color='blue'>".$expediente."</b>. ingresando al sigiente link:  <a href='http://181.65.149.146/sisgedonew/app/main.php' target='_blank'>http://181.65.149.146/sisgedonew/app/main.php.</a> <br><br>";
+
+            $mensaje.="<b>Fecha de Registro:".pasFechaVista($fecha)."</b><br><br>";
+            $mensaje.="<b>DOCUMENTO:".$numero." - ".$siglas."</b><br><br>";
+
+            $mensaje.="Fecha del Documento: ".pasFechaVista($fechadoc)."<br>";
+            $mensaje.='N° de Expediente: '.$expediente.'<br>';
+            $mensaje.="N° de Folios: ".$folios."<br>";
+            $mensaje.="Asunto: ".$asunto."<br>";
+            $mensaje.="Estado: Ingresado<br>";
+
+            $mensaje.="<br><br>";
+
+            $mensaje.="<b>Datos de Origen</b><br>";
+            $mensaje.="Entidad : ".$entidad->nombre."<br>";
+            $mensaje.="Firma : ".$firma."<br>";
+            $mensaje.="Cargo : ".$cargo."<br>";
+            $mensaje.="Detalle : ".$detalle."<br>";
+
+            $mensaje.="<br><br>";
+
+            $mensaje.="<b>Datos de Destino - UGEL YUNGAY</b><br>";
+            $mensaje.="Unidad Orgánica : ".$unidadorg->nombre."<br>";
+
+            if($formacopia==1)
+            {
+                $mensaje.="Forma : Copia<br>";
+            }
+            
+            $mensaje.="Detalle : ".$detalledestino."<br>";
+
+
+
+            $mensaje.="<br><br>";
+            $mensaje.="<br><br>";
+            $mensaje.="<br><br>";
+
+            $mensaje.="Este es un mensaje automático del sistema, por favor no responda este mensaje, si tuviera alguna dificultad para ingresar a la plataforma de Registro de Nuevo Trámite, acérquese a la UGEL Yungay y reporte su problema.";
+
+
+            $user=User::find(Auth::user()->id);
+
+
+            if(strlen($data->rutafile)>0)
+                {
+                   // $adjunto=public_path('archivosadjuntos')."/".$data->rutafile;
+                   // return $this->view('mail1',['msg'=>$mensaje])->attach($adjunto)->to($user->email)->subject($asunt)->from("sgdugelyungay@gmail.com");
+                   return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunt)->from("sgdugelyungay@gmail.com");
+                }
+
+                else{
+
+                    return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunt)->from("sgdugelyungay@gmail.com");
+                }
+
+
+            
+
+        }
+
+        elseif(strval($data->tipomail)=="7"){
+
+            $file = $data->archivo;
+
+
+            if($data->hasFile('archivo')){
+                $nombre2=$file->getClientOriginalName();
+    
+    
+                $iduser=Auth::user()->id;
+                $user=User::find($iduser);
+    
+                $admin=DB::select("select p.apellidos, p.nombres from personas p
+    inner join users u on u.persona_id=p.id
+    where u.id='".$iduser."';");
+    
+    
+                $adminName="";
+    
+                foreach ($admin as  $dato) {
+                    $adminName=$dato->apellidos.', '.$dato->nombres;
+                }
+    
+               $adjunto=public_path('emails')."/".$nombre2;
+    
+            return $this->view('mail',['name'=>$user->name,'msg'=>$data->mensaje,'admin'=>$adminName])->attach($adjunto)->to(json_decode(stripslashes($data->mails)))->subject($data->asunto)->from("sgdugelyungay@gmail.com");
+            
+    
+            }else{
+                $iduser=Auth::user()->id;
+                $user=User::find($iduser);
+    
+                $admin=DB::select("select p.apellidos, p.nombres from personas p
+    inner join users u on u.persona_id=p.id
+    where u.id='".$iduser."';");
+    
+    
+                $adminName="";
+    
+                foreach ($admin as  $dato) {
+                    $adminName=$dato->apellidos.', '.$dato->nombres;
+                }
+    
+            return $this->view('mail',['name'=>$user->name,'msg'=>$data->mensaje,'admin'=>$adminName])->to(json_decode(stripslashes($data->mails)))->subject($data->asunto)->from("sgdugelyungay@gmail.com");
+            }
+
+
+        }
         else{
 
         

@@ -370,7 +370,7 @@ return response()->json(["datos"=>$datos,"res"=>$res]);
 
                 $newTramite->entidad=$entidad->nombre;
                 $newTramite->detalle=$detalle;
-                $newTramite->firma=$cargo;
+                $newTramite->firma=$firma;
                 $newTramite->cargo=$cargo;
                 $newTramite->clasificacion='Ninguna';
                 $newTramite->dias=$prioridad->dias;
@@ -385,7 +385,7 @@ return response()->json(["datos"=>$datos,"res"=>$res]);
 
             $newDetalle->estado="1";
             $newDetalle->detalleestado="Trámite Inicializado";
-            $newDetalle->observacion="Trámite Inicializado por el Usuario".$nombres." ".$apellidos;
+            $newDetalle->observacion="Trámite Inicializado por el Usuario ".$nombres." ".$apellidos;
             $newDetalle->fechadetalle=$fecha;
             $newDetalle->activo="1";
             $newDetalle->borrado="0"; 

@@ -145,11 +145,11 @@
                             </li>--}}
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                             {{--   <div class="pull-left">
-                                    <a href="{{ url('/settings') }}" class="btn btn-default btn-flat">{{ trans('adminlte_lang::message.profile') }}</a>
-                                </div> --}} 
+                             <div class="pull-left">
+                                    <a href="{{ url('miperfil') }}" class="btn btn-primary btn-flat">Mi Perfil</a>
+                                </div> 
                                 <div class="pull-right">
-                                    <a href="{{ url('/salir') }}" class="btn btn-default btn-flat"
+                                    <a href="{{ url('/salir') }}" class="btn btn-danger btn-flat"
                                        onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                         {{ trans('adminlte_lang::message.signout') }}

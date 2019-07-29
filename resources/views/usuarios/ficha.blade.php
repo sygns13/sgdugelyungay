@@ -19,7 +19,7 @@
 
                                 <td style="width: 11.5cm;;text-align: center;padding-top: 20px;">
                                     
-                                    <img class="logoImage" src="{{ asset('/img/logo.jpg')}}" alt="l">
+                                    <img class="logoImage" src="{{ asset('/img/logo-yungay.png')}}" alt="l" style="width: 80px;">
 
                                 </td>
                                <td style="width: 3.52cm; text-align: center;padding-top: 20px;" >
@@ -45,7 +45,7 @@
 
                                 <td style="width: 11.5cm;text-align: center;padding-top: 15px;padding-bottom: 20px;">
                                     
-                                    <p style="margin-bottom: 0px;font-size: 19px"><strong>FICHA DE USUARIO DEL SISTEMA</strong></p>
+                                    <p style="margin-bottom: 0px;font-size: 19px"><strong>FICHA DE USUARIO DEL SISTEMA WEB DE REGISTRO DE TRÁMITES - UGEL YUNGAY</strong></p>
                                   
                                 </td>
                                <td style="width: 3.52cm; text-align: center;padding-top: 17px;">
@@ -129,94 +129,6 @@
                 </div>
 
 
-                <div style="width: 18cm;" v-if="prov!=''"> 
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td style="width: 5.6cm; text-align: center; border: 1px;border-style: solid">
-                                <p style="margin-bottom: 0px;font-size: 13px"><strong style="padding-left: 8px;">Provincia</strong>:</p>
-                                </td>
-
-                                <td style="width: 70%;text-align: center;padding-top: 17px;padding-bottom: 17px;border: 1px;border-style: solid;">
-                                    
-                                    <p style="margin-bottom: 0px;font-size: 14px;text-align: justify;padding-left: 10px;padding-right: 10px;">
-                                    @{{ prov}}   
-                                </p>
-                                  
-                                </td>
-                                           
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-
-                                <div style="width: 18cm;" v-if="dist!=''"> 
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td style="width: 5.6cm; text-align: center; border: 1px;border-style: solid">
-                                <p style="margin-bottom: 0px;font-size: 13px"><strong style="padding-left: 8px;">Distrito</strong>:</p>
-                                </td>
-
-                                <td style="width: 70%;text-align: center;padding-top: 17px;padding-bottom: 17px;border: 1px;border-style: solid;">
-                                    
-                                    <p style="margin-bottom: 0px;font-size: 14px;text-align: justify;padding-left: 10px;padding-right: 10px;">
-                                    @{{ dist}}   
-                                </p>
-                                  
-                                </td>
-                                           
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-
-
-                                <div style="width: 18cm;" v-if="dept!=''"> 
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td style="width: 5.6cm; text-align: center; border: 1px;border-style: solid">
-                                <p style="margin-bottom: 0px;font-size: 13px"><strong style="padding-left: 8px;">Dependencia</strong>:</p>
-                                </td>
-
-                                <td style="width: 70%;text-align: center;padding-top: 17px;padding-bottom: 17px;border: 1px;border-style: solid;">
-                                    
-                                    <p style="margin-bottom: 0px;font-size: 14px;text-align: justify;padding-left: 10px;padding-right: 10px;">
-                                    @{{ dept}}   
-                                </p>
-                                  
-                                </td>
-                                           
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-              
-
-                <div style="width: 18cm;"> 
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td style="width: 5.6cm; text-align: center; border: 1px;border-style: solid">
-                                <p style="margin-bottom: 0px;font-size: 13px"><strong style="padding-left: 8px;">TELÉFONO</strong>:</p>
-                                </td>
-
-                                <td style="width: 70%;text-align: center;padding-top: 17px;padding-bottom: 17px;border: 1px;border-style: solid;">
-                                    
-                                    <p style="margin-bottom: 0px;font-size: 14px;text-align: justify;padding-left: 10px;padding-right: 10px;">
-                                    @{{ fillPersona.telf }}
-                                   </p>
-                                  
-                                </td>
-                                           
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
 
                 <div style="width: 18cm;"> 
                     <table>

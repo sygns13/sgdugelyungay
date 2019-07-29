@@ -1,7 +1,7 @@
 @extends('adminlte::layouts.app')
 
 @section('htmlheader_title')
-Gestión de Formas de Recepcion
+Gestión de Entidades
 @endsection
 
 <style type="text/css">         
@@ -23,7 +23,7 @@ Gestión de Formas de Recepcion
 		@if(accesoUser([1]))
 
 		<template v-if="divprincipal" id="divprincipal">
-			@include('formarecepcion.principal')
+			@include('entidades.principal')
 		</template>
 		@endif
 

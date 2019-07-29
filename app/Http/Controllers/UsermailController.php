@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Persona;
 use App\User;
+use App\Tipouser;
 
 
 use Validator;
@@ -28,13 +29,6 @@ class UsermailController extends Controller
             $idtipouser=Auth::user()->tipouser_id;
             $tipouser=Tipouser::find($idtipouser);
 
-            $persona=DB::table('personas')
-            ->join('users', 'users.persona_id', '=', 'personas.id')
-            ->join('tipousers','tipousers.id','=','users.tipouser_id')
-            ->where('users.borrado','0')
-            ->where('users.id',$iduser)
-            ->select('personas.id as idper', 'personas.doc as dni', 'personas.nombres as nombresPer', 'personas.apellidos as apePer', 'personas.genero', 'personas.telefono', 'personas.direccion', 'personas.tipodoc', 'users.id as idUsser', 'users.name as username', 'users.email','users.activo as activouser','tipousers.nombre as tipouser')->get();
-
             $modulo="usuariosmail";
 
             return view('usuariosmail.index',compact('modulo','tipouser'));
@@ -55,49 +49,41 @@ class UsermailController extends Controller
         $usuarios=DB::table('users')
         ->join('tipousers', 'users.tipouser_id', '=', 'tipousers.id')
         ->join('personas', 'users.persona_id', '=', 'personas.id')
-        ->leftJoin('dependencias', 'users.dependencia_id', '=', 'dependencias.id')
-        ->leftJoin('distritos', 'dependencias.distrito_id', '=', 'distritos.id')
-        ->leftJoin('provincias', 'distritos.provincia_id', '=', 'provincias.id')
         ->where('users.borrado','0')
         ->where('tipousers.activo','1')
             ->where(function($query) use ($buscar){
-        $query->where('personas.doc','like','%'.$buscar.'%');
+        $query->where('personas.dni','like','%'.$buscar.'%');
         $query->orWhere('personas.apellidos','like','%'.$buscar.'%');
         $query->orWhere('personas.nombres','like','%'.$buscar.'%');
         $query->orWhere('users.name','like','%'.$buscar.'%');
-        $query->orWhere('distritos.nombre','like','%'.$buscar.'%');
-        $query->orWhere('provincias.nombre','like','%'.$buscar.'%');
+        $query->orWhere('users.email','like','%'.$buscar.'%');
     })
         ->orderBy('tipousers.id')
-        ->orderBy('users.id')
         ->orderBy('personas.apellidos')
-        ->select('users.id as iduser','users.name as username','users.email','users.token2','users.activo','users.dependencia_id','tipousers.id as idtipo','tipousers.nombre as tipouser','tipousers.descripcion','personas.id as idper', 'personas.doc', 'personas.nombres as nombresPer', 'personas.apellidos as apePer', 'personas.genero', 'personas.telefono', 'personas.direccion', 'personas.tipodoc','dependencias.id as idDep','dependencias.nombre as dependencia','distritos.id as idDis', 'distritos.nombre as distrito', 'provincias.id as idProv','provincias.nombre as provincia')->paginate(10);
+        ->orderBy('users.id')
+        ->select('users.id as iduser','users.name as username','users.email','users.activo','tipousers.id as idtipo','tipousers.nombre as tipouser','tipousers.descripcion','personas.id as idper', 'personas.dni', 'personas.nombres as nombresPer', 'personas.apellidos as apePer', 'personas.genero', 'personas.direccion')->paginate(20);
 
 
         $usuarios2=DB::table('users')
         ->join('tipousers', 'users.tipouser_id', '=', 'tipousers.id')
         ->join('personas', 'users.persona_id', '=', 'personas.id')
-        ->leftJoin('dependencias', 'users.dependencia_id', '=', 'dependencias.id')
-        ->leftJoin('distritos', 'dependencias.distrito_id', '=', 'distritos.id')
-        ->leftJoin('provincias', 'distritos.provincia_id', '=', 'provincias.id')
         ->where('users.borrado','0')
         ->where('tipousers.activo','1')
             ->where(function($query) use ($buscar){
-        $query->where('personas.doc','like','%'.$buscar.'%');
+        $query->where('personas.dni','like','%'.$buscar.'%');
         $query->orWhere('personas.apellidos','like','%'.$buscar.'%');
         $query->orWhere('personas.nombres','like','%'.$buscar.'%');
         $query->orWhere('users.name','like','%'.$buscar.'%');
-        $query->orWhere('distritos.nombre','like','%'.$buscar.'%');
-        $query->orWhere('provincias.nombre','like','%'.$buscar.'%');
+        $query->orWhere('users.email','like','%'.$buscar.'%');
     })
         ->orderBy('tipousers.id')
-        ->orderBy('users.id')
         ->orderBy('personas.apellidos')
-        ->select('users.id as iduser','users.name as username','users.email','users.token2','users.activo','users.dependencia_id','tipousers.id as idtipo','tipousers.nombre as tipouser','tipousers.descripcion','personas.id as idper', 'personas.doc', 'personas.nombres as nombresPer', 'personas.apellidos as apePer', 'personas.genero', 'personas.telefono', 'personas.direccion', 'personas.tipodoc','dependencias.id as idDep','dependencias.nombre as dependencia','distritos.id as idDis', 'distritos.nombre as distrito', 'provincias.id as idProv','provincias.nombre as provincia')->get();
+        ->orderBy('users.id')
+        ->select('users.id as iduser','users.name as username','users.email','users.activo','tipousers.id as idtipo','tipousers.nombre as tipouser','tipousers.descripcion','personas.id as idper', 'personas.dni', 'personas.nombres as nombresPer', 'personas.apellidos as apePer', 'personas.genero', 'personas.direccion')->get();
 
         $tipousers=Tipouser::where('borrado','0')->where('activo','1')->where('id','<','4')->orderBy('id')->get();
 
-        $provincias=Provincias::where('distritojudicial_id','1')->get();
+
 
         return [
             'pagination'=>[
@@ -110,7 +96,6 @@ class UsermailController extends Controller
             ],
             'usuarios'=>$usuarios,
             'tipousers'=>$tipousers,
-            'provincias'=>$provincias,
             'usuarios2'=>$usuarios2,
         ];
     }

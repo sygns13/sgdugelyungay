@@ -47,7 +47,7 @@ data:{
    unidadorganicas: [],
    errors:[],
 
-   fillunidadorganica:{'id':'', 'codigo':'', 'siglas':'', 'nombre':'', 'activo':''},
+   fillunidadorganica:{'id':'', 'codigo':'', 'siglas':'', 'nombre':'', 'activo':'' , 'abreviatura':''},
 
    pagination: {
    'total': 0,
@@ -69,6 +69,7 @@ data:{
    newnombre:'',
    newsiglas:'',
    newcodigo:'',
+   newAbreviatura:'',
    newEstado:'1',
 
 
@@ -153,6 +154,7 @@ methods: {
        this.newnombre='';
        this.newsiglas='';
        this.newcodigo='';
+       this.newAbreviatura='';
        this.newEstado='1';
    },
    create:function () {
@@ -161,7 +163,7 @@ methods: {
        $("#btnCancel").attr('disabled', true);
        $("#btnClose").attr('disabled', true);
        this.divloaderNuevo=true;
-       axios.post(url,{codigo:this.newcodigo, siglas:this.newsiglas, nombre:this.newnombre, activo:this.newEstado }).then(response=>{
+       axios.post(url,{codigo:this.newcodigo, abreviatura:this.newAbreviatura, siglas:this.newsiglas, nombre:this.newnombre, activo:this.newEstado }).then(response=>{
            //console.log(response.data);
 
            $("#btnGuardar").removeAttr("disabled");
@@ -221,6 +223,7 @@ methods: {
        this.fillunidadorganica.siglas=unidadorganica.siglas;
        this.fillunidadorganica.nombre=unidadorganica.nombre;
        this.fillunidadorganica.activo=unidadorganica.activo;
+       this.fillunidadorganica.abreviatura=unidadorganica.abreviatura;
 
        $("#boxTitulo").text('Unidad Orgánica: '+unidadorganica.nombre);
        $("#modalEditar").modal('show');
@@ -243,7 +246,7 @@ methods: {
            
            if(response.data.result=='1'){   
            this.getUnidadOrganicas(this.thispage);
-           this.fillunidadorganica={'id':'', 'codigo':'', 'siglas':'', 'nombre':'', 'activo':''};
+           this.fillunidadorganica={'id':'', 'codigo':'', 'siglas':'', 'nombre':'', 'activo':'' , 'abreviatura':''};
            this.errors=[];
            $("#modalEditar").modal('hide');
            toastr.success(response.data.msj);
