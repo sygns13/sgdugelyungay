@@ -241,7 +241,7 @@
                 var auximg="";
                 axios.get(url).then(response=>{
 
-                this.idUser=response.data.idUser;
+                this.idPersona=response.data.idPersona;
                 
                 if(this.idPersona=="0")
                     {
