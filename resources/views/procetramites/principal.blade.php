@@ -36,7 +36,7 @@
 
 <div class="col-md-12" style="padding-top: 15px;">
   <div class="form-group">
-    <label for="cbuestado" class="col-sm-3 control-label" style="   font-weight: normal; text-align: justify;"><b>Búsqueda por:</b> N° deExpediente, Número, Siglas, Asunto, Entidad, Detalle, Firma, Cargo, Unidad Orgánica, Tipo de Documento op Prioridad:</label>
+    <label for="cbuestado" class="col-sm-3 control-label" style="   font-weight: normal; text-align: justify;"><b>Búsqueda por:</b> N° de Expediente, Número, Siglas, Asunto, Entidad, Detalle, Firma, Cargo, Unidad Orgánica, Tipo de Documento o Prioridad:</label>
     <div class="col-sm-5">
 
 
@@ -90,14 +90,15 @@
     <table class="table table-hover table-bordered" >
       <tbody><tr>
         <th style="font-size: 11px; padding: 5px; width: 3%;">#</th>
-        <th style="font-size: 11px; padding: 5px; width: 5%;">N° de Expediente</th>
-        <th style="font-size: 11px; padding: 5px; width: 10%;">Tipo de Documento</th>
-        <th style="font-size: 11px; padding: 5px; width: 13%;">N° y Siglas del Doc</th>
-        <th style="font-size: 11px; padding: 5px; width: 17%;">Asunto</th>
+        <th style="font-size: 11px; padding: 5px; width: 4%;">N° de Expediente</th>
+        <th style="font-size: 11px; padding: 5px; width: 8%;">Tipo de Documento</th>
+        <th style="font-size: 11px; padding: 5px; width: 12%;">N° y Siglas del Doc</th>
+        <th style="font-size: 11px; padding: 5px; width: 15%;">Asunto</th>
         <th style="font-size: 11px; padding: 5px; width: 8%;">Fecha Registro</th>
-        <th style="font-size: 11px; padding: 5px; width: 13%;">Origen</th>
-        <th style="font-size: 11px; padding: 5px; width: 13%;">Destino</th>
+        <th style="font-size: 11px; padding: 5px; width: 12%;">Origen</th>
+        <th style="font-size: 11px; padding: 5px; width: 12%;">Destino</th>
         <th style="font-size: 11px; padding: 5px; width: 8%;">Estado</th>
+        <th style="font-size: 11px; padding: 5px; width: 8%;">Usuario Web</th>
         <th style="font-size: 11px; padding: 5px; width: 10%;">Gestión</th>
       </tr>
       <tr v-for="tramite, key in tramites">
@@ -118,7 +119,7 @@
             <span class="label label-success" v-if="tramite.estado=='4'">Atendido</span>
           </td>
 
-
+        <td style="font-size: 11px; padding: 5px;">@{{ tramite.nombres }} @{{tramite.apellidos}}</td>
 
 
        <td style="font-size: 11px; padding: 5px;">

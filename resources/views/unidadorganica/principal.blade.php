@@ -168,13 +168,13 @@
          </td>
          <td style="font-size: 12px; padding: 5px;">
   
-           <a href="#" v-if="unidadorganica.activo=='1'" class="btn bg-navy btn-sm" v-on:click.prevent="baja(unidadorganica)" data-placement="top" data-toggle="tooltip" title="Desactivar Tipo de Documento"><i class="fa fa-arrow-circle-down"></i></a>
+           <a href="#" v-if="unidadorganica.activo=='1'" class="btn bg-navy btn-sm" v-on:click.prevent="baja(unidadorganica)" data-placement="top" data-toggle="tooltip" title="Desactivar Unidad Orgánica"><i class="fa fa-arrow-circle-down"></i></a>
   
-           <a href="#" v-if="unidadorganica.activo=='0'" class="btn btn-success btn-sm" v-on:click.prevent="alta(unidadorganica)" data-placement="top" data-toggle="tooltip" title="Activar Tipo de Documento"><i class="fa fa-check-circle"></i></a>
+           <a href="#" v-if="unidadorganica.activo=='0'" class="btn btn-success btn-sm" v-on:click.prevent="alta(unidadorganica)" data-placement="top" data-toggle="tooltip" title="Activar Unidad Orgánica"><i class="fa fa-check-circle"></i></a>
   
   
-           <a href="#" class="btn btn-warning btn-sm" v-on:click.prevent="editar(unidadorganica)" data-placement="top" data-toggle="tooltip" title="Editar Tipo de Documento"><i class="fa fa-edit"></i></a>
-           <a href="#" class="btn btn-danger btn-sm" v-on:click.prevent="borrar(unidadorganica)" data-placement="top" data-toggle="tooltip" title="Borrar Tipo de Documento"><i class="fa fa-trash"></i></a>
+           <a href="#" class="btn btn-warning btn-sm" v-on:click.prevent="editar(unidadorganica)" data-placement="top" data-toggle="tooltip" title="Editar Unidad Orgánica"><i class="fa fa-edit"></i></a>
+           <a href="#" class="btn btn-danger btn-sm" v-on:click.prevent="borrar(unidadorganica)" data-placement="top" data-toggle="tooltip" title="Borrar Unidad Orgánica"><i class="fa fa-trash"></i></a>
          </td>
        </tr>
   

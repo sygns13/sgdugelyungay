@@ -86,7 +86,7 @@
                   <select class="form-control" id="cbuTipoUser" name="cbuTipoUser" v-model="newTipoUser">
                     <option disabled value="">Seleccione un Tipo de Usuario</option>
 
-                    <option v-for="tipouser, key in tipousers" v-bind:value="tipouser.id">@{{ tipouser.nombre }} </option>
+                    <option v-for="tipouser, key in tipousers" v-bind:value="tipouser.id" v-if="tipouser.id!=2">@{{ tipouser.nombre }} </option>
  
                   </select>
                    </div>
