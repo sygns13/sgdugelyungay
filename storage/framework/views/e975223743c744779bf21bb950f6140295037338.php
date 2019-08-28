@@ -205,7 +205,7 @@
           <span style="font-size:100%;" class="label label-primary" v-if="estado=='3'">Ingresado al SISGEDO</span>
           <span style="font-size:100%;" class="label label-success" v-if="estado=='4'">Atendido</span>
 
-
+          <button class="btn btn-success" @click.prevent="imprimir"><i class="fa fa-print" aria-hidden="true" ></i> Imprimir</button>
      </h3>
 
 
@@ -823,7 +823,457 @@
 
 
 
+  <div class="box box-success" style="display:none;">
+   
 
+    
+      <div class="box-body" id="divparteImp">
+ 
+         <table width="100%">
+             <tbody>
+               <tr style="height: 30px;"><td></td></tr><tr>
+ 
+               <td valign="top" style=""> 
+             <table class="frmline" width="720" align="center" border="0" cellpadding="0" cellspacing="0">
+         
+               <tbody><tr>
+                 <td colspan="7" style="    ">
+                   <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
+                   <tbody><tr>
+                     <td width="100%" colspan="3">
+                           <table width="100%" cellspacing="0" cellpadding="3" border="0">
+                   <tbody><tr>
+                                         <th  width="20%" align="left">
+                                 </th>
+                     <th width="70%" height="26">
+                     DOCUMENTO EN PROCESO :: Estado	
+                   
+                     <span style="font-size:100%;"  v-if="estado=='1'">Solicitado</span>
+                     <span style="font-size:100%;"  v-if="estado=='2'">Recepcionado</span>
+                     <span style="font-size:100%;"  v-if="estado=='3'">Ingresado al SISGEDO</span>
+                     <span style="font-size:100%;"  v-if="estado=='4'">Atendido</span>
+                   
+                   </th>	
+                         <th width="25%" align="right">
+                               
+                           </th>				
+                     </tr>
+                     </tbody></table>
+                     </td>
+                   </tr>
+                   </tbody></table>
+                   </td></tr>
+ 
+                   <tr>
+                     <td colspan="5" style="    "><table cellspacing="0" border="0" cellpadding="0"><tbody><tr><td width="10" background="<?php echo e(asset('/img/sisgedo/titulo1.jpg')); ?>" height="10">&nbsp;</td><td width="90%" align="left" class="marco seccion">&nbsp;EXPEDIENTE</td><td background="<?php echo e(asset('/img/sisgedo/titulo3.jpg')); ?>" height="20" align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></tbody></table></td>
+                   </tr>	
+ 
+                   <tr valign="middle">
+                       <td width="1%" class="marco" >&nbsp;</td>	
+                         <td width="22%" class="etiqueta" align="right">Expediente&nbsp;&nbsp;</td>
+                         <td width="1%" class="objeto">&nbsp;</td>
+                         <td width="78%" class="objeto" >	
+                                                    
+                          <input type="text" class="cajatexto txtmuestra" id="txtexpediente" name="txtexpediente" placeholder="" maxlength="500" v-model="expediente" readonly size="10">
+                         &nbsp;
+ 
+                           </td>
+                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
+                   </tr>	
+ 
+                   <tr><td colspan="5" style="    " class="marco seccionblank">&nbsp;</td></tr>
+ 
+ 
+ 
+                   <tr>
+                       <td colspan="5" style="    "><table cellspacing="0" border="0" cellpadding="0"><tbody><tr><td width="10" background="<?php echo e(asset('/img/sisgedo/titulo1.jpg')); ?>" height="10">&nbsp;</td><td width="90%" align="left" class="marco seccion">&nbsp;DATOS DEL REGISTRO</td><td background="<?php echo e(asset('/img/sisgedo/titulo3.jpg')); ?>" height="20" align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></tbody></table></td>
+                   </tr>	
+ 
+ 
+                   <tr valign="middle">
+                       <td width="1%" class="marco" >&nbsp;</td>	
+                         <td width="22%" class="etiqueta" align="right">Fecha de Registro&nbsp;&nbsp;</td>
+                         <td width="1%" class="objeto">&nbsp;</td>
+                         <td width="78%" class="objeto" >	
+                                                    
+ 
+                          <input type="text" class="cajatexto txtmuestra" id="txtfecha" name="txtfecha" placeholder="" maxlength="10" v-model="fecha" readonly size="10">
+ 
+ 
+                         &nbsp;
+ 
+                           </td>
+                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
+                   </tr>	
+ 
+ 
+                   <tr valign="middle">
+                       <td width="1%" class="marco">&nbsp;</td>	
+                         <td width="22%" class="etiqueta" align="right">Prioridad&nbsp;&nbsp;</td>
+                         <td width="1%" class="objeto">&nbsp;</td>
+                         <td width="78%" class="objeto">	
+                         <select class="cajatexto" id="cbuprioridad" name="cbuprioridad" v-model="modelPrioridad" style="width: 160px;">
+                             <option value="1">{{prioridad}}</option>
+                             </select>
+                       </td>
+                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
+                   </tr>
+ 
+ 
+                   <tr><td colspan="5" style="    " class="marco seccionblank">&nbsp;</td></tr>
+                   <tr>
+                       <td colspan="5" style="    "><table cellspacing="0" border="0" cellpadding="0"><tbody><tr><td width="10" background="<?php echo e(asset('/img/sisgedo/titulo1.jpg')); ?>" height="10">&nbsp;</td><td width="90%" align="left" class="marco seccion">&nbsp;ORIGEN</td><td background="<?php echo e(asset('/img/sisgedo/titulo3.jpg')); ?>" height="20" align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></tbody></table></td>
+                   </tr>	
+ 
+                   <tr valign="middle">
+                       <td width="1%" class="marco" >&nbsp;</td>	
+                         <td width="22%" class="etiqueta" align="right">Origen&nbsp;&nbsp;</td>
+                         <td width="1%" class="objeto">&nbsp;</td>
+                         <td width="78%" class="objeto" >
+                           
+                                 <label for="radioInterno" style="">Interno</label>
+                                 <input type="radio" id="radioInterno" value="1" v-model="origen" disabled class="radiomuestra">
+                                                 
+                                 <label for="radioExterno" style="margin-left: 10px;">Externo</label>
+                                 <input type="radio" id="radioExterno" value="2" v-model="origen" disabled class="radiomuestra">
+                         &nbsp;
+ 
+                           </td>
+                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
+                   </tr>	
+ 
+                   <tr valign="middle">
+                       <td width="1%" class="marco" >&nbsp;</td>	
+                         <td width="22%" class="etiqueta" align="right">Entidad&nbsp;&nbsp;</td>
+                         <td width="1%" class="objeto">&nbsp;</td>
+                         <td width="78%" class="objeto" valign="top">	
+                                                    
+                            <input type="text" class="cajatexto txtmuestra" id="txtcodEntidad" name="txtcodEntidad" placeholder="" maxlength="20" v-model="codigoEntidad" readonly  size="6">
+ 
+                          <img src="<?php echo e(asset('/img/sisgedo/search.gif')); ?>" alt="Buscar" height="14" width="16" border="0" style="cursor:pointer"> 
+                         &nbsp; <br>
+ 
+         
+                             <select class="cajatexto" id="cbuentidad" name="cbuentidad" v-model="modelEntidad" style="width: 470px;">
+                                 <option value="1">{{entidad}}</option>
+                             </select>
+                       </td>
+                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
+                   </tr>	
+ 
+ 
+                   <tr valign="middle">
+                       <td width="1%" class="marco" >&nbsp;</td>	
+                         <td width="22%" class="etiqueta" align="right">Detalle&nbsp;&nbsp;</td>
+                         <td width="1%" class="objeto">&nbsp;</td>
+                         <td width="78%" class="objeto" >	
+                                                    
+         
+ 
+                          <input type="text" class="cajatexto txtmuestra" id="txtdetalle" name="txtdetalle" placeholder="" maxlength="500" v-model="detalle" readonly size="53">
+                         &nbsp;
+ 
+                           </td>
+                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
+                   </tr>	
+ 
+                   <tr valign="middle">
+                       <td width="1%" class="marco" >&nbsp;</td>	
+                         <td width="22%" class="etiqueta" align="right">Firma&nbsp;&nbsp;</td>
+                         <td width="1%" class="objeto">&nbsp;</td>
+                         <td width="78%" class="objeto" >	
+ 
+                          <input type="text" class="cajatexto txtmuestra" id="txtfirma" name="txtfirma" placeholder="" maxlength="500" v-model="firma" readonly size="53">
+                         &nbsp;
+ 
+                           </td>
+                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
+                   </tr>	
+ 
+                   <tr valign="middle">
+                       <td width="1%" class="marco" >&nbsp;</td>	
+                         <td width="22%" class="etiqueta" align="right">Cargo&nbsp;&nbsp;</td>
+                         <td width="1%" class="objeto">&nbsp;</td>
+                         <td width="78%" class="objeto" >	
+                                                    
+                          <input type="text" class="cajatexto txtmuestra" id="txtcargo" name="txtcargo" placeholder="" maxlength="500" v-model="cargo" readonly size="53">
+                         &nbsp;
+ 
+                           </td>
+                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
+                   </tr>	
+ 
+ 
+                   <tr><td colspan="5" style="    " class="marco seccionblank">&nbsp;</td></tr>
+                   <tr>
+                       <td colspan="5" style="    "><table cellspacing="0" border="0" cellpadding="0"><tbody><tr><td width="10" background="<?php echo e(asset('/img/sisgedo/titulo1.jpg')); ?>" height="10">&nbsp;</td><td width="90%" align="left" class="marco seccion">&nbsp;DATOS DEL DOCUMENTO</td><td background="<?php echo e(asset('/img/sisgedo/titulo3.jpg')); ?>" height="20" align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></tbody></table></td>
+                   </tr>	
+ 
+                   <tr valign="middle">
+                       <td width="1%" class="marco" >&nbsp;</td>	
+                         <td width="22%" class="etiqueta" align="right">Fecha de Documento&nbsp;&nbsp;</td>
+                         <td width="1%" class="objeto">&nbsp;</td>
+                         <td width="78%" class="objeto" >	    									
+ 
+                          <input type="text" class="cajatexto txtmuestra" id="txtfechadoc" name="txtfechadoc" placeholder="" maxlength="10" v-model="fechadoc" readonly size="10">
+                          &nbsp;
+                           </td>
+                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
+                   </tr>	
+ 
+ 
+                   <tr valign="middle">
+                       <td width="1%" class="marco">&nbsp;</td>	
+                         <td width="22%" class="etiqueta" align="right">Tipo de Documento&nbsp;&nbsp;</td>
+                         <td width="1%" class="objeto">&nbsp;</td>
+                         <td width="78%" class="objeto">	
+                      
+                     <select class="cajatexto" id="cbuTipoDoc" name="cbuTipoDoc" v-model="modelTipo" style="width: 300px;">
+                         <option value="1">{{tipodocumento}}</option>
+                       </select>
+                       </td>
+                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
+                   </tr>
+ 
+ 
+ 
+                   <tr valign="middle">
+                       <td width="1%" class="marco" >&nbsp;</td>	
+                         <td width="22%" class="etiqueta" align="right">Número y Siglas&nbsp;&nbsp;</td>
+                         <td width="1%" class="objeto">&nbsp;</td>
+                         <td width="78%" class="objeto" valign="top">	
+                                                    
+                       <input type="text" class="cajatexto txtmuestra" id="txtnumero" name="txtnumero" placeholder="" maxlength="20" v-model="numero" readonly size="10">
+ 
+                       <input type="text" class="cajatexto txtmuestra" id="txtsiglas" name="txtsiglas" placeholder="" maxlength="500" v-model="siglas" readonly size="53">
+ 
+                       </td>
+                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
+                   </tr>	
+ 
+ 
+                   <tr valign="middle">
+                       <td width="1%" class="marco">&nbsp;</td>	
+                         <td width="22%" class="etiqueta" align="right">Forma de Recepción&nbsp;&nbsp;</td>
+                         <td width="1%" class="objeto">&nbsp;</td>
+                         <td width="78%" class="objeto">	
+                      
+ 
+                     
+                       <select class="cajatexto" id="cbuFormaRecep" name="cbuFormaRecep" v-model="modelForma" style="width: 250px;">
+   
+                           <option value="1">{{formarecep}}</option>
+                           </select>
+ 
+                       </td>
+                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
+                   </tr>
+ 
+ 
+ 
+                   <tr valign="middle" v-if="archivoExsite">
+                       <td width="1%" class="marco" >&nbsp;</td>	
+                         <td width="22%" class="etiqueta" align="right">Archivo&nbsp;&nbsp;</td>
+                         <td width="1%" class="objeto">&nbsp;</td>
+                         <td width="78%" class="objeto" >
+                             
+                               <a v-bind:href="urlAdjunto" download data-placement="top" data-toggle="tooltip" title="Descargar Archivo Adjunto">
+                                
+                               
+                             </a>
+                         &nbsp;
+ 
+                           </td>
+                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
+                   </tr>	
+ 
+ 
+ 
+                   <tr valign="middle" v-else>
+                       <td width="1%" class="marco" >&nbsp;</td>	
+                         <td width="22%" class="etiqueta" align="right">Archivo&nbsp;&nbsp;</td>
+                         <td width="1%" class="objeto">&nbsp;</td>
+                         <td width="78%" class="objeto" >
+                           
+                                 <label for="radioInterno" style="padding-right: 15px;">No se adjuntó archivo</label>
+ 
+                         &nbsp;
+ 
+                           </td>
+                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
+                   </tr>	
+ 
+ 
+ 
+                   <tr valign="middle">
+                       <td width="1%" class="marco" >&nbsp;</td>	
+                         <td width="22%" class="etiqueta" align="right">Folios&nbsp;&nbsp;</td>
+                         <td width="1%" class="objeto">&nbsp;</td>
+                         <td width="78%" class="objeto" valign="top">	
+ 
+                       <input type="text" class="cajatexto txtmuestra" id="txtfolios" name="txtfolios" placeholder="" maxlength="20" v-model="folios" readonly size="10">
+                       </td>
+                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
+                   </tr>	
+ 
+ 
+ 
+                   <tr valign="middle">
+                       <td width="1%" class="marco">&nbsp;</td>	
+                         <td width="22%" class="etiqueta" align="right">Asunto&nbsp;&nbsp;</td>
+                         <td width="1%" class="objeto">&nbsp;</td>
+                         <td width="78%" class="objeto">	
+  
+ 
+ 
+                         <textarea name="txtasunto" id="txtasunto" cols="60" rows="4" class="cajatexto txtmuestra" v-model="asunto" readonly></textarea>  
+                         </td>
+                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
+                   </tr>
+ 
+ 
+                   <tr><td colspan="5" style="    " class="marco seccionblank">&nbsp;</td></tr>
+                   <tr>
+                       <td colspan="5" style="    "><table cellspacing="0" border="0" cellpadding="0"><tbody><tr><td width="10" background="<?php echo e(asset('/img/sisgedo/titulo1.jpg')); ?>" height="10">&nbsp;</td><td width="90%" align="left" class="marco seccion">&nbsp;CLASIFICACION TUPA</td><td background="<?php echo e(asset('/img/sisgedo/titulo3.jpg')); ?>" height="20" align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></tbody></table></td>
+                   </tr>	
+ 
+                   <tr valign="middle">
+                       <td width="1%" class="marco" >&nbsp;</td>	
+                         <td width="22%" class="etiqueta" align="right">Clasificación&nbsp;&nbsp;</td>
+                         <td width="1%" class="objeto">&nbsp;</td>
+                         <td width="78%" class="objeto" >
+                           
+                                 <label for="radioInterno" style="">Silencio Positivo</label>
+                                 <input type="radio" id="radioSilencioPositivo" value="1" v-model="clasificacion" disabled class="radiomuestra">
+                                                 
+                                 <label for="radioExterno" style="margin-left: 10px;">Silencio Negativo</label>
+                                 <input type="radio" id="radioSilencioNegativo" value="2" v-model="clasificacion" disabled class="radiomuestra">
+ 
+                                 <label for="radioExterno" style="margin-left: 10px;">Automático</label>
+                                 <input type="radio" id="radioAutomatico" value="3" v-model="clasificacion" disabled class="radiomuestra">
+ 
+ 
+                                 <label for="radioExterno" style="margin-left: 10px;">Ninguna</label>
+                                 <input type="radio" id="radioNinguna" value="4" v-model="clasificacion" disabled class="radiomuestra">
+ 
+                         &nbsp;
+ 
+                           </td>
+                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
+                   </tr>	
+ 
+                   <tr valign="middle">
+                       <td width="1%" class="marco" >&nbsp;</td>	
+                         <td width="22%" class="etiqueta" align="right"># de Días de atención&nbsp;&nbsp;</td>
+                         <td width="1%" class="objeto">&nbsp;</td>
+                         <td width="78%" class="objeto" valign="top">	
+                                                    
+                            <input type="text" class="cajatexto txtmuestra" id="txtnumdias" name="txtnumdias" placeholder="" maxlength="20" v-model="diasAtencion" readonly size="6">
+ 
+ 
+                       </td>
+                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
+                   </tr>	
+ 
+ 
+ 
+                   <tr><td colspan="5" style="    " class="marco seccionblank">&nbsp;</td></tr>
+                   <tr>
+                       <td colspan="5" style="    "><table cellspacing="0" border="0" cellpadding="0"><tbody><tr><td width="10" background="<?php echo e(asset('/img/sisgedo/titulo1.jpg')); ?>" height="10">&nbsp;</td><td width="90%" align="left" class="marco seccion">&nbsp;DESTINO(S) - DERIVACION DEL DOCUMENTO</td><td background="<?php echo e(asset('/img/sisgedo/titulo3.jpg')); ?>" height="20" align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></tbody></table></td>
+                   </tr>	
+ 
+ 
+                   <tr valign="middle">
+                       <td width="1%" class="marco" >&nbsp;</td>	
+                         <td width="22%" class="etiqueta" align="right">Forma&nbsp;&nbsp;</td>
+                         <td width="1%" class="objeto">&nbsp;</td>
+                         <td width="78%" class="objeto" valign="top">	
+ 
+ 
+                             <label for="radioInterno" style="">Copia</label>
+                                                    
+                             <input type="checkbox" id="CHECKFORMA" v-model="forma" style="display:inline-block;" disabled class="radiomuestra">
+ 
+ 
+                       </td>
+                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
+                   </tr>	
+ 
+ 
+ 
+                   <tr valign="middle">
+                       <td width="1%" class="marco" >&nbsp;</td>	
+                         <td width="22%" class="etiqueta" align="right">Unidad Orgánica&nbsp;&nbsp;</td>
+                         <td width="1%" class="objeto">&nbsp;</td>
+                         <td width="78%" class="objeto" valign="top">	
+                                                                        
+                            <input type="text" class="cajatexto txtmuestra" id="txtUnidadOrganica" name="txtUnidadOrganica" placeholder="" maxlength="20" v-model="codUndOrg"  readonly size="6">
+ 
+                          <img src="<?php echo e(asset('/img/sisgedo/search.gif')); ?>" alt="Buscar" height="14" width="16" border="0" style="cursor:pointer"> 
+                      
+ 
+                         <select class="cajatexto" id="cbuUnidadOrganica" name="cbuUnidadOrganica" v-model="modelUnidadOrg" style="width:450px;">
+                             <option  value="1">{{unidadOrganica}}</option>
+                       </select>
+ 
+                       </td>
+                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
+                   </tr>	
+ 
+ 
+ 
+ 
+                   <tr valign="middle">
+                       <td width="1%" class="marco" >&nbsp;</td>	
+                         <td width="22%" class="etiqueta" align="right">Detalle&nbsp;&nbsp;</td>
+                         <td width="1%" class="objeto">&nbsp;</td>
+                         <td width="78%" class="objeto" valign="top">	
+                                                    
+ 
+                            <input type="text" class="cajatexto txtmuestra" id="txtDetalleUO" name="txtDetalleUO" placeholder="" maxlength="500" v-model="detalleUnidadOrg" readonly size="60">
+ 
+ 
+                       </td>
+                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
+                   </tr>	
+ 
+                   <tr><td colspan="5" style="    " class="marco seccionblank">&nbsp;</td></tr>
+ 
+ 
+                   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+            
+                   
+ 
+ 
+ 
+                   
+             
+             </tbody></table>
+             </td></tr>
+             
+             </tbody></table>
+         
+    
+           
+ 
+     </div>
+ 
+ 
+ 
+   
+ </div>
+ 
+ 
 
 
 

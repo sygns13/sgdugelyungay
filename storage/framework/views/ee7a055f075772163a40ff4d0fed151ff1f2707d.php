@@ -2,8 +2,8 @@
     let app = new Vue({
 el: '#app',
 data:{
-       titulo:"Procesamiento de Trámites",
-       subtitulo: "Gestión",
+       titulo:"Seguimiento de Trámites",
+       subtitulo: "En Proceso",
        subtitulo2: "Principal",
 
    subtitle2:false,
@@ -26,10 +26,10 @@ data:{
    divloader9:false,
    divloader10:false,
    divtitulo:true,
-   classTitle:'fa fa-cogs',
+   classTitle:'fa fa-list-alt',
    classMenu0:'',
-   classMenu1:'',
-   classMenu2:'active',
+   classMenu1:'active',
+   classMenu2:'',
    classMenu3:'',
    classMenu4:'',
    classMenu5:'',
@@ -65,9 +65,6 @@ data:{
    divloaderEdit:false,
 
    thispage:'1',
-
-
-   newEstado:1,
 
 
 
@@ -110,15 +107,6 @@ data:{
    modelUnidadOrg:1,
    unidadOrganica:'',
    detalleUnidadOrg:'',
-
-
-
-
-   tramiteid:'',
-   numExpediente:'',
-   tramipersona_id:'',
-
-   divloaderEdit2:false,
  
 
 },
@@ -228,14 +216,10 @@ methods: {
     return value.slice(8)+"/"+value.slice(5,7)+"/"+value.slice(0,4)
   },
 
-  cambiarestado:function(){
-    this.getTramites(this.thispage);
-  },
-
 
    getTramites: function (page) {
        var busca=this.buscar;
-       var url = 'procetramite?page='+page+'&busca='+busca+'&estado='+this.newEstado;
+       var url = 'mitramite?page='+page+'&busca='+busca;
 
        axios.get(url).then(response=>{
            this.tramites= response.data.tramites.data;
@@ -257,16 +241,6 @@ methods: {
    buscarBtn: function () {
        this.getTramites();
        this.thispage='1';
-   },
-
-   LimpiarBtn:function() {
-
-       this.buscar='';
-
-       this.$nextTick(function () {
-       this.buscarBtn();
-     })
-       
    },
 
   
@@ -299,10 +273,6 @@ methods: {
    },
 
    verTramite:function(tramite){
-
-
-       this.tramiteid=tramite.id;
-       this.tramipersona_id=tramite.persona_id;
 
     this.tipodocumento=tramite.tipodocumento;
    this.numero=tramite.numero;
@@ -363,25 +333,6 @@ methods: {
    this.detalleUnidadOrg=tramite.detalledestino;
 
 
-
-   if(this.estado=='1'){
-
-    var url = 'procetramites/procesar';
-                       axios.post(url,{id:tramite.id, estado:'2', persona_id:tramite.persona_id }).then(response=>{//eliminamos
-
-                       if(response.data.result=='1'){
-                           app.getTramites(app.thispage);//listamos
-                           toastr.success(response.data.msj);//mostramos mensaje
-                           app.estado=2;
-                       }else{
-                          // $('#'+response.data.selector).focus();
-                           toastr.error(response.data.msj);
-                       }
-                       });
-
-   }
-
-
    this.$nextTick(function () {
        $("#divparte1").hide();
        $("#divparte2").hide();
@@ -398,87 +349,13 @@ methods: {
 
    },
 
-   registrarSISGEDO:function(){
 
-    this.numExpediente='',
-    $("#modalProcesar").modal('show');
-
-    this.$nextTick(function () {
-       $("#txtexpediente").focus();
-     })
-
-   },
-
-   ingresoSisgedo:function(id){
-
-       $("#btnSaveE").attr('disabled', true);
-       $("#btnCancelE").attr('disabled', true);
-       this.divloaderEdit=true;
-
-    var url = 'procetramites/procesar';
-    
-    axios.post(url,{id:id, estado:'3', persona_id:this.tramipersona_id, expediente:this.numExpediente }).then(response=>{//ingreso
-
-            $("#btnSaveE").removeAttr("disabled");
-           $("#btnCancelE").removeAttr("disabled");
-           this.divloaderEdit=false;
-
-                       if(response.data.result=='1'){
-                           app.getTramites(app.thispage);//listamos
-                           toastr.success(response.data.msj);//mostramos mensaje
-                           $("#modalProcesar").modal('hide');
-                           app.estado=3;
-                       }else{
-                          // $('#'+response.data.selector).focus();
-                           toastr.error(response.data.msj);
-                       }
-                       });
-
-   },
-
-   atender:function(id,perso_id){
-
-       swal({
-             title: '¿Estás seguro?',
-             text: "Desea dar por atendido el Trámite Seleccionado",
-             type: 'info',
-             showCancelButton: true,
-             confirmButtonColor: '#3085d6',
-             cancelButtonColor: '#d33',
-             confirmButtonText: 'Si, Aceptar'
-           }).then(function () {
-
-        $("#btnSaveA").attr('disabled', true);
-        $("#btnatent").attr('disabled', true);
-       this.divloaderEdit2=true;
-
-                       var url = 'procetramites/procesar';;
-                       axios.post(url,{id:id, estado:'4', persona_id:perso_id }).then(response=>{//ingreso
-
-        
-        $("#btnSaveA").removeAttr("disabled");
-        $("#btnatent").removeAttr("disabled");
-           this.divloaderEdit2=false;
-
-                       if(response.data.result=='1'){
-                           app.getTramites(app.thispage);//listamos
-                           toastr.success(response.data.msj);//mostramos mensaje
-                           app.estado=4;
-                       }else{
-                          // $('#'+response.data.selector).focus();
-                           toastr.error(response.data.msj);
-                       }
-                       });
-                   
-               }).catch(swal.noop);
-
-   },
 
    imprimir:function () {
 
-//console.log("aqui");
+    //console.log("aqui");
 
-      $("#divparteImp").printArea();
+          $("#divparteImp").printArea();
 
 
 },

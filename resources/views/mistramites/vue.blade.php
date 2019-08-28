@@ -349,6 +349,17 @@ methods: {
 
    },
 
+
+
+   imprimir:function () {
+
+    //console.log("aqui");
+
+          $("#divparteImp").printArea();
+
+
+},
+
 }
 });
 </script>
