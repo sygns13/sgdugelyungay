@@ -165,7 +165,7 @@ return response()->json(["datos"=>$datos,"res"=>$res]);
             {
 
             $segureFile=1;
-            $msj="El archivo adjunto ingresado tiene un taaño de extensión no válida, ingrese otro archivo o limpie el formulario";
+            $msj="El archivo adjunto ingresado tiene un tamaño de extensión no válida, ingrese otro archivo o limpie el formulario";
             $result='0';
             $selector='archivo';
             }
