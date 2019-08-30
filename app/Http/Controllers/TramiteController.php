@@ -127,7 +127,7 @@ class TramiteController extends Controller
         ->join('unidadorganicas', 'tramites.unidadorganica_id', '=', 'unidadorganicas.id')
         ->join('entidads', 'tramites.entidad_id', '=', 'entidads.id')
         ->join('personas', 'tramites.persona_id', '=', 'personas.id')
-        ->join('users', 'tramites.user_id', '=', 'users.id')
+        ->join('users', 'users.persona_id', '=', 'personas.id')
 
         ->where('tramites.activo','1')
         ->where('tramites.persona_id',$idPersona)
@@ -333,6 +333,38 @@ class TramiteController extends Controller
     }
 
 
+    public function notificar(Request $request)
+    {
+        $id=$request->id;
+
+        $result='1';
+        $msj='';
+        $selector='';
+
+        $tramite=Tramite::find($id);
+        $estado=$tramite->estado;
+
+        $request->tipomail="0";
+
+        if(intval($estado)==2){
+            $request->tipomail="4";
+        }
+        elseif(intval($estado)==3){
+            $request->tipomail="5";
+        }
+        elseif(intval($estado)==4){
+            $request->tipomail="6";
+        }
+
+        Mail::send(new SendMail());
+
+        $msj="El estado del trámite fue notificado exitosamente al correo electrónico del usuario que realizó el trámite virtual";
+
+        return response()->json(["result"=>$result,'msj'=>$msj,'selector'=>$selector]);
+
+    }
+
+
     public function procesar(Request $request)
     {
 
@@ -388,7 +420,7 @@ class TramiteController extends Controller
 
 
                 $request->tipomail="4";
-                Mail::send(new SendMail());
+               // Mail::send(new SendMail());
 
 
         }elseif(strval($estado)=="3"){

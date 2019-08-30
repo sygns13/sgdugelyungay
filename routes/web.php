@@ -82,6 +82,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('usuario/altabaja/{id}/{var}','UserController@altabaja');
 
         Route::post('procetramites/procesar','TramiteController@procesar');
+        Route::post('procetramites/notificar','TramiteController@notificar');
         Route::post('usuario/miperfil','UserController@miperfil');
         Route::post('usuario/modificarclave','UserController@modificarclave');
 

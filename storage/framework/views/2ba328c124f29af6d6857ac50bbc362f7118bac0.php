@@ -9,9 +9,9 @@ data:{
    subtitle2:false,
    subtitulo2:"",
 
-   tipouserPerfil:'{{ $tipouser->nombre }}',
-   userPerfil:'{{ Auth::user()->name }}',
-   mailPerfil:'{{ Auth::user()->email }}',
+   tipouserPerfil:'<?php echo e($tipouser->nombre); ?>',
+   userPerfil:'<?php echo e(Auth::user()->name); ?>',
+   mailPerfil:'<?php echo e(Auth::user()->email); ?>',
 
    
    divloader0:true,
@@ -340,7 +340,7 @@ $('#cbuUnidadOrganica').val('0').trigger('change');
                toastr.success(response.data.msj);
 
                this.$nextTick(function () {
-                window.location.href = "{{ URL::to('mistramites')}}";
+                window.location.href = "<?php echo e(URL::to('mistramites')); ?>";
                     })
            }else{
                $('#'+response.data.selector).focus();

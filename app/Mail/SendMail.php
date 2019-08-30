@@ -253,8 +253,11 @@ class SendMail extends Mailable
             $formacopia=$tramite->formacopia;
             $unidadorganica_id=$tramite->unidadorganica_id;
             $detalledestino=$tramite->detalledestino;
+            $rutafile=$tramite->rutafile;
 
+            
             $fecha=$tramite->fecha;
+           // $fecha=Date("Y-m-d");
 
         $Persona=DB::select("select p.id, p.nombres, p.apellidos, p.dni, u.email FROM personas p
         inner join users u on p.id=u.persona_id
@@ -331,9 +334,9 @@ class SendMail extends Mailable
             $user=User::find(Auth::user()->id);
 
 
-            if(strlen($data->rutafile)>0)
+            if(strlen($rutafile)>0)
                 {
-                   // $adjunto=public_path('archivosadjuntos')."/".$data->rutafile;
+                   // $adjunto=public_path('archivosadjuntos')."/".$rutafile;
                    // return $this->view('mail1',['msg'=>$mensaje])->attach($adjunto)->to($user->email)->subject($asunt)->from("sgdugelyungay@gmail.com");
                    return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunt)->from("sgdugelyungay@gmail.com");
                 }
@@ -370,6 +373,7 @@ class SendMail extends Mailable
             $formacopia=$tramite->formacopia;
             $unidadorganica_id=$tramite->unidadorganica_id;
             $detalledestino=$tramite->detalledestino;
+            $rutafile=$tramite->rutafile;
 
             $fecha=$tramite->fecha;
 
@@ -449,9 +453,9 @@ class SendMail extends Mailable
             $user=User::find(Auth::user()->id);
 
 
-            if(strlen($data->rutafile)>0)
+            if(strlen($rutafile)>0)
                 {
-                   // $adjunto=public_path('archivosadjuntos')."/".$data->rutafile;
+                   // $adjunto=public_path('archivosadjuntos')."/".$rutafile;
                    // return $this->view('mail1',['msg'=>$mensaje])->attach($adjunto)->to($user->email)->subject($asunt)->from("sgdugelyungay@gmail.com");
                    return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunt)->from("sgdugelyungay@gmail.com");
                 }
@@ -488,6 +492,7 @@ class SendMail extends Mailable
             $formacopia=$tramite->formacopia;
             $unidadorganica_id=$tramite->unidadorganica_id;
             $detalledestino=$tramite->detalledestino;
+            $rutafile=$tramite->rutafile;
 
             $fecha=$tramite->fecha;
 
@@ -567,9 +572,9 @@ class SendMail extends Mailable
             $user=User::find(Auth::user()->id);
 
 
-            if(strlen($data->rutafile)>0)
+            if(strlen($rutafile)>0)
                 {
-                   // $adjunto=public_path('archivosadjuntos')."/".$data->rutafile;
+                   // $adjunto=public_path('archivosadjuntos')."/".$rutafile;
                    // return $this->view('mail1',['msg'=>$mensaje])->attach($adjunto)->to($user->email)->subject($asunt)->from("sgdugelyungay@gmail.com");
                    return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunt)->from("sgdugelyungay@gmail.com");
                 }
