@@ -26,6 +26,8 @@ use App\User;
 use Mail;
 use App\Mail\SendMail;
 
+use HttpRequest;
+
 class PrincipalController extends Controller
 {
     /**
@@ -67,26 +69,45 @@ class PrincipalController extends Controller
         $res=1;
 
         error_reporting(E_ALL ^ E_NOTICE);
-        $token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImNyaXN0aWFuXzdfNzBAaG90bWFpbC5jb20ifQ.tsIAAU8PPZNMnqf9uu79GF5kfERpoDhwLMpynkOVF-Y";
+        //$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImNyaXN0aWFuXzdfNzBAaG90bWFpbC5jb20ifQ.tsIAAU8PPZNMnqf9uu79GF5kfERpoDhwLMpynkOVF-Y";
+        $token="Bearer 768f646027108db8a95c64a9b385c4b1d7bd92eb22c9213ba1c2f685794ef418";
 
        // $consulta = file_get_contents('http://aplicaciones007.jne.gob.pe/srop_publico/Consulta/Afiliado/GetNombresCiudadano?DNI='.$dni);
-        $consulta = file_get_contents('https://dniruc.apisperu.com/api/v1/dni/'.$dni.'?token='.$token);
+       // $consulta = file_get_contents('https://dniruc.apisperu.com/api/v1/dni/'.$dni.'?token='.$token);
 
+
+       $opts = [
+        "http" => [
+            "method" => "GET",
+            "header" => "Authorization: Bearer 768f646027108db8a95c64a9b385c4b1d7bd92eb22c9213ba1c2f685794ef418" .
+                ""
+        ]
+    ];
+
+    $context = stream_context_create($opts);
+
+      // $consulta = file_get_contents('https://dniruc.apisperu.com/api/v1/dni/'.$dni.'?token='.$token);
+       $consulta = file_get_contents('https://apiperu.dev/api/dni/'.$dni, false, $context);
        // $partes = explode("|", $consulta);
 
        $consulta=json_decode($consulta);
 
-        /* $datos = array(
+         $datos = array(
                 0 => $dni, 
-                1 => $consulta->nombres, 
-                2 => $consulta->apellidoPaterno,
-                3 => $consulta->apellidoMaterno,
-        ); */
+                1 => $consulta->data->nombres, 
+                2 => $consulta->data->apellido_paterno,
+                3 => $consulta->data->apellido_materno,
+        ); 
 
 
-if($consulta!=null){
+if($consulta->success){
     $res=0;
 }
+
+
+
+
+
 
 
 return response()->json(["datos"=>$datos,"res"=>$res,"consulta"=>$consulta]);

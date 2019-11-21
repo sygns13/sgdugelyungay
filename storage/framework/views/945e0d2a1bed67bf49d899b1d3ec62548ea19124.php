@@ -499,30 +499,6 @@ var onloadCallback = function() {
         methods: {
 
 
-            ValidarDNIPRUEBA:function(){
-            let nombreCompleto="CHAVEZ TORRES CRISTIAN FERNANDO";
-
-            console.log(nombreCompleto);
-            let separador = " ";
-
-            let arreglo=nombreCompleto.split(separador);
-
-            let nombrePoner="";
-            let apellidoPoner="";
-
-            arreglo.forEach( function(valor, indice, array) {
-                if(indice<2){
-                    apellidoPoner+=valor+" ";
-                }
-                else{
-                    nombrePoner+=valor+" ";
-                }
-            });
-
-            this.newnombres=nombrePoner;
-            this.newapellidos=apellidoPoner;
-        },
-
             
 
 
@@ -543,7 +519,6 @@ var onloadCallback = function() {
                 {
                     var url='principal/consultadni';
                    // var url='https://api.migoperu.pe/api/v1/dni';
-                    //var url='https://dniruc.apisperu.com/api/v1/dni/'+this.newDNI+'?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImNyaXN0aWFuXzdfNzBAaG90bWFpbC5jb20ifQ.tsIAAU8PPZNMnqf9uu79GF5kfERpoDhwLMpynkOVF-Y';
        $("#btncrearE").attr('disabled', true);
        $("#btniniciarE").attr('disabled', true);
        $("#txtdni").attr('disabled', true);
@@ -586,8 +561,8 @@ var onloadCallback = function() {
                 }
             });  */
 
-            this.newnombres=response.data.consulta.nombres;
-            this.newapellidos=response.data.consulta.apellidoPaterno+' '+response.data.consulta.apellidoMaterno;
+            this.newnombres=response.data.consulta.data.nombres;
+            this.newapellidos=response.data.consulta.data.apellido_paterno+' '+response.data.consulta.data.apellido_materno;
 
             $("#txtdir").focus();
 

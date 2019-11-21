@@ -500,30 +500,6 @@ var onloadCallback = function() {
         methods: {
 
 
-            ValidarDNIPRUEBA:function(){
-            let nombreCompleto="CHAVEZ TORRES CRISTIAN FERNANDO";
-
-            console.log(nombreCompleto);
-            let separador = " ";
-
-            let arreglo=nombreCompleto.split(separador);
-
-            let nombrePoner="";
-            let apellidoPoner="";
-
-            arreglo.forEach( function(valor, indice, array) {
-                if(indice<2){
-                    apellidoPoner+=valor+" ";
-                }
-                else{
-                    nombrePoner+=valor+" ";
-                }
-            });
-
-            this.newnombres=nombrePoner;
-            this.newapellidos=apellidoPoner;
-        },
-
             
 
 
@@ -586,8 +562,8 @@ var onloadCallback = function() {
                 }
             });  */
 
-            this.newnombres=response.data.consulta.nombres;
-            this.newapellidos=response.data.consulta.apellidoPaterno+' '+response.data.consulta.apellidoMaterno;
+            this.newnombres=response.data.consulta.data.nombres;
+            this.newapellidos=response.data.consulta.data.apellido_paterno+' '+response.data.consulta.data.apellido_materno;
 
             $("#txtdir").focus();
 
