@@ -67,8 +67,68 @@ class PrincipalController extends Controller
         $res=1;
 
         error_reporting(E_ALL ^ E_NOTICE);
+        $token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImNyaXN0aWFuXzdfNzBAaG90bWFpbC5jb20ifQ.tsIAAU8PPZNMnqf9uu79GF5kfERpoDhwLMpynkOVF-Y";
 
-        $consulta = file_get_contents('http://aplicaciones007.jne.gob.pe/srop_publico/Consulta/Afiliado/GetNombresCiudadano?DNI='.$dni);
+       // $consulta = file_get_contents('http://aplicaciones007.jne.gob.pe/srop_publico/Consulta/Afiliado/GetNombresCiudadano?DNI='.$dni);
+        $consulta = file_get_contents('https://dniruc.apisperu.com/api/v1/dni/'.$dni.'?token='.$token);
+
+       // $partes = explode("|", $consulta);
+
+       $consulta=json_decode($consulta);
+
+        /* $datos = array(
+                0 => $dni, 
+                1 => $consulta->nombres, 
+                2 => $consulta->apellidoPaterno,
+                3 => $consulta->apellidoMaterno,
+        ); */
+
+
+if($consulta!=null){
+    $res=0;
+}
+
+
+return response()->json(["datos"=>$datos,"res"=>$res,"consulta"=>$consulta]);
+    }
+
+
+
+    public function consultadni2(Request $request)
+    {
+        $dni=$request->dni;
+
+        $res=1;
+
+        $postdata = http_build_query(
+            array(
+                'CODDNI' => $dni
+            )
+        );
+
+        $headers=array(
+            'Content-Type' => 'application/json',
+            'RequestVerificationToken' => 'S4WlEbtVvmky09XgK6GN5oA4InhnECs4GFbzX5cgUejP0WqlkXIRtXgBQhpH5u1_6xkWHUcOM0Z9CKgyT-kDMILwEHJy4DwQ_p77yfA2nSI1:ApIblHa5JQG2YvEr3AlOjs_eGZVdH83QhK8yn5gzThMs0HE1i0Cw2kssNa8B9NT_fIJpeY3PGume9BeTsGHf6a14iF1IACtrZJVBVicgLWM1',
+            'Cookie' => '_ga=GA1.3.1990388134.1572917173; _gid=GA1.3.1752394323.1574217267; ASP.NET_SessionId=2zy2s2f1brdmxtqktqn3uqz1; _gat=1; _gat_dretTracker=1'
+        );
+
+        $opts = array('http' =>
+    array(
+        'method'  => 'POST',
+        'header'  => $headers,
+        'content' => json_encode($postdata)
+    )
+);
+
+
+$context  = stream_context_create($opts);
+
+
+        error_reporting(E_ALL ^ E_NOTICE);
+
+        //$consulta = file_get_contents('http://aplicaciones007.jne.gob.pe/srop_publico/Consulta/Afiliado/GetNombresCiudadano?DNI='.$dni);
+
+        $consulta = file_get_contents('https://aplicaciones007.jne.gob.pe/srop_publico/Consulta/api/AfiliadoApi/GetNombresCiudadano', false, $context);
 
         $partes = explode("|", $consulta);
 

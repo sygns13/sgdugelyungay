@@ -500,6 +500,33 @@ var onloadCallback = function() {
         methods: {
 
 
+            ValidarDNIPRUEBA:function(){
+            let nombreCompleto="CHAVEZ TORRES CRISTIAN FERNANDO";
+
+            console.log(nombreCompleto);
+            let separador = " ";
+
+            let arreglo=nombreCompleto.split(separador);
+
+            let nombrePoner="";
+            let apellidoPoner="";
+
+            arreglo.forEach( function(valor, indice, array) {
+                if(indice<2){
+                    apellidoPoner+=valor+" ";
+                }
+                else{
+                    nombrePoner+=valor+" ";
+                }
+            });
+
+            this.newnombres=nombrePoner;
+            this.newapellidos=apellidoPoner;
+        },
+
+            
+
+
             ValidarDNI:function(){
 
                 this.newnombres='';
@@ -516,13 +543,15 @@ var onloadCallback = function() {
                 else
                 {
                     var url='principal/consultadni';
+                   // var url='https://api.migoperu.pe/api/v1/dni';
        $("#btncrearE").attr('disabled', true);
        $("#btniniciarE").attr('disabled', true);
        $("#txtdni").attr('disabled', true);
        $("#btnValidar").attr('disabled', true);
        
        this.divloaderNuevo3=true;
-       axios.post(url,{dni:this.newDNI }).then(response=>{
+       axios.post(url,{ dni:this.newDNI }).then(response=>{
+       //axios.get(url).then(response=>{
            //console.log(response.data);
 
            $("#btncrearE").removeAttr("disabled");
@@ -532,12 +561,33 @@ var onloadCallback = function() {
 
            this.divloaderNuevo3=false;
 
-           if(response.data.res=='1'){
+          // this.newnombres=response.data.nombres;
+           // this.newapellidos=response.data.apellidoPaterno+' '+response.data.apellidoMaterno;
+
+           if(String(response.data.res)=="0"){
 
             alertify.success('DNI Válido, continúe ingresando los datos');
 
-            this.newnombres=response.data.datos[3];
-            this.newapellidos=response.data.datos[1]+' '+response.data.datos[2];
+            /*  let nombreCompleto=response.data.nombre;
+
+            let separador = " ";
+
+            let arreglo=nombreCompleto.split(separador);
+
+            let nombrePoner="";
+            let apellidoPoner="";
+
+            arreglo.forEach( function(valor, indice, array) {
+                if(indice<2){
+                    apellidoPoner+=valor+" ";
+                }
+                else{
+                    nombrePoner+=valor+" ";
+                }
+            });  */
+
+            this.newnombres=response.data.consulta.nombres;
+            this.newapellidos=response.data.consulta.apellidoPaterno+' '+response.data.consulta.apellidoMaterno;
 
             $("#txtdir").focus();
 
@@ -546,8 +596,19 @@ var onloadCallback = function() {
 
             alertify.error('DNI No válido, no correspodne a ninguna persona');
             $("#txtdni").focus();
-           }
+           } 
        }).catch(error=>{
+           console.log(error);
+
+           $("#btncrearE").removeAttr("disabled");
+           $("#btniniciarE").removeAttr("disabled");
+           $("#txtdni").removeAttr("disabled");
+           $("#btnValidar").removeAttr("disabled");
+
+           this.divloaderNuevo3=false;
+
+        alertify.error('DNI No válido, no correspodne a ninguna persona');
+            $("#txtdni").focus();
            //this.errors=error.response.data
        })
                 }
