@@ -83,7 +83,7 @@ data:{
    newfirma:'',
    newcargo:'',
 
-   newfecha:'',
+   newfecha:'{{$fec}}',
    newtipodoc:0,
    newNumero:'',
    newSiglas:'',
@@ -106,6 +106,8 @@ data:{
    newUsuario:'',
 
 
+   uploadReady2:true,
+   archivo2:null,
 
 },
 created:function () {
@@ -223,6 +225,19 @@ $(".clsunidadorges").each(function( index ) {
                 }
             },
 
+    
+    getArchivo2:function(event){
+        //Asignamos la imagen a  nuestra data
+
+        if (!event.target.files.length)
+        {
+            this.archivo2=null;
+        }
+        else{
+        this.archivo2 = event.target.files[0];
+        }
+    },
+
    getFormaRecepcion: function (page) {
        var busca=this.buscar;
        var url = 'principal?page='+page+'&busca='+busca;
@@ -281,11 +296,13 @@ this.newDetalleDestino='';
 this.newProveido='';
 this.newUsuario='';
 
-
+this.uploadReady2=false;
+this.archivo2=null;
 
 
 this.$nextTick(function () {
     this.uploadReady=true;
+    this.uploadReady2=true;
     $('#cbuentidad').val('0').trigger('change');
 $('#cbuTipoDoc').val('0').trigger('change');
 $('#cbuUnidadOrganica').val('0').trigger('change');
@@ -315,6 +332,8 @@ $('#cbuUnidadOrganica').val('0').trigger('change');
        data.append('formacopia', this.newForma);
        data.append('unidadorganica_id', this.newUnidadOrganica);
        data.append('detalledestino', this.newDetalleDestino);
+
+       data.append('archivo2', this.archivo2);
 
 
        const config = { headers: { 'Content-Type': 'multipart/form-data' } };

@@ -129,7 +129,7 @@ class TramiteController extends Controller
         ->join('personas', 'tramites.persona_id', '=', 'personas.id')
         ->join('users', 'users.persona_id', '=', 'personas.id')
 
-        ->where('tramites.activo','1')
+        ->where('tramites.activo','!=','2')
         ->where('tramites.persona_id',$idPersona)
 
             ->where(function($query) use ($buscar){
@@ -146,7 +146,7 @@ class TramiteController extends Controller
         $query->orWhere('prioridads.prioridad','like','%'.$buscar.'%');
     })
         ->orderBy('tramites.id')
-        ->select('tramites.id','tramites.expediente','tramites.fecha','tramites.prioridad_id','tramites.origen','tramites.entidad_id','tramites.fechadoc','tramites.tipodocumento_id','tramites.numero','tramites.siglas','tramites.formarecepcion_id','tramites.rutafile','tramites.folios','tramites.asunto','tramites.clasificacion_id','tramites.formacopia','tramites.unidadorganica_id','tramites.detalledestino','tramites.estado','tramites.activo','tramites.persona_id','tramites.user_id','tramites.entidad','tramites.detalle','tramites.firma','tramites.cargo','tramites.clasificacion','tramites.dias','tramites.unidadorganica','prioridads.prioridad','tipodocumentos.tipo as tipodocumento','formarecepcions.forma','unidadorganicas.siglas as siglasunidad','unidadorganicas.codigo as codunidad','unidadorganicas.abreviatura','entidads.codigo as codentidad','entidads.nombre as entidad','entidads.abrev as abreventidad','entidads.siglas as siglasentidad','users.name','personas.nombres','personas.apellidos','personas.dni')->paginate(20);
+        ->select('tramites.id','tramites.expediente','tramites.fecha','tramites.prioridad_id','tramites.origen','tramites.entidad_id','tramites.fechadoc','tramites.tipodocumento_id','tramites.numero','tramites.siglas','tramites.formarecepcion_id','tramites.rutafile','tramites.folios','tramites.asunto','tramites.clasificacion_id','tramites.formacopia','tramites.unidadorganica_id','tramites.detalledestino','tramites.estado','tramites.activo','tramites.persona_id','tramites.user_id','tramites.entidad','tramites.detalle','tramites.firma','tramites.cargo','tramites.clasificacion','tramites.dias','tramites.unidadorganica','prioridads.prioridad','tipodocumentos.tipo as tipodocumento','formarecepcions.forma','unidadorganicas.siglas as siglasunidad','unidadorganicas.codigo as codunidad','unidadorganicas.abreviatura','entidads.codigo as codentidad','entidads.nombre as entidad','entidads.abrev as abreventidad','entidads.siglas as siglasentidad','users.name','personas.nombres','personas.apellidos','personas.dni','tramites.rutafile2','tramites.motivoAnul')->paginate(20);
 
 
 
@@ -198,7 +198,7 @@ class TramiteController extends Controller
         ->join('personas', 'tramites.persona_id', '=', 'personas.id')
         ->join('users', 'tramites.user_id', '=', 'users.id')
 
-        ->where('tramites.activo','2')
+        ->where('tramites.activo','!=','1')
         ->where('tramites.persona_id',$idPersona)
 
             ->where(function($query) use ($buscar){
@@ -215,7 +215,7 @@ class TramiteController extends Controller
         $query->orWhere('prioridads.prioridad','like','%'.$buscar.'%');
     })
         ->orderBy('tramites.id')
-        ->select('tramites.id','tramites.expediente','tramites.fecha','tramites.prioridad_id','tramites.origen','tramites.entidad_id','tramites.fechadoc','tramites.tipodocumento_id','tramites.numero','tramites.siglas','tramites.formarecepcion_id','tramites.rutafile','tramites.folios','tramites.asunto','tramites.clasificacion_id','tramites.formacopia','tramites.unidadorganica_id','tramites.detalledestino','tramites.estado','tramites.activo','tramites.persona_id','tramites.user_id','tramites.entidad','tramites.detalle','tramites.firma','tramites.cargo','tramites.clasificacion','tramites.dias','tramites.unidadorganica','prioridads.prioridad','tipodocumentos.tipo as tipodocumento','formarecepcions.forma','unidadorganicas.siglas as siglasunidad','unidadorganicas.codigo as codunidad','unidadorganicas.abreviatura','entidads.codigo as codentidad','entidads.nombre as entidad','entidads.abrev as abreventidad','entidads.siglas as siglasentidad','users.name','personas.nombres','personas.apellidos','personas.dni')->paginate(20);
+        ->select('tramites.id','tramites.expediente','tramites.fecha','tramites.prioridad_id','tramites.origen','tramites.entidad_id','tramites.fechadoc','tramites.tipodocumento_id','tramites.numero','tramites.siglas','tramites.formarecepcion_id','tramites.rutafile','tramites.folios','tramites.asunto','tramites.clasificacion_id','tramites.formacopia','tramites.unidadorganica_id','tramites.detalledestino','tramites.estado','tramites.activo','tramites.persona_id','tramites.user_id','tramites.entidad','tramites.detalle','tramites.firma','tramites.cargo','tramites.clasificacion','tramites.dias','tramites.unidadorganica','prioridads.prioridad','tipodocumentos.tipo as tipodocumento','formarecepcions.forma','unidadorganicas.siglas as siglasunidad','unidadorganicas.codigo as codunidad','unidadorganicas.abreviatura','entidads.codigo as codentidad','entidads.nombre as entidad','entidads.abrev as abreventidad','entidads.siglas as siglasentidad','users.name','personas.nombres','personas.apellidos','personas.dni','tramites.rutafile2','tramites.motivoAnul')->paginate(20);
 
 
 
@@ -275,16 +275,19 @@ class TramiteController extends Controller
         $query->orWhere('prioridads.prioridad','like','%'.$buscar.'%');
     })
         ->orderBy('tramites.id')
-        ->select('tramites.id','tramites.expediente','tramites.fecha','tramites.prioridad_id','tramites.origen','tramites.entidad_id','tramites.fechadoc','tramites.tipodocumento_id','tramites.numero','tramites.siglas','tramites.formarecepcion_id','tramites.rutafile','tramites.folios','tramites.asunto','tramites.clasificacion_id','tramites.formacopia','tramites.unidadorganica_id','tramites.detalledestino','tramites.estado','tramites.activo','tramites.persona_id','tramites.user_id','tramites.entidad','tramites.detalle','tramites.firma','tramites.cargo','tramites.clasificacion','tramites.dias','tramites.unidadorganica','prioridads.prioridad','tipodocumentos.tipo as tipodocumento','formarecepcions.forma','unidadorganicas.siglas as siglasunidad','unidadorganicas.codigo as codunidad','unidadorganicas.abreviatura','entidads.codigo as codentidad','entidads.nombre as entidad','entidads.abrev as abreventidad','entidads.siglas as siglasentidad','users.name','personas.nombres','personas.apellidos','personas.dni');
+        ->select('tramites.id','tramites.expediente','tramites.fecha','tramites.prioridad_id','tramites.origen','tramites.entidad_id','tramites.fechadoc','tramites.tipodocumento_id','tramites.numero','tramites.siglas','tramites.formarecepcion_id','tramites.rutafile','tramites.folios','tramites.asunto','tramites.clasificacion_id','tramites.formacopia','tramites.unidadorganica_id','tramites.detalledestino','tramites.estado','tramites.activo','tramites.persona_id','tramites.user_id','tramites.entidad','tramites.detalle','tramites.firma','tramites.cargo','tramites.clasificacion','tramites.dias','tramites.unidadorganica','prioridads.prioridad','tipodocumentos.tipo as tipodocumento','formarecepcions.forma','unidadorganicas.siglas as siglasunidad','unidadorganicas.codigo as codunidad','unidadorganicas.abreviatura','entidads.codigo as codentidad','entidads.nombre as entidad','entidads.abrev as abreventidad','entidads.siglas as siglasentidad','users.name','personas.nombres','personas.apellidos','personas.dni','tramites.rutafile2','tramites.motivoAnul');
 
-
+        if(intval($estado)==0)
+        {
+            $query->where('tramites.activo','0');
+        }
         if(intval($estado)==1)
         {
-            $query->where('tramites.estado','<','3');
+            $query->where('tramites.estado','<','3')->where('tramites.activo','!=','0');
         }
         elseif(intval($estado)==3 || intval($estado)==4)
         {
-            $query->where('tramites.estado',$estado);
+            $query->where('tramites.estado',$estado)->where('tramites.activo','!=','0');
         }
 
         $tramites=$query->paginate(20);
@@ -362,6 +365,60 @@ class TramiteController extends Controller
 
         return response()->json(["result"=>$result,'msj'=>$msj,'selector'=>$selector]);
 
+    }
+
+
+    public function anular(Request $request)
+    {
+
+
+        $id=$request->id;
+        $motivoAnul=$request->motivoAnul;
+
+        $result='1';
+        $msj='';
+        $selector='';
+
+        $fecha=Date("Y-m-d");
+
+        $iduser=Auth::user()->id;
+
+        $Persona=DB::select("select p.id, p.nombres, p.apellidos, p.dni FROM personas p
+        inner join users u on p.id=u.persona_id
+        where u.id='".$iduser."';");
+
+        $apellidos="";
+        $nombres="";
+
+        foreach ($Persona as $key => $dato) {
+            $apellidos=$dato->apellidos;
+            $nombres=$dato->nombres;
+        }
+
+            $update = Tramite::findOrFail($id);
+            $update->activo='0';
+            $update->motivoAnul=$motivoAnul;
+            $update->save();
+
+            $msj='El Trámite fue Anulado exitosamente';
+
+
+            $newDetalle=new Detalletramite();
+
+            $newDetalle->estado="0";
+            $newDetalle->detalleestado="Trámite Anulado";
+            $newDetalle->observacion="Trámite Anulado por el Usuario ".$nombres." ".$apellidos;
+            $newDetalle->fechadetalle=$fecha;
+            $newDetalle->activo="1";
+            $newDetalle->borrado="0"; 
+            $newDetalle->tramite_id=$id; 
+            $newDetalle->user_id=$iduser; 
+
+            $newDetalle->save();
+
+
+            return response()->json(["result"=>$result,'msj'=>$msj,'selector'=>$selector]);
+    
     }
 
 

@@ -190,7 +190,8 @@ return response()->json(["datos"=>$datos,"res"=>$res]);
         $detalle=$request->detalle;
         $firma=$request->firma;
         $cargo=$request->cargo;
-        $fechadoc=$request->fechadoc;
+       // $fechadoc=$request->fechadoc;
+        $fechadoc=date("Y-m-d");
         $tipodocumento_id=$request->tipodocumento_id;
         $numero=$request->numero;
         $siglas=$request->siglas;
@@ -204,6 +205,11 @@ return response()->json(["datos"=>$datos,"res"=>$res]);
         $formacopia=$request->formacopia;
         $unidadorganica_id=$request->unidadorganica_id;
         $detalledestino=$request->detalledestino;
+
+
+
+        $file2 = $request->archivo2;
+        $segureFile2=0;
 
 
         if( $formacopia==true ||  strval($formacopia)=="true")
@@ -226,6 +232,7 @@ return response()->json(["datos"=>$datos,"res"=>$res]);
 
 
          $archivo="";
+         $archivo2="";
 
 
         if($request->hasFile('archivo')){
@@ -236,7 +243,7 @@ return response()->json(["datos"=>$datos,"res"=>$res]);
 
             $aux2=date('d-m-Y').'-'.date('H-i-s');
             $input2  = array('archivo' => $file) ;
-            $reglas2 = array('archivo' => 'required|file:1,20480');
+            $reglas2 = array('archivo' => 'required|file:1,102400');
             $validatorF = Validator::make($input2, $reglas2);
 
  
@@ -246,7 +253,7 @@ return response()->json(["datos"=>$datos,"res"=>$res]);
             {
 
             $segureFile=1;
-            $msj="El archivo adjunto ingresado tiene un tamaño de extensión no válida, ingrese otro archivo o limpie el formulario";
+            $msj="El primer archivo adjunto ingresado tiene un tamaño de extensión no válida, ingrese otro archivo o limpie el formulario";
             $result='0';
             $selector='archivo';
             }
@@ -265,7 +272,7 @@ return response()->json(["datos"=>$datos,"res"=>$res]);
                     $archivo=$nuevoNombre2;
                 }
                 else{
-                    $msj="Error al subir el archivo adjunto, intentelo nuevamente luego";
+                    $msj="Error al subir el primer archivo adjunto, intentelo nuevamente luego";
                     $segureFile=1;
                     $result='0';
                     $selector='archivo';
@@ -273,7 +280,7 @@ return response()->json(["datos"=>$datos,"res"=>$res]);
                 }
                 else {
                     $segureFile=1;
-                    $msj="El archivo adjunto ingresado tiene una extensión no válida, ingrese otro archivo o limpie el formulario";
+                    $msj="El primer archivo adjunto ingresado tiene una extensión no válida, ingrese otro archivo o limpie el formulario";
                     $result='0';
                     $selector='archivo';
                 }
@@ -281,8 +288,78 @@ return response()->json(["datos"=>$datos,"res"=>$res]);
 
         }
 
+
+
+
+
+
+
+
+        if($request->hasFile('archivo2')){
+
+
+
+            //$nombreArchivo=$request->nombreArchivo;
+
+            $aux2=date('d-m-Y').'-'.date('H-i-s');
+            $input2  = array('archivo' => $file2) ;
+            $reglas2 = array('archivo' => 'required|file:1,102400');
+            $validatorF = Validator::make($input2, $reglas2);
+
+ 
+          
+
+            if ($validatorF->fails())
+            {
+
+            $segureFile=1;
+            $msj="El segundo archivo adjunto ingresado tiene un tamaño de extensión no válida, ingrese otro archivo o limpie el formulario";
+            $result='0';
+            $selector='archivo';
+            }
+
+            else
+            {
+                $nombre2=$file2->getClientOriginalName();
+                $extension2=$file2->getClientOriginalExtension();
+                $nuevoNombre2=$aux2."-".$nombre2;
+                $subir3=Storage::disk('infoFile')->put($nuevoNombre2, \File::get($file2));
+
+                if($extension2=="pdf" || $extension2=="doc" || $extension2=="docx" || $extension2=="xls" || $extension2=="xlsx" || $extension2=="ppt" || $extension2=="pptx" || $extension2=="PDF" || $extension2=="DOC" || $extension2=="DOCX" || $extension2=="XLS" || $extension2=="XLSX" || $extension2=="PPT" || $extension2=="PTTX")
+                {
+
+                if($subir3){
+                    $archivo2=$nuevoNombre2;
+                }
+                else{
+                    $msj="Error al subir el segundo archivo adjunto, intentelo nuevamente luego";
+                    $segureFile2=1;
+                    $result='0';
+                    $selector='archivo2';
+                }
+                }
+                else {
+                    $segureFile2=1;
+                    $msj="El segundo archivo adjunto ingresado tiene una extensión no válida, ingrese otro archivo o limpie el formulario";
+                    $result='0';
+                    $selector='archivo2';
+                }
+            }
+
+        }
+
+
+
+
+
+
         if($segureFile==1){
             Storage::disk('infoFile')->delete($archivo);
+                if($segureFile2==1){
+                    Storage::disk('infoFile')->delete($archivo2);
+                }
+        }elseif($segureFile2==1){
+            Storage::disk('infoFile')->delete($archivo2);
         }
         else
         {
@@ -458,6 +535,9 @@ return response()->json(["datos"=>$datos,"res"=>$res]);
                 $newTramite->unidadorganica=$unidadorg->nombre;
 
 
+                $newTramite->rutafile2=$archivo2;
+
+
             $newTramite->save();
 
 
@@ -479,6 +559,7 @@ return response()->json(["datos"=>$datos,"res"=>$res]);
             $request->tipomail="3";
 
             $request->rutafile=$archivo;
+            $request->rutafile2=$archivo2;
 
 
             Mail::send(new SendMail());

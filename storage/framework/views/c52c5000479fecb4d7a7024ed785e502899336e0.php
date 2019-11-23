@@ -119,7 +119,20 @@ data:{
    tramipersona_id:'',
 
    divloaderEdit2:false,
+
+   nombresusu:'',
+   apellidosusu:'',
+   dniusu:'',
+   usernameusu:'',
  
+   archivoExsite2:false,
+   urlAdjunto2:'',
+
+   motivoAnul:'',
+   divloaderAnul:false,
+
+   activo:1,
+   motivoAnul:'',
 
 },
 created:function () {
@@ -298,6 +311,67 @@ methods: {
                }).catch(swal.noop);
    },
 
+
+   anular:function(tramite){
+
+    this.tramiteid=tramite.id;
+    this.motivoAnul='';
+    $("#boxTituloAnular").text(tramite.tipodocumento+': '+tramite.numero+' '+tramite.siglas);
+    this.divloaderAnul=false;
+
+$("#modalAnular").modal('show');
+
+this.$nextTick(function () {
+   $("#txtmotivoAnul").focus();
+ })
+
+},
+
+anularTramite:function(idTramite){
+
+    if(String(this.motivoAnul).length>0){
+
+swal({
+      title: '¿Estás seguro?',
+      text: "Desea Anular el Trámite Seleccionado",
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Aceptar'
+    }).then(function () {
+
+ $("#btnSaveAnul").attr('disabled', true);
+ $("#btnCancelAnul").attr('disabled', true);
+app.divloaderAnul=true;
+
+                var url = 'procetramites/anular';
+                axios.post(url,{id:idTramite, motivoAnul:app.motivoAnul}).then(response=>{//ingreso
+
+ 
+ $("#btnSaveAnul").removeAttr("disabled");
+ $("#btnCancelAnul").removeAttr("disabled");
+    app.divloaderAnul=false;
+
+                if(response.data.result=='1'){
+                    app.getTramites(app.thispage);//listamos
+                    toastr.success(response.data.msj);//mostramos mensaje
+                    $("#modalAnular").modal('hide');
+                }else{
+                   // $('#'+response.data.selector).focus();
+                    toastr.error(response.data.msj);
+                }
+                });
+            
+        }).catch(swal.noop);
+
+    }
+    else{
+        toastr.error("Ingrese el motivo de la anulación del trámite seleccionado");
+    }
+
+},
+
    verTramite:function(tramite){
 
 
@@ -308,6 +382,8 @@ methods: {
    this.numero=tramite.numero;
    this.siglas=tramite.siglas;
    this.estado=tramite.estado;
+   this.activo=tramite.activo;
+   this.motivoAnul=tramite.motivoAnul;
 
    this.expediente=tramite.expediente;
 
@@ -334,10 +410,21 @@ methods: {
    this.formarecep=tramite.forma;
   
    this.urlAdjunto=tramite.rutafile;
+   this.urlAdjunto2=tramite.rutafile2;
+
+   this.nombresusu=tramite.nombres;
+   this.apellidosusu=tramite.apellidos;
+   this.dniusu=tramite.dni;
+   this.usernameusu=tramite.name;
    
    if(String(this.urlAdjunto.length)>0)
    {
     this.archivoExsite=true;
+   }
+
+   if(String(this.urlAdjunto2.length)>0)
+   {
+    this.archivoExsite2=true;
    }
 
 
@@ -482,6 +569,34 @@ methods: {
 
 
 },
+
+notificar:function(){
+    swal({
+             title: '¿Estás seguro?',
+             text: "Desea Notificar el Estado del Trámite vía correo electrónico al Usuario Tramitador",
+             type: 'info',
+             showCancelButton: true,
+             confirmButtonColor: '#3085d6',
+             cancelButtonColor: '#d33',
+             confirmButtonText: 'Si, Enviar Notificación'
+           }).then(function () {
+
+            console.log("que chuchas");
+                       var url = 'procetramites/notificar';
+                       axios.post(url,{id:app.tramiteid, persona_id:app.tramipersona_id }).then(response=>{//ingreso
+
+                       if(response.data.result=='1'){
+                           
+                           toastr.success(response.data.msj);//mostramos mensaje
+  
+                       }else{
+                          // $('#'+response.data.selector).focus();
+                           toastr.error(response.data.msj);
+                       }
+                       });
+                   
+               }).catch(swal.noop);
+}
 
 }
 });

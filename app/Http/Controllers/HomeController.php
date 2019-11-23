@@ -63,13 +63,13 @@ class HomeController extends Controller
             if(accesoUser([1]) ){
 
                 $modulo="inicioAdmin";
-                return view('inicio.home',compact('tipouser','modulo','iduser'));
+                return view('inicio.home',compact('tipouser','modulo','iduser','fec'));
 
             }
             elseif (accesoUser([3])) {
                
                 $modulo="iniciousuario";
-                return view('iniciousuario.home',compact('tipouser','modulo','iduser'));
+                return view('iniciousuario.home',compact('tipouser','modulo','iduser','fec'));
             }
             
 

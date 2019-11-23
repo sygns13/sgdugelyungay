@@ -26,6 +26,7 @@
         <option value="1">SOLICITADO Y RECEPCIONADO</option>
         <option value="3">INGRESADO AL SISGEDO</option>
         <option value="4">ATENDIDO</option>
+        <option value="0">ANULADOS</option>
         <option value="5">TODOS</option>
       </select>
     </div>
@@ -113,10 +114,16 @@
         <td style="font-size: 11px; padding: 5px;">@{{ tramite.unidadorganica }}</td>
 
         <td style="font-size: 13    px; padding: 5px;">
+
+          <template v-if="tramite.activo=='0'">
+            <span class="label label-danger" v-if="tramite.activo=='0'">Anulado</span>
+          </template>
+          <template v-else>
             <span class="label label-info" v-if="tramite.estado=='1'">Solicitado</span>
             <span class="label label-warning" v-if="tramite.estado=='2'">Recepcionado</span>
             <span class="label label-primary" v-if="tramite.estado=='3'">Ingresado al SISGEDO</span>
             <span class="label label-success" v-if="tramite.estado=='4'">Atendido</span>
+          </template>
           </td>
 
         <td style="font-size: 11px; padding: 5px;">@{{ tramite.nombres }} @{{tramite.apellidos}}</td>
@@ -129,10 +136,11 @@
 
          <a href="http://181.65.149.146/sisgedonew/app/main.php" v-if="tramite.estado>2" class="btn btn-primary btn-sm" target="_blank" data-placement="top" data-toggle="tooltip" title="Realizar Seguimiento en el SISGEDO ingresando el N° de Expediente"><i class="fa fa-external-link"></i></a>
 
-
+         <template v-if="tramite.activo!='0'">
          <a href="#" v-if="tramite.estado=='3'" class="btn btn-success btn-sm" v-on:click.prevent="atender(tramite.id,tramite.persona_id)" data-placement="top" data-toggle="tooltip" title="Procesar Como Trámite Atendido" id="btnatent"><i class="fa fa-check-square-o"></i></a>
-
+        </template>
          
+         <a v-if="tramite.estado<3" href="#" class="btn btn-danger btn-sm" v-on:click.prevent="anular(tramite)" data-placement="top" data-toggle="tooltip" title="Anular Trámite"><i class="fa fa-times"></i></a>
 
 {{-- 
 
@@ -211,14 +219,18 @@
 
         <br><br>
           Estado:  
+
+          <template v-if="activo=='0'">
+              <span class="label label-danger" v-if="activo=='0'">Anulado</span>
+            </template>
+            <template v-else>
           <span style="font-size:100%;" class="label label-info" v-if="estado=='1'">Solicitado</span>
           <span style="font-size:100%;" class="label label-warning" v-if="estado=='2'">Recepcionado</span>
           <span style="font-size:100%;" class="label label-primary" v-if="estado=='3'">Ingresado al SISGEDO</span>
           <span style="font-size:100%;" class="label label-success" v-if="estado=='4'">Atendido</span>
-
-          <button class="btn btn-success" @click.prevent="imprimir"><i class="fa fa-print" aria-hidden="true" ></i> Imprimir</button>
-
           <button class="btn btn-primary" @click.prevent="notificar"><i class="fa fa-envelope-o" aria-hidden="true" ></i> Notificar Estado del trámite al Usuario vía Correo Electrónico</button>
+            </template>
+          <button class="btn btn-success" @click.prevent="imprimir"><i class="fa fa-print" aria-hidden="true" ></i> Imprimir</button>
      </h3>
 
 
@@ -237,6 +249,11 @@
 
     
      <div class="box-body">
+
+        <div class="col-md-12" v-if="activo=='0'">
+            <p style="text-align:justify;"><b>Motivo de la Anulación: </b> @{{motivoAnul}}
+            </p>
+            </div>
 
         <table width="100%" height="81%" border="0" cellpadding="0" cellspacing="10" class="backform">
             <tbody>
@@ -473,22 +490,26 @@
 
 
 
-                  <tr valign="middle" v-if="archivoExsite">
-                      <td width="1%" class="marco" >&nbsp;</td>	
-                        <td width="22%" class="etiqueta" align="right">Archivo&nbsp;&nbsp;</td>
-                        <td width="1%" class="objeto">&nbsp;</td>
-                        <td width="78%" class="objeto" >
-                              <label for="radioInterno" style="color: #006699!important;padding-right: 15px;">Descargar:</label>
-                              <a v-bind:href="urlAdjunto" download data-placement="top" data-toggle="tooltip" title="Descargar Archivo Adjunto">
-                                <img class="image image-responsive" style="width:40px;" id="divarchivo" src="{{ asset('/img/pdf.png') }}"/>
-                              
-                            </a>
-                        &nbsp;
+                  <tr valign="middle" v-if="archivoExsite || archivoExsite2">
+                    <td width="1%" class="marco" >&nbsp;</td>	
+                      <td width="22%" class="etiqueta" align="right">Archivo&nbsp;&nbsp;</td>
+                      <td width="1%" class="objeto">&nbsp;</td>
+                      <td width="78%" class="objeto" >
+                            <label for="radioInterno" style="color: #006699!important;padding-right: 15px;">Descargar:</label>
+                            <a  v-if="archivoExsite" v-bind:href="'archivosadjuntos/'+urlAdjunto" download data-placement="top" data-toggle="tooltip" title="Descargar Archivo Adjunto">
+                              <img class="image image-responsive" style="width:40px;" id="divarchivo" src="{{ asset('/img/pdf.png') }}"/>
+                            
+                          </a>
+                      &nbsp;
 
-                          </td>
-                        <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
-                  </tr>	
+                      <a  v-if="archivoExsite2" v-bind:href="'archivosadjuntos/'+urlAdjunto2" download data-placement="top" data-toggle="tooltip" title="Descargar Archivo Adjunto">
+                        <img class="image image-responsive" style="width:40px;" id="divarchivo" src="{{ asset('/img/pdf.png') }}"/>
+                      
+                    </a>
 
+                        </td>
+                      <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
+                </tr>	
 
 
                   <tr valign="middle" v-else>
@@ -808,6 +829,81 @@
 
 
 
+  <form method="post" v-on:submit.prevent="anularTramite(tramiteid)">
+    <div class="modal  bs-example-modal-lg" id="modalAnular" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+      <div class="modal-dialog modal-lg" role="document" id="modaltamanio">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="desAnularTitulo" style="font-weight: bold;text-decoration: underline;">CONFIRMAR ANULACIÓN DEL TRÁMITE</h4>
+  
+          </div> 
+          <div class="modal-body">
+            <input type="hidden" id="idServicio" value="0">
+  
+            <div class="row">
+  
+              <div class="box" id="o" style="border:0px; box-shadow:none;" >
+                <div class="box-header with-border">
+                  <h3 class="box-title" id="boxTituloAnular"></h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+  
+                <div class="box-body">
+
+
+                    <div class="col-md-12" >
+    
+                        <div class="form-group">
+                          <label for="txtexpediente" class="col-sm-12 control-label">Ingrese el Motivo de Anulación:</label>
+                
+                          <div class="col-sm-12">
+                            <textarea name="txtmotivoAnul" id="txtmotivoAnul" rows="6" autofocus v-model="motivoAnul" required style="width: 100%;"></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+  
+
+  
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" id="btnSaveAnul"><i class="fa fa-floppy-o" aria-hidden="true"></i> Confirmar Anulación</button>
+  
+              <button type="button" id="btnCancelAnul" class="btn btn-default" data-dismiss="modal"><i class="fa fa-sign-out" aria-hidden="true"></i> Cerrar</button>
+  
+              <div class="sk-circle" v-show="divloaderAnul">
+                <div class="sk-circle1 sk-child"></div>
+                <div class="sk-circle2 sk-child"></div>
+                <div class="sk-circle3 sk-child"></div>
+                <div class="sk-circle4 sk-child"></div>
+                <div class="sk-circle5 sk-child"></div>
+                <div class="sk-circle6 sk-child"></div>
+                <div class="sk-circle7 sk-child"></div>
+                <div class="sk-circle8 sk-child"></div>
+                <div class="sk-circle9 sk-child"></div>
+                <div class="sk-circle10 sk-child"></div>
+                <div class="sk-circle11 sk-child"></div>
+                <div class="sk-circle12 sk-child"></div>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+
+
+
+
+
+
+
+
 
 
 
@@ -852,6 +948,9 @@
 
     
       <div class="box-body" id="divparteImp">
+
+
+         
  
          <table width="100%">
              <tbody>
@@ -871,12 +970,17 @@
                                  </th>
                      <th width="70%" height="26">
                      DOCUMENTO EN PROCESO :: Estado	
-                   
+                      
+                     <template v-if="activo=='0'">
+                        <span style="font-size:100%;"v-if="activo=='0'">Anulado</span>
+                      </template>
+                      <template v-else>
                      <span style="font-size:100%;"  v-if="estado=='1'">Solicitado</span>
                      <span style="font-size:100%;"  v-if="estado=='2'">Recepcionado</span>
                      <span style="font-size:100%;"  v-if="estado=='3'">Ingresado al SISGEDO</span>
                      <span style="font-size:100%;"  v-if="estado=='4'">Atendido</span>
-                   
+                      </template>
+
                    </th>	
                          <th width="25%" align="right">
                                
@@ -1095,13 +1199,15 @@
  
  
  
-                   <tr valign="middle" v-if="archivoExsite">
+                   <tr valign="middle" v-if="archivoExsite || archivoExsite2">
                        <td width="1%" class="marco" >&nbsp;</td>	
                          <td width="22%" class="etiqueta" align="right">Archivo&nbsp;&nbsp;</td>
                          <td width="1%" class="objeto">&nbsp;</td>
                          <td width="78%" class="objeto" >
                              
-                               <a v-bind:href="urlAdjunto" download data-placement="top" data-toggle="tooltip" title="Descargar Archivo Adjunto">
+                               <a v-if="archivoExsite" v-bind:href="urlAdjunto" download data-placement="top" data-toggle="tooltip" title="Descargar Archivo Adjunto">
+
+                                <a v-if="archivoExsite2" v-bind:href="urlAdjunto2" download data-placement="top" data-toggle="tooltip" title="Descargar Archivo Adjunto">
                                 
                                
                              </a>
@@ -1110,7 +1216,9 @@
                            </td>
                          <td width="1%" class="objeto" style="    ">&nbsp;</td>
                    </tr>	
- 
+
+
+    
  
  
                    <tr valign="middle" v-else>

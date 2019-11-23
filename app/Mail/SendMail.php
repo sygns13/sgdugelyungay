@@ -254,6 +254,7 @@ class SendMail extends Mailable
             $unidadorganica_id=$tramite->unidadorganica_id;
             $detalledestino=$tramite->detalledestino;
             $rutafile=$tramite->rutafile;
+            $rutafile2=$tramite->rutafile2;
 
             
             $fecha=$tramite->fecha;
@@ -374,6 +375,7 @@ class SendMail extends Mailable
             $unidadorganica_id=$tramite->unidadorganica_id;
             $detalledestino=$tramite->detalledestino;
             $rutafile=$tramite->rutafile;
+            $rutafile2=$tramite->rutafile2;
 
             $fecha=$tramite->fecha;
 
@@ -493,6 +495,7 @@ class SendMail extends Mailable
             $unidadorganica_id=$tramite->unidadorganica_id;
             $detalledestino=$tramite->detalledestino;
             $rutafile=$tramite->rutafile;
+            $rutafile2=$tramite->rutafile2;
 
             $fecha=$tramite->fecha;
 

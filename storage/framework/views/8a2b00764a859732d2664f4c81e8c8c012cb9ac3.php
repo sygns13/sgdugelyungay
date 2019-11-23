@@ -85,12 +85,13 @@
                            <img src="<?php echo e(asset('/img/sisgedo/search.gif')); ?>" alt="Buscar" height="14" width="16" border="0" style="cursor:pointer" @click.prevent="buscarEntidad()"> 
                           &nbsp; <br>
   
-                              <select class="cajatexto" id="cbuentidad" name="cbuentidad" v-model="newentidad" style="width: 470px;">
+                              <select class="cajatexto" id="cbuentidad" name="cbuentidad" v-model="newentidad" style="width: 470px;" @change="cambiocbu">
                                   <option value="0" disabled>------ Seleccione Opción ------</option>
                                   <template v-for="entidad, key in entidads">
                                     <option   v-bind:value="entidad.id">{{entidad.nombre}} - ({{entidad.codigo}})</option>
             
                                     <input type="hidden" class="clsentidades" v-bind:id="'ident'+entidad.id" v-bind:value="entidad.codigo">
+                                    <input type="hidden" class="clssiglasentidades" v-bind:id="'idsigent'+entidad.id" v-bind:value="entidad.siglas">
             
                                   </template>
                                 </select>
@@ -150,7 +151,7 @@
                           <td width="1%" class="objeto">&nbsp;</td>
                           <td width="78%" class="objeto" >	    									
   
-                           <input type="date"  id="txtfecha" name="txtfecha" placeholder="dd/mm/aaaa" maxlength="10" v-model="newfecha" required size="10" style="line-height: 1;">
+                           <input type="date"  id="txtfecha" name="txtfecha" placeholder="dd/mm/aaaa" maxlength="10" v-model="newfecha" required size="10" style="line-height: 1;" readonly>
                             </td>
                           <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
                     </tr>	
@@ -202,6 +203,20 @@
                           <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
                     </tr>	
 
+
+
+                    <tr valign="middle">
+                      <td width="1%" class="marco" >&nbsp;</td>	
+                        <td width="22%" class="etiqueta" align="right">Segundo Archivo&nbsp;&nbsp;</td>
+                        <td width="1%" class="objeto">&nbsp;</td>
+                        <td width="78%" class="objeto" >
+                            <input v-if="uploadReady2" name="archivo3" type="file" id="archivo2" class="archivo" @change="getArchivo2" 
+                            accept=".pdf, .doc, .docx, .xls, .xlsx, ppt, .pptx, .PDF, .DOC, .DOCX, .XLS, .XLSX, .PPT, .PTTX"/>
+
+
+                          </td>
+                        <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
+                  </tr>	
   
   
   

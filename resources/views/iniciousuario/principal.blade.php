@@ -174,7 +174,7 @@
                           <td width="1%" class="objeto">&nbsp;</td>
                           <td width="78%" class="objeto" >	    									
   
-                           <input type="date"  id="txtfecha" name="txtfecha" placeholder="dd/mm/aaaa" maxlength="10" v-model="newfecha" required size="10" style="line-height: 1;">
+                           <input type="date"  id="txtfecha" name="txtfecha" placeholder="dd/mm/aaaa" maxlength="10" v-model="newfecha" required size="10" style="line-height: 1;" readonly>
                             </td>
                           <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
                     </tr>	
@@ -226,6 +226,20 @@
                           <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
                     </tr>	
 
+
+
+                    <tr valign="middle">
+                      <td width="1%" class="marco" >&nbsp;</td>	
+                        <td width="22%" class="etiqueta" align="right">Segundo Archivo&nbsp;&nbsp;</td>
+                        <td width="1%" class="objeto">&nbsp;</td>
+                        <td width="78%" class="objeto" >
+                            <input v-if="uploadReady2" name="archivo3" type="file" id="archivo2" class="archivo" @change="getArchivo2" 
+                            accept=".pdf, .doc, .docx, .xls, .xlsx, ppt, .pptx, .PDF, .DOC, .DOCX, .XLS, .XLSX, .PPT, .PTTX"/>
+
+
+                          </td>
+                        <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
+                  </tr>	
   
   
   

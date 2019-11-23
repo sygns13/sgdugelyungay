@@ -107,8 +107,13 @@ data:{
    modelUnidadOrg:1,
    unidadOrganica:'',
    detalleUnidadOrg:'',
- 
 
+   urlAdjunto2:'',
+   archivoExsite2:false,
+ 
+    activo:1,
+
+    motivoAnul:'',
 },
 created:function () {
    this.getTramites(this.thispage);
@@ -278,6 +283,8 @@ methods: {
    this.numero=tramite.numero;
    this.siglas=tramite.siglas;
    this.estado=tramite.estado;
+   this.activo=tramite.activo;
+   this.motivoAnul=tramite.motivoAnul;
 
    this.expediente=tramite.expediente;
 
@@ -304,10 +311,17 @@ methods: {
    this.formarecep=tramite.forma;
   
    this.urlAdjunto=tramite.rutafile;
+   this.urlAdjunto2=tramite.rutafile2;
    
    if(String(this.urlAdjunto.length)>0)
    {
     this.archivoExsite=true;
+
+   }
+
+   if(String(this.urlAdjunto2.length)>0)
+   {
+    this.archivoExsite2=true;
    }
 
 

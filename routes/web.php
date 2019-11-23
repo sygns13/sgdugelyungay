@@ -85,12 +85,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('procetramites/notificar','TramiteController@notificar');
         Route::post('usuario/miperfil','UserController@miperfil');
         Route::post('usuario/modificarclave','UserController@modificarclave');
-
-
-
-                //Rutas Usuarios
-                Route::get('mistramites','TramiteController@index1');
-                Route::resource('mitramite','TramiteController');
+        
+        Route::post('procetramites/anular','TramiteController@anular');
+        
+        
+        //Rutas Usuarios
+        Route::get('mistramites','TramiteController@index1');
+        Route::resource('mitramite','TramiteController');
                 Route::get('mitramite/altabaja/{id}/{var}','TramiteController@altabaja');
                 
                 Route::get('reghistoricos','TramiteController@index2');
