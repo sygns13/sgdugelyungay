@@ -279,11 +279,15 @@ class TramiteController extends Controller
 
         if(intval($estado)==0)
         {
-            $query->where('tramites.activo','0');
+            $query->where('tramites.activo','0')
+            ->orWhere(function($query) use ($buscar){
+                $query->where('tramites.activo','2');
+                $query->where('tramites.estado','<>','4');
+            });
         }
         if(intval($estado)==1)
         {
-            $query->where('tramites.estado','<','3')->where('tramites.activo','!=','0');
+            $query->where('tramites.estado','<','3')->where('tramites.activo','!=','0')->where('tramites.activo','!=','2');
         }
         elseif(intval($estado)==3 || intval($estado)==4)
         {

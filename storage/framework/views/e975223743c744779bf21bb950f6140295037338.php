@@ -108,8 +108,8 @@
 
         <td style="font-size: 13    px; padding: 5px;">
 
-          <template v-if="tramite.activo=='0'">
-            <span class="label label-danger" v-if="tramite.activo=='0'">Anulado</span>
+          <template v-if="tramite.activo=='0' || (tramite.activo=='2' && parseInt(tramite.estado)<4)">
+            <span class="label label-danger" v-if="tramite.activo=='0' || (tramite.activo=='2' && parseInt(tramite.estado)<4)">Anulado</span>
           </template>
           <template v-else>
             <span class="label label-info" v-if="tramite.estado=='1'">Solicitado</span>
@@ -133,7 +133,7 @@
          <a href="#" v-if="tramite.estado=='3'" class="btn btn-success btn-sm" v-on:click.prevent="atender(tramite.id,tramite.persona_id)" data-placement="top" data-toggle="tooltip" title="Procesar Como Trámite Atendido" id="btnatent"><i class="fa fa-check-square-o"></i></a>
         </template>
          
-         <a v-if="tramite.estado<3" href="#" class="btn btn-danger btn-sm" v-on:click.prevent="anular(tramite)" data-placement="top" data-toggle="tooltip" title="Anular Trámite"><i class="fa fa-times"></i></a>
+         <a v-if="tramite.estado<3 && tramite.activo!='0' && tramite.activo!='2'" href="#" class="btn btn-danger btn-sm" v-on:click.prevent="anular(tramite)" data-placement="top" data-toggle="tooltip" title="Anular Trámite"><i class="fa fa-times"></i></a>
 
 
         </td>
@@ -209,8 +209,8 @@
         <br><br>
           Estado:  
 
-          <template v-if="activo=='0'">
-              <span class="label label-danger" v-if="activo=='0'">Anulado</span>
+          <template v-if="activo=='0' || (activo=='2' && parseInt(estado)<4)">
+              <span class="label label-danger" v-if="activo=='0' || (activo=='2' && parseInt(estado)<4)">Anulado</span>
             </template>
             <template v-else>
           <span style="font-size:100%;" class="label label-info" v-if="estado=='1'">Solicitado</span>
@@ -239,7 +239,7 @@
     
      <div class="box-body">
 
-        <div class="col-md-12" v-if="activo=='0'">
+        <div class="col-md-12" v-if="activo=='0' || (activo=='2' && parseInt(estado)<4)">
             <p style="text-align:justify;"><b>Motivo de la Anulación: </b> {{motivoAnul}}
             </p>
             </div>
@@ -684,10 +684,10 @@
     <div class="box-footer">
 
 <center>
-        <button type="button" class="btn btn-primary" id="btnSave" @click="registrarSISGEDO()" v-if="parseInt(estado)<3"><i class="fa fa-save" aria-hidden="true"></i>  Confirmar Ingreso al SISGEDO</button>
+        <button type="button" class="btn btn-primary" id="btnSave" @click="registrarSISGEDO()" v-if="parseInt(estado)<3 && activo!='0' && activo!='2'"><i class="fa fa-save" aria-hidden="true"></i>  Confirmar Ingreso al SISGEDO</button>
 
 
-        <button type="button" class="btn btn-success" id="btnSaveA" @click="atender(tramiteid,tramipersona_id)" v-if="parseInt(estado)==3"><i class="fa fa-check-square-o" aria-hidden="true"></i>  Confirmar Trámite Atendido</button>
+        <button type="button" class="btn btn-success" id="btnSaveA" @click="atender(tramiteid,tramipersona_id)" v-if="parseInt(estado)==3 && activo!='0' && activo!='2'"><i class="fa fa-check-square-o" aria-hidden="true"></i>  Confirmar Trámite Atendido</button>
 
         <a href="http://181.65.149.146/sisgedonew/app/main.php" target="_blank" v-if="parseInt(estado)>=3"><h4 style="color: blue;">Click Aquí para Realizar el Seguimiento de este Trámite en el SISGEDO: Debe de Ingresar el N° de Expediente</h4></a>
 </center>
@@ -957,7 +957,7 @@
                      DOCUMENTO EN PROCESO :: Estado	
                       
                      <template v-if="activo=='0'">
-                        <span style="font-size:100%;"v-if="activo=='0'">Anulado</span>
+                        <span style="font-size:100%;"v-if="activo=='0' || (activo=='2' && parseInt(estado)<4)">Anulado</span>
                       </template>
                       <template v-else>
                      <span style="font-size:100%;"  v-if="estado=='1'">Solicitado</span>
