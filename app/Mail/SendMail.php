@@ -81,7 +81,7 @@ class SendMail extends Mailable
             $mensaje.="Este es un mensaje automático del sistema, por favor no responda este mensaje, si tuviera alguna dificultad para ingresar a la plataforma de Registro de Nuevo Trámite, acérquese a la UGEL Yungay y reporte su problema.";
 
 
-            return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunto)->from("sgdugelyungay@gmail.com");
+            return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunto)->from("sgd@tramite.ugelyungay.gob.pe");
 
         }
 
@@ -112,7 +112,7 @@ class SendMail extends Mailable
             $mensaje.="Este es un mensaje automático del sistema, por favor no responda este mensaje, si tuviera alguna dificultad para ingresar a la plataforma de Registro de Nuevo Trámite, acérquese a la UGEL Yungay y reporte su problema.";
 
 
-            return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunto)->from("sgdugelyungay@gmail.com");
+            return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunto)->from("sgd@tramite.ugelyungay.gob.pe");
 
         }
 
@@ -213,13 +213,13 @@ class SendMail extends Mailable
             if(strlen($data->rutafile)>0)
                 {
                    // $adjunto=public_path('archivosadjuntos')."/".$data->rutafile;
-                   // return $this->view('mail1',['msg'=>$mensaje])->attach($adjunto)->to($user->email)->subject($asunt)->from("sgdugelyungay@gmail.com");
-                   return $this->view('mail1',['msg'=>$mensaje])->to($user->email)->subject($asunt)->from("sgdugelyungay@gmail.com");
+                   // return $this->view('mail1',['msg'=>$mensaje])->attach($adjunto)->to($user->email)->subject($asunt)->from("sgd@tramite.ugelyungay.gob.pe");
+                   return $this->view('mail1',['msg'=>$mensaje])->to($user->email)->subject($asunt)->from("sgd@tramite.ugelyungay.gob.pe");
                 }
 
                 else{
 
-                    return $this->view('mail1',['msg'=>$mensaje])->to($user->email)->subject($asunt)->from("sgdugelyungay@gmail.com");
+                    return $this->view('mail1',['msg'=>$mensaje])->to($user->email)->subject($asunt)->from("sgd@tramite.ugelyungay.gob.pe");
                 }
 
 
@@ -338,13 +338,13 @@ class SendMail extends Mailable
             if(strlen($rutafile)>0)
                 {
                    // $adjunto=public_path('archivosadjuntos')."/".$rutafile;
-                   // return $this->view('mail1',['msg'=>$mensaje])->attach($adjunto)->to($user->email)->subject($asunt)->from("sgdugelyungay@gmail.com");
-                   return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunt)->from("sgdugelyungay@gmail.com");
+                   // return $this->view('mail1',['msg'=>$mensaje])->attach($adjunto)->to($user->email)->subject($asunt)->from("sgd@tramite.ugelyungay.gob.pe");
+                   return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunt)->from("sgd@tramite.ugelyungay.gob.pe");
                 }
 
                 else{
 
-                    return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunt)->from("sgdugelyungay@gmail.com");
+                    return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunt)->from("sgd@tramite.ugelyungay.gob.pe");
                 }
 
 
@@ -458,13 +458,13 @@ class SendMail extends Mailable
             if(strlen($rutafile)>0)
                 {
                    // $adjunto=public_path('archivosadjuntos')."/".$rutafile;
-                   // return $this->view('mail1',['msg'=>$mensaje])->attach($adjunto)->to($user->email)->subject($asunt)->from("sgdugelyungay@gmail.com");
-                   return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunt)->from("sgdugelyungay@gmail.com");
+                   // return $this->view('mail1',['msg'=>$mensaje])->attach($adjunto)->to($user->email)->subject($asunt)->from("sgd@tramite.ugelyungay.gob.pe");
+                   return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunt)->from("sgd@tramite.ugelyungay.gob.pe");
                 }
 
                 else{
 
-                    return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunt)->from("sgdugelyungay@gmail.com");
+                    return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunt)->from("sgd@tramite.ugelyungay.gob.pe");
                 }
 
 
@@ -578,13 +578,13 @@ class SendMail extends Mailable
             if(strlen($rutafile)>0)
                 {
                    // $adjunto=public_path('archivosadjuntos')."/".$rutafile;
-                   // return $this->view('mail1',['msg'=>$mensaje])->attach($adjunto)->to($user->email)->subject($asunt)->from("sgdugelyungay@gmail.com");
-                   return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunt)->from("sgdugelyungay@gmail.com");
+                   // return $this->view('mail1',['msg'=>$mensaje])->attach($adjunto)->to($user->email)->subject($asunt)->from("sgd@tramite.ugelyungay.gob.pe");
+                   return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunt)->from("sgd@tramite.ugelyungay.gob.pe");
                 }
 
                 else{
 
-                    return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunt)->from("sgdugelyungay@gmail.com");
+                    return $this->view('mail1',['msg'=>$mensaje])->to($email)->subject($asunt)->from("sgd@tramite.ugelyungay.gob.pe");
                 }
 
 
@@ -617,7 +617,7 @@ class SendMail extends Mailable
     
                $adjunto=public_path('emails')."/".$nombre2;
     
-            return $this->view('mail',['name'=>$user->name,'msg'=>$data->mensaje,'admin'=>$adminName])->attach($adjunto)->to(json_decode(stripslashes($data->mails)))->subject($data->asunto)->from("sgdugelyungay@gmail.com");
+            return $this->view('mail',['name'=>$user->name,'msg'=>$data->mensaje,'admin'=>$adminName])->attach($adjunto)->to(json_decode(stripslashes($data->mails)))->subject($data->asunto)->from("sgd@tramite.ugelyungay.gob.pe");
             
     
             }else{
@@ -635,7 +635,7 @@ class SendMail extends Mailable
                     $adminName=$dato->apellidos.', '.$dato->nombres;
                 }
     
-            return $this->view('mail',['name'=>$user->name,'msg'=>$data->mensaje,'admin'=>$adminName])->to(json_decode(stripslashes($data->mails)))->subject($data->asunto)->from("sgdugelyungay@gmail.com");
+            return $this->view('mail',['name'=>$user->name,'msg'=>$data->mensaje,'admin'=>$adminName])->to(json_decode(stripslashes($data->mails)))->subject($data->asunto)->from("sgd@tramite.ugelyungay.gob.pe");
             }
 
 

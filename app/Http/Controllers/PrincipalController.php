@@ -265,9 +265,9 @@ return response()->json(["datos"=>$datos,"res"=>$res]);
                 $nuevoNombre2=$aux2."-".$nombre2;
                 $subir2=Storage::disk('infoFile')->put($nuevoNombre2, \File::get($file));
 
-                if($extension2=="pdf" || $extension2=="doc" || $extension2=="docx" || $extension2=="xls" || $extension2=="xlsx" || $extension2=="ppt" || $extension2=="pptx" || $extension2=="PDF" || $extension2=="DOC" || $extension2=="DOCX" || $extension2=="XLS" || $extension2=="XLSX" || $extension2=="PPT" || $extension2=="PTTX")
-                {
-
+             /*   if($extension2=="pdf" || $extension2=="doc" || $extension2=="docx" || $extension2=="xls" || $extension2=="xlsx" || $extension2=="ppt" || $extension2=="pptx" || $extension2=="PDF" || $extension2=="DOC" || $extension2=="DOCX" || $extension2=="XLS" || $extension2=="XLSX" || $extension2=="PPT" || $extension2=="PTTX")
+                {*/
+            if($extension2=="pdf" ||$extension2=="PDF" ){
                 if($subir2){
                     $archivo=$nuevoNombre2;
                 }
@@ -325,8 +325,9 @@ return response()->json(["datos"=>$datos,"res"=>$res]);
                 $nuevoNombre2=$aux2."-".$nombre2;
                 $subir3=Storage::disk('infoFile')->put($nuevoNombre2, \File::get($file2));
 
-                if($extension2=="pdf" || $extension2=="doc" || $extension2=="docx" || $extension2=="xls" || $extension2=="xlsx" || $extension2=="ppt" || $extension2=="pptx" || $extension2=="PDF" || $extension2=="DOC" || $extension2=="DOCX" || $extension2=="XLS" || $extension2=="XLSX" || $extension2=="PPT" || $extension2=="PTTX")
-                {
+               /* if($extension2=="pdf" || $extension2=="doc" || $extension2=="docx" || $extension2=="xls" || $extension2=="xlsx" || $extension2=="ppt" || $extension2=="pptx" || $extension2=="PDF" || $extension2=="DOC" || $extension2=="DOCX" || $extension2=="XLS" || $extension2=="XLSX" || $extension2=="PPT" || $extension2=="PTTX")
+                {*/
+            if($extension2=="pdf" ||$extension2=="PDF" ){
 
                 if($subir3){
                     $archivo2=$nuevoNombre2;

@@ -81,7 +81,7 @@
                           <td width="1%" class="objeto">&nbsp;</td>
                           <td width="78%" class="objeto">	
 
-                          <select class="cajatexto" id="cbuprioridad" name="cbuprioridad" v-model="newPrioridad" style="width: 160px;">
+                          <select class="cajatexto" id="cbuprioridad" name="cbuprioridad" v-model="newPrioridad" style="width: 160px;" data-toggle="tooltip" data-placement="top" title="Seleccione la Prioridad del Documento">
                                   <option v-for="prioridad, key in prioridads"  v-bind:value="prioridad.id">@{{prioridad.prioridad}}</option>
                   
                           </select>
@@ -103,7 +103,7 @@
                           <td width="78%" class="objeto" valign="top">	
                                                      
               
-                             <input type="text" class="cajatexto" id="txtcodEntidad" name="txtcodEntidad" placeholder="" maxlength="20" v-model="codEntidad" style="width: 100px; display:inline-block;" onkeypress="return soloNumeros(event);" @keyup="$event.keyCode === 13 ? buscarEntidad() : false" size="6">
+                             <input type="text" class="cajatexto" id="txtcodEntidad" name="txtcodEntidad" placeholder="" maxlength="20" v-model="codEntidad" style="width: 100px; display:inline-block;" onkeypress="return soloNumeros(event);" @keyup="$event.keyCode === 13 ? buscarEntidad() : false" size="6" data-toggle="tooltip" data-placement="top" title="Ingrese el código de la entidad que envía el documento, o seleccione">
   
                            <img src="{{ asset('/img/sisgedo/search.gif') }}" alt="Buscar" height="14" width="16" border="0" style="cursor:pointer" @click.prevent="buscarEntidad()"> 
                           &nbsp; <br>
@@ -129,7 +129,7 @@
                           <td width="1%" class="objeto">&nbsp;</td>
                           <td width="78%" class="objeto" >	
                                                     
-                          <input type="text" class="cajatexto" id="txtdetalle" name="txtdetalle" placeholder="" maxlength="500" v-model="newDetalle" size="53">
+                          <input type="text" class="cajatexto" id="txtdetalle" name="txtdetalle" placeholder="" maxlength="500" v-model="newDetalle" size="53" data-toggle="tooltip" data-placement="top" title="Ingrese el detalle de su trámite (Puede escribir el nombre de su IE)">
                           &nbsp;
   
                             </td>
@@ -142,7 +142,7 @@
                           <td width="1%" class="objeto">&nbsp;</td>
                           <td width="78%" class="objeto" >	
   
-                           <input type="text" class="cajatexto" id="txtfirma" name="txtfirma" placeholder="" maxlength="500" v-model="newfirma" size="53">
+                           <input type="text" class="cajatexto" id="txtfirma" name="txtfirma" placeholder="" maxlength="500" v-model="newfirma" size="53" data-toggle="tooltip" data-placement="top" title="Ingrese el nombre completo de la persona que envía el documento">
                           &nbsp;
   
                             </td>
@@ -155,7 +155,7 @@
                           <td width="1%" class="objeto">&nbsp;</td>
                           <td width="78%" class="objeto" >	
                                                      
-                           <input type="text" class="cajatexto" id="txtcargo" name="txtcargo" placeholder="" maxlength="500" v-model="newcargo" size="53">
+                           <input type="text" class="cajatexto" id="txtcargo" name="txtcargo" placeholder="" maxlength="500" v-model="newcargo" size="53" data-toggle="tooltip" data-placement="top" title="Ingrese el cargo de la persona que envía el documento">
                            &nbsp;
   
                             </td>
@@ -203,9 +203,9 @@
                           <td width="1%" class="objeto">&nbsp;</td>
                           <td width="78%" class="objeto" valign="top">	
                                                      
-                        <input type="text" class="cajatexto" id="txtnumero" name="txtnumero" placeholder="" maxlength="20" v-model="newNumero" required size="10">
+                        <input type="text" class="cajatexto" id="txtnumero" name="txtnumero" placeholder="" maxlength="20" v-model="newNumero" required size="10" data-toggle="tooltip" data-placement="top" title="Ingrese el número del documento">
 
-                        <input type="text" class="cajatexto" id="txtsiglas" name="txtsiglas" placeholder="" maxlength="500" v-model="newSiglas" required size="53">
+                        <input type="text" class="cajatexto" id="txtsiglas" name="txtsiglas" placeholder="" maxlength="500" v-model="newSiglas" required size="53" data-toggle="tooltip" data-placement="top" title="Ingrese las SIGLAS del documento ejemplo: Of-001-IE-STE-YUNGAY-2010">
 
 
   
@@ -215,11 +215,13 @@
    
                     <tr valign="middle">
                         <td width="1%" class="marco" >&nbsp;</td>	
-                          <td width="22%" class="etiqueta" align="right">Archivo&nbsp;&nbsp;</td>
+                          <td width="22%" class="etiqueta" align="right">Archivo (solo PDF)&nbsp;&nbsp;</td>
                           <td width="1%" class="objeto">&nbsp;</td>
                           <td width="78%" class="objeto" >
+                              {{-- <input v-if="uploadReady" name="archivo2" type="file" id="archivo" class="archivo" @change="getArchivo" 
+                              accept=".pdf, .doc, .docx, .xls, .xlsx, ppt, .pptx, .PDF, .DOC, .DOCX, .XLS, .XLSX, .PPT, .PTTX"/>--}}
                               <input v-if="uploadReady" name="archivo2" type="file" id="archivo" class="archivo" @change="getArchivo" 
-                              accept=".pdf, .doc, .docx, .xls, .xlsx, ppt, .pptx, .PDF, .DOC, .DOCX, .XLS, .XLSX, .PPT, .PTTX"/>
+                              accept=".pdf, .PDF" data-toggle="tooltip" data-placement="top" title="Suba su documento (ANEXO 01)"/>
 
   
                             </td>
@@ -230,12 +232,13 @@
 
                     <tr valign="middle">
                       <td width="1%" class="marco" >&nbsp;</td>	
-                        <td width="22%" class="etiqueta" align="right">Segundo Archivo&nbsp;&nbsp;</td>
+                        <td width="22%" class="etiqueta" align="right">2° Archivo (solo PDF)&nbsp;&nbsp;</td>
                         <td width="1%" class="objeto">&nbsp;</td>
                         <td width="78%" class="objeto" >
+                            {{-- <input v-if="uploadReady2" name="archivo3" type="file" id="archivo2" class="archivo" @change="getArchivo2" 
+                            accept=".pdf, .doc, .docx, .xls, .xlsx, ppt, .pptx, .PDF, .DOC, .DOCX, .XLS, .XLSX, .PPT, .PTTX"/>--}}
                             <input v-if="uploadReady2" name="archivo3" type="file" id="archivo2" class="archivo" @change="getArchivo2" 
-                            accept=".pdf, .doc, .docx, .xls, .xlsx, ppt, .pptx, .PDF, .DOC, .DOCX, .XLS, .XLSX, .PPT, .PTTX"/>
-
+                            accept=".pdf, .PDF," data-toggle="tooltip" data-placement="top" title="Suba su documento (ANEXO 02)"/>
 
                           </td>
                         <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
@@ -249,7 +252,7 @@
                           <td width="1%" class="objeto">&nbsp;</td>
                           <td width="78%" class="objeto" valign="top">	
   
-                        <input type="text" class="cajatexto" id="txtfolios" name="txtfolios" placeholder="" maxlength="20" v-model="newFolios" required size="10">
+                        <input type="text" class="cajatexto" id="txtfolios" name="txtfolios" placeholder="" maxlength="20" v-model="newFolios" required size="10" data-toggle="tooltip" data-placement="top" title="Ingrese la cantidad de folios del documento">
 
                         </td>
                           <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
@@ -262,7 +265,7 @@
                           <td width="22%" class="etiqueta" align="right">Asunto&nbsp;&nbsp;</td>
                           <td width="1%" class="objeto">&nbsp;</td>
                           <td width="78%" class="objeto">	
-                            <textarea name="txtasunto" id="txtasunto" cols="60" rows="4" class="cajatexto" v-model="newAsunto"></textarea>
+                            <textarea name="txtasunto" id="txtasunto" cols="60" rows="4" class="cajatexto" v-model="newAsunto" placeholder="Ingrese el Asunto del documento"></textarea>
                           </td>
                           <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
                     </tr>
@@ -303,7 +306,7 @@
                           <td width="1%" class="objeto">&nbsp;</td>
                           <td width="78%" class="objeto" valign="top">	
                                                                          
-                             <input type="text" class="cajatexto" id="txtUnidadOrganica" name="txtUnidadOrganica" placeholder="" maxlength="20" v-model="codUndOrg"  style="width: 100px; display:inline-block;" onkeypress="return soloNumeros(event);" @keyup="$event.keyCode === 13 ? buscarUnidadOrganica() : false" size="6">
+                             <input type="text" class="cajatexto" id="txtUnidadOrganica" name="txtUnidadOrganica" placeholder="" maxlength="20" v-model="codUndOrg"  style="width: 100px; display:inline-block;" onkeypress="return soloNumeros(event);" @keyup="$event.keyCode === 13 ? buscarUnidadOrganica() : false" size="6" data-toggle="tooltip" data-placement="top" title="Ingrese el código de la unidad de destino del documento, o seleccione">
 
 
   
@@ -331,7 +334,7 @@
                           <td width="22%" class="etiqueta" align="right">Detalle&nbsp;&nbsp;</td>
                           <td width="1%" class="objeto">&nbsp;</td>
                           <td width="78%" class="objeto" valign="top">	
-                             <input type="text" class="cajatexto" id="txtDetalleUO" name="txtDetalleUO" placeholder="" maxlength="500" v-model="newDetalleDestino" size="60"> 
+                             <input type="text" class="cajatexto" id="txtDetalleUO" name="txtDetalleUO" placeholder="" maxlength="500" v-model="newDetalleDestino" size="60" data-toggle="tooltip" data-placement="top" title="Ingrese algún detalle adicional del documento (Puede ingresar alguna observación)"> 
                         </td>
                           <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
                     </tr>	
