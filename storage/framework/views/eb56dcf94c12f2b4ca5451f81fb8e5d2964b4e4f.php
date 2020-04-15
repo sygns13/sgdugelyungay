@@ -250,8 +250,8 @@
 
                         alertify.success('DNI Válido, continúe ingresando los datos');
 
-                        this.newNombres=response.data.datos[3];
-                        this.newApellidos=response.data.datos[1]+' '+response.data.datos[2];
+                        this.newNombres=response.data.datos[1];
+                        this.newApellidos=response.data.datos[2]+' '+response.data.datos[3];
 
                         this.formularioCrear=true;
                         this.$nextTick(function () {

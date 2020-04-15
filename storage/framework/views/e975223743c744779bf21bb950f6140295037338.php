@@ -127,7 +127,7 @@
 
           <a href="#" class="btn btn-info btn-sm" v-on:click.prevent="verTramite(tramite)" data-placement="top" data-toggle="tooltip" title="Ver Detalles del Trámite"><i class="fa fa-search"></i></a>
 
-         <a href="http://181.65.149.146/sisgedonew/app/main.php" v-if="tramite.estado>2" class="btn btn-primary btn-sm" target="_blank" data-placement="top" data-toggle="tooltip" title="Realizar Seguimiento en el SISGEDO ingresando el N° de Expediente"><i class="fa fa-external-link"></i></a>
+         <a href="http://sisgedo.regionancash.gob.pe/sisgedonew/app/main.php?_op=10&_type=M&fbclid=IwAR2pLzo9mK0dIhZYkjBYlTUAZueLWHwNYmt_trl9i2OKJ7FgURpWfch6UT8" v-if="tramite.estado>2" class="btn btn-primary btn-sm" target="_blank" data-placement="top" data-toggle="tooltip" title="Realizar Seguimiento en el SISGEDO ingresando el N° de Expediente"><i class="fa fa-external-link"></i></a>
 
          <template v-if="tramite.activo!='0'">
          <a href="#" v-if="tramite.estado=='3'" class="btn btn-success btn-sm" v-on:click.prevent="atender(tramite.id,tramite.persona_id)" data-placement="top" data-toggle="tooltip" title="Procesar Como Trámite Atendido" id="btnatent"><i class="fa fa-check-square-o"></i></a>
@@ -590,66 +590,6 @@
 
 
                   <tr><td colspan="5" style="    border-right: 2px #006699 solid;" class="marco seccionblank">&nbsp;</td></tr>
-                  <tr>
-                      <td colspan="5" style="    border-right: 2px #006699 solid;"><table cellspacing="0" border="0" cellpadding="0"><tbody><tr><td width="10" background="<?php echo e(asset('/img/sisgedo/titulo1.jpg')); ?>" height="10">&nbsp;</td><td width="90%" align="left" class="marco seccion">&nbsp;DESTINO(S) - DERIVACION DEL DOCUMENTO</td><td background="<?php echo e(asset('/img/sisgedo/titulo3.jpg')); ?>" height="20" align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></tbody></table></td>
-                  </tr>	
-
-
-                  <tr valign="middle">
-                      <td width="1%" class="marco" >&nbsp;</td>	
-                        <td width="22%" class="etiqueta" align="right">Forma&nbsp;&nbsp;</td>
-                        <td width="1%" class="objeto">&nbsp;</td>
-                        <td width="78%" class="objeto" valign="top">	
-
-
-                            <label for="radioInterno" style="color: #006699!important;">Copia</label>
-                               										
-                            <input type="checkbox" id="CHECKFORMA" v-model="forma" style="display:inline-block;" disabled class="radiomuestra">
-
-
-                      </td>
-                        <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
-                  </tr>	
-
-
-
-                  <tr valign="middle">
-                      <td width="1%" class="marco" >&nbsp;</td>	
-                        <td width="22%" class="etiqueta" align="right">Unidad Orgánica&nbsp;&nbsp;</td>
-                        <td width="1%" class="objeto">&nbsp;</td>
-                        <td width="78%" class="objeto" valign="top">	
-                               										                    
-                           <input type="text" class="cajatexto txtmuestra" id="txtUnidadOrganica" name="txtUnidadOrganica" placeholder="" maxlength="20" v-model="codUndOrg"  readonly size="6">
-
-                         <img src="<?php echo e(asset('/img/sisgedo/search.gif')); ?>" alt="Buscar" height="14" width="16" border="0" style="cursor:pointer"> 
-                     
-
-                        <select class="cajatexto" id="cbuUnidadOrganica" name="cbuUnidadOrganica" v-model="modelUnidadOrg" style="width:450px;">
-                            <option  value="1">{{unidadOrganica}}</option>
-                      </select>
-
-                      </td>
-                        <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
-                  </tr>	
-
-
-
-
-                  <tr valign="middle">
-                      <td width="1%" class="marco" >&nbsp;</td>	
-                        <td width="22%" class="etiqueta" align="right">Detalle&nbsp;&nbsp;</td>
-                        <td width="1%" class="objeto">&nbsp;</td>
-                        <td width="78%" class="objeto" valign="top">	
-                               										
-
-                           <input type="text" class="cajatexto txtmuestra" id="txtDetalleUO" name="txtDetalleUO" placeholder="" maxlength="500" v-model="detalleUnidadOrg" readonly size="60">
-
-
-                      </td>
-                        <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
-                  </tr>	
-
-                  <tr><td colspan="5" style="    border-right: 2px #006699 solid;" class="marco seccionblank">&nbsp;</td></tr>
 
 
                   
@@ -689,7 +629,7 @@
 
         <button type="button" class="btn btn-success" id="btnSaveA" @click="atender(tramiteid,tramipersona_id)" v-if="parseInt(estado)==3 && activo!='0' && activo!='2'"><i class="fa fa-check-square-o" aria-hidden="true"></i>  Confirmar Trámite Atendido</button>
 
-        <a href="http://181.65.149.146/sisgedonew/app/main.php" target="_blank" v-if="parseInt(estado)>=3"><h4 style="color: blue;">Click Aquí para Realizar el Seguimiento de este Trámite en el SISGEDO: Debe de Ingresar el N° de Expediente</h4></a>
+        <a href="http://sisgedo.regionancash.gob.pe/sisgedonew/app/main.php?_op=10&_type=M&fbclid=IwAR2pLzo9mK0dIhZYkjBYlTUAZueLWHwNYmt_trl9i2OKJ7FgURpWfch6UT8" target="_blank" v-if="parseInt(estado)>=3"><h4 style="color: blue;">Click Aquí para Realizar el Seguimiento de este Trámite en el SISGEDO: Debe de Ingresar el N° de Expediente</h4></a>
 </center>
 
 
@@ -1293,66 +1233,6 @@
                    </tr>	
  
  
- 
-                   <tr><td colspan="5" style="    " class="marco seccionblank">&nbsp;</td></tr>
-                   <tr>
-                       <td colspan="5" style="    "><table cellspacing="0" border="0" cellpadding="0"><tbody><tr><td width="10" background="<?php echo e(asset('/img/sisgedo/titulo1.jpg')); ?>" height="10">&nbsp;</td><td width="90%" align="left" class="marco seccion">&nbsp;DESTINO(S) - DERIVACION DEL DOCUMENTO</td><td background="<?php echo e(asset('/img/sisgedo/titulo3.jpg')); ?>" height="20" align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></tbody></table></td>
-                   </tr>	
- 
- 
-                   <tr valign="middle">
-                       <td width="1%" class="marco" >&nbsp;</td>	
-                         <td width="22%" class="etiqueta" align="right">Forma&nbsp;&nbsp;</td>
-                         <td width="1%" class="objeto">&nbsp;</td>
-                         <td width="78%" class="objeto" valign="top">	
- 
- 
-                             <label for="radioInterno" style="">Copia</label>
-                                                    
-                             <input type="checkbox" id="CHECKFORMA" v-model="forma" style="display:inline-block;" disabled class="radiomuestra">
- 
- 
-                       </td>
-                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
-                   </tr>	
- 
- 
- 
-                   <tr valign="middle">
-                       <td width="1%" class="marco" >&nbsp;</td>	
-                         <td width="22%" class="etiqueta" align="right">Unidad Orgánica&nbsp;&nbsp;</td>
-                         <td width="1%" class="objeto">&nbsp;</td>
-                         <td width="78%" class="objeto" valign="top">	
-                                                                        
-                            <input type="text" class="cajatexto txtmuestra" id="txtUnidadOrganica" name="txtUnidadOrganica" placeholder="" maxlength="20" v-model="codUndOrg"  readonly size="6">
- 
-                          <img src="<?php echo e(asset('/img/sisgedo/search.gif')); ?>" alt="Buscar" height="14" width="16" border="0" style="cursor:pointer"> 
-                      
- 
-                         <select class="cajatexto" id="cbuUnidadOrganica" name="cbuUnidadOrganica" v-model="modelUnidadOrg" style="width:450px;">
-                             <option  value="1">{{unidadOrganica}}</option>
-                       </select>
- 
-                       </td>
-                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
-                   </tr>	
- 
- 
- 
- 
-                   <tr valign="middle">
-                       <td width="1%" class="marco" >&nbsp;</td>	
-                         <td width="22%" class="etiqueta" align="right">Detalle&nbsp;&nbsp;</td>
-                         <td width="1%" class="objeto">&nbsp;</td>
-                         <td width="78%" class="objeto" valign="top">	
-                                                    
- 
-                            <input type="text" class="cajatexto txtmuestra" id="txtDetalleUO" name="txtDetalleUO" placeholder="" maxlength="500" v-model="detalleUnidadOrg" readonly size="60">
- 
- 
-                       </td>
-                         <td width="1%" class="objeto" style="    ">&nbsp;</td>
-                   </tr>	
  
                    <tr><td colspan="5" style="    " class="marco seccionblank">&nbsp;</td></tr>
  

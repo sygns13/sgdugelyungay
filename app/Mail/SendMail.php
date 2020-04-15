@@ -190,12 +190,12 @@ class SendMail extends Mailable
             $mensaje.="<b>Datos de Destino - UGEL YUNGAY</b><br>";
             $mensaje.="Unidad Orgánica : ".$unidadorg->nombre."<br>";
 
-            if($formacopia==1)
+            /*if($formacopia==1)
             {
                 $mensaje.="Forma : Copia<br>";
             }
             
-            $mensaje.="Detalle : ".$detalledestino."<br>";
+            $mensaje.="Detalle : ".$detalledestino."<br>";*/
 
 
            // $mensaje.="<br><br>";
@@ -316,12 +316,12 @@ class SendMail extends Mailable
             $mensaje.="<b>Datos de Destino - UGEL YUNGAY</b><br>";
             $mensaje.="Unidad Orgánica : ".$unidadorg->nombre."<br>";
 
-            if($formacopia==1)
+            /*if($formacopia==1)
             {
                 $mensaje.="Forma : Copia<br>";
             }
             
-            $mensaje.="Detalle : ".$detalledestino."<br>";
+            $mensaje.="Detalle : ".$detalledestino."<br>";*/
 
 
 
@@ -412,7 +412,7 @@ class SendMail extends Mailable
 
             $mensaje.="<br><br>";
             $mensaje.="Mediante el presente mensaje de correo electrónico se le remite la confirmación de ingreso de su trámite al SISGEDO (Sistema de Gestión Documental) por parte del operador del sistema, del siguiente trámite ingresado por usted a la plataforma: <a href='http://tramite.ugelyungay.gob.pe' target='_blank'>http://tramite.ugelyungay.gob.pe</a>. <br><br> 
-                Por lo que desde ahora Puede realizar el seguimiento de su trámite en el SISGEDO empleando su número de Expediente: N° <b color='blue'>".$expediente."</b>. ingresando al sigiente link:  <a href='http://181.65.149.146/sisgedonew/app/main.php' target='_blank'>http://181.65.149.146/sisgedonew/app/main.php.</a> <br><br>";
+                Por lo que desde ahora Puede realizar el seguimiento de su trámite en el SISGEDO empleando su número de Expediente: N° <b color='blue'>".$expediente."</b>. ingresando al sigiente link:  <a href='http://sisgedo.regionancash.gob.pe/sisgedonew/app/main.php?fbclid=IwAR1Rc3E_CzGvjVtTLXzYUULiug7D_Xieo7kCJB4s7JYWvZhtynzdhergfVA' target='_blank'>http://sisgedo.regionancash.gob.pe/sisgedonew/app/main.php?fbclid=IwAR1Rc3E_CzGvjVtTLXzYUULiug7D_Xieo7kCJB4s7JYWvZhtynzdhergfVA.</a> <br><br>";
 
             $mensaje.="<b>Fecha de Registro:".pasFechaVista($fecha)."</b><br><br>";
             $mensaje.="<b>DOCUMENTO:".$numero." - ".$siglas."</b><br><br>";
@@ -436,12 +436,12 @@ class SendMail extends Mailable
             $mensaje.="<b>Datos de Destino - UGEL YUNGAY</b><br>";
             $mensaje.="Unidad Orgánica : ".$unidadorg->nombre."<br>";
 
-            if($formacopia==1)
+            /*if($formacopia==1)
             {
                 $mensaje.="Forma : Copia<br>";
             }
             
-            $mensaje.="Detalle : ".$detalledestino."<br>";
+            $mensaje.="Detalle : ".$detalledestino."<br>";*/
 
 
 
@@ -532,7 +532,7 @@ class SendMail extends Mailable
 
             $mensaje.="<br><br>";
             $mensaje.="Mediante el presente mensaje de correo electrónico se le remite la confirmación de Atención de su trámite ingresado por usted mediante la plataforma web: <a href='http://tramite.ugelyungay.gob.pe' target='_blank'>http://tramite.ugelyungay.gob.pe</a>. <br><br> 
-                Puede realizar el seguimiento de la atención que se le brindó a su trámite en el SISGEDO (Sistema de Gestión Documental) empleando su número de Expediente: N° <b color='blue'>".$expediente."</b>. ingresando al sigiente link:  <a href='http://181.65.149.146/sisgedonew/app/main.php' target='_blank'>http://181.65.149.146/sisgedonew/app/main.php.</a> <br><br>";
+                Puede realizar el seguimiento de la atención que se le brindó a su trámite en el SISGEDO (Sistema de Gestión Documental) empleando su número de Expediente: N° <b color='blue'>".$expediente."</b>. ingresando al sigiente link:  <a href='http://sisgedo.regionancash.gob.pe/sisgedonew/app/main.php?fbclid=IwAR1Rc3E_CzGvjVtTLXzYUULiug7D_Xieo7kCJB4s7JYWvZhtynzdhergfVA' target='_blank'>http://sisgedo.regionancash.gob.pe/sisgedonew/app/main.php?fbclid=IwAR1Rc3E_CzGvjVtTLXzYUULiug7D_Xieo7kCJB4s7JYWvZhtynzdhergfVA.</a> <br><br>";
 
             $mensaje.="<b>Fecha de Registro:".pasFechaVista($fecha)."</b><br><br>";
             $mensaje.="<b>DOCUMENTO:".$numero." - ".$siglas."</b><br><br>";
@@ -556,12 +556,12 @@ class SendMail extends Mailable
             $mensaje.="<b>Datos de Destino - UGEL YUNGAY</b><br>";
             $mensaje.="Unidad Orgánica : ".$unidadorg->nombre."<br>";
 
-            if($formacopia==1)
+            /*if($formacopia==1)
             {
                 $mensaje.="Forma : Copia<br>";
             }
             
-            $mensaje.="Detalle : ".$detalledestino."<br>";
+            $mensaje.="Detalle : ".$detalledestino."<br>";*/
 
 
 

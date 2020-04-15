@@ -249,72 +249,7 @@
 
   
   
-  
-                    <tr><td colspan="5" style="    border-right: 2px #006699 solid;" class="marco seccionblank">&nbsp;</td></tr>
-                    <tr>
-                        <td colspan="5" style="    border-right: 2px #006699 solid;"><table cellspacing="0" border="0" cellpadding="0"><tbody><tr><td width="10" background="<?php echo e(asset('/img/sisgedo/titulo1.jpg')); ?>" height="10">&nbsp;</td><td width="90%" align="left" class="marco seccion">&nbsp;DESTINO(S) - DERIVACION DEL DOCUMENTO</td><td background="<?php echo e(asset('/img/sisgedo/titulo3.jpg')); ?>" height="20" align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></tbody></table></td>
-                    </tr>	
-  
-  
-                    <tr valign="middle">
-                        <td width="1%" class="marco" >&nbsp;</td>	
-                          <td width="22%" class="etiqueta" align="right">Forma&nbsp;&nbsp;</td>
-                          <td width="1%" class="objeto">&nbsp;</td>
-                          <td width="78%" class="objeto" valign="top">	
-  
-  
-                              <label for="radioInterno" style="color: #006699!important;">Copia</label>
-                                                     
-                              <input type="checkbox" id="CHECKFORMA" v-model="newForma" style="display:inline-block;">
-
-  
-  
-                        </td>
-                          <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
-                    </tr>	
-  
-  
-  
-                    <tr valign="middle">
-                        <td width="1%" class="marco" >&nbsp;</td>	
-                          <td width="22%" class="etiqueta" align="right">Unidad Orgánica&nbsp;&nbsp;</td>
-                          <td width="1%" class="objeto">&nbsp;</td>
-                          <td width="78%" class="objeto" valign="top">	
-                                                                         
-                             <input type="text" class="cajatexto" id="txtUnidadOrganica" name="txtUnidadOrganica" placeholder="" maxlength="20" v-model="codUndOrg"  style="width: 100px; display:inline-block;" onkeypress="return soloNumeros(event);" @keyup="$event.keyCode === 13 ? buscarUnidadOrganica() : false" size="6" data-toggle="tooltip" data-placement="top" title="Ingrese el código de la unidad de destino del documento, o seleccione">
-
-
-  
-                           <img src="<?php echo e(asset('/img/sisgedo/search.gif')); ?>" alt="Buscar" height="14" width="16" border="0" style="cursor:pointer" @click.prevent="buscarUnidadOrganica()"> 
-                       
-                    <select class="cajatexto" id="cbuUnidadOrganica" name="cbuUnidadOrganica" v-model="newUnidadOrganica" style="width:450px;">
-                      <option value="0" disabled>Seleccione Unidad Orgánica</option>
-                      <template v-for="unidadorg, key in unidadorganicas">
-                          <option   v-bind:value="unidadorg.id">{{unidadorg.nombre}} - ({{unidadorg.codigo}})</option>
-                          <input type="hidden" class="clsunidadorges" v-bind:id="'idorg'+unidadorg.id" v-bind:value="unidadorg.codigo">
-                        </template>
-                    </select>
-
-
-  
-                        </td>
-                          <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
-                    </tr>	
-  
-  
-  
-  
-                    <tr valign="middle">
-                        <td width="1%" class="marco" >&nbsp;</td>	
-                          <td width="22%" class="etiqueta" align="right">Detalle&nbsp;&nbsp;</td>
-                          <td width="1%" class="objeto">&nbsp;</td>
-                          <td width="78%" class="objeto" valign="top">	
-                             <input type="text" class="cajatexto" id="txtDetalleUO" name="txtDetalleUO" placeholder="" maxlength="500" v-model="newDetalleDestino" size="60" data-toggle="tooltip" data-placement="top" title="Ingrese algún detalle adicional del documento (Puede ingresar alguna observación)"> 
-                        </td>
-                          <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
-                    </tr>	
-  
-                    <tr><td colspan="5" style="    border-right: 2px #006699 solid;" class="marco seccionblank">&nbsp;</td></tr>
+                    <tr><td colspan="5" style="    border-right: 2px #006699 solid;" class="marco seccionblank">&nbsp;</td></tr> 
   
   
                     

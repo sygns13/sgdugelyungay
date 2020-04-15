@@ -273,7 +273,7 @@
 
 
   
-  
+  {{--
   
                     <tr><td colspan="5" style="    border-right: 2px #006699 solid;" class="marco seccionblank">&nbsp;</td></tr>
                     <tr>
@@ -338,8 +338,8 @@
                         </td>
                           <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
                     </tr>	
-  
-                    <tr><td colspan="5" style="    border-right: 2px #006699 solid;" class="marco seccionblank">&nbsp;</td></tr>
+  --}}
+                    <tr><td colspan="5" style="    border-right: 2px #006699 solid;" class="marco seccionblank">&nbsp;</td></tr> 
   
   
                     

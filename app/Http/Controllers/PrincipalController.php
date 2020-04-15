@@ -445,12 +445,12 @@ return response()->json(["datos"=>$datos,"res"=>$res]);
             $msj='Debe ingresar el asunto del documento';
             $selector='txtasunto';
         }
-        elseif(intval($unidadorganica_id)<1)
+    /*elseif(intval($unidadorganica_id)<1)
          {
             $result='0';
             $msj='Debe seleccionar la Unidad Orgánica a la que va dirigida el documento';
             $selector='cbuUnidadOrganica';
-         }
+         }*/
         else{
 
                         /*
@@ -497,7 +497,10 @@ return response()->json(["datos"=>$datos,"res"=>$res]);
         
         $prioridad=Prioridad::find($prioridad_id);
 
-        $unidadorg=Unidadorganica::find($unidadorganica_id);
+        $unidadorganica_id=54; //Tramite Documentario
+        $request->unidadorganica_id=$unidadorganica_id;
+
+       // $unidadorg=Unidadorganica::find($unidadorganica_id);
 
 
                 $newTramite = new Tramite();
@@ -517,7 +520,8 @@ return response()->json(["datos"=>$datos,"res"=>$res]);
 
                 $newTramite->clasificacion_id='4';
                 $newTramite->formacopia=$formacopia;
-                $newTramite->unidadorganica_id=$unidadorganica_id;
+               // $newTramite->unidadorganica_id=$unidadorganica_id;
+               $newTramite->unidadorganica_id=$unidadorganica_id; //Tramite Documentario
                 $newTramite->detalledestino=$detalledestino;
 
                 $newTramite->estado='1';
@@ -533,7 +537,7 @@ return response()->json(["datos"=>$datos,"res"=>$res]);
                 $newTramite->cargo=$cargo;
                 $newTramite->clasificacion='Ninguna';
                 $newTramite->dias=$prioridad->dias;
-                $newTramite->unidadorganica=$unidadorg->nombre;
+               // $newTramite->unidadorganica=$unidadorg->nombre;
 
 
                 $newTramite->rutafile2=$archivo2;

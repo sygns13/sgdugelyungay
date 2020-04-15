@@ -96,7 +96,7 @@
 
           <a href="#" class="btn btn-info btn-sm" v-on:click.prevent="verTramite(tramite)" data-placement="top" data-toggle="tooltip" title="Ver Detalles del Trámite"><i class="fa fa-search"></i></a>
           
-         <a href="http://181.65.149.146/sisgedonew/app/main.php" v-if="tramite.estado>2" class="btn btn-primary btn-sm" target="_blank" data-placement="top" data-toggle="tooltip" title="Realizar Seguimiento en el SISGEDO"><i class="fa fa-external-link"></i></a>
+         <a href="http://sisgedo.regionancash.gob.pe/sisgedonew/app/main.php?fbclid=IwAR1Rc3E_CzGvjVtTLXzYUULiug7D_Xieo7kCJB4s7JYWvZhtynzdhergfVA" v-if="tramite.estado>2" class="btn btn-primary btn-sm" target="_blank" data-placement="top" data-toggle="tooltip" title="Realizar Seguimiento en el SISGEDO"><i class="fa fa-external-link"></i></a>
 
      {{--     <a href="#" v-if="tramite.estado=='4'" class="btn btn-success btn-sm" v-on:click.prevent="archivar(tramite)" data-placement="top" data-toggle="tooltip" title="Archivar Trámite"><i class="fa fa-archive"></i></a>
 
@@ -630,7 +630,7 @@
                         <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
                   </tr>	
 
-
+{{-- 
 
                   <tr><td colspan="5" style="    border-right: 2px #006699 solid;" class="marco seccionblank">&nbsp;</td></tr>
                   <tr>
@@ -691,7 +691,7 @@
                       </td>
                         <td width="1%" class="objeto" style="    border-right: 2px #006699 solid;">&nbsp;</td>
                   </tr>	
-
+--}}
                   <tr><td colspan="5" style="    border-right: 2px #006699 solid;" class="marco seccionblank">&nbsp;</td></tr>
 
 
@@ -727,7 +727,7 @@
     <div class="box-footer">
 
         <template  v-if="parseInt(estado)==4">
-      <a href="http://181.65.149.146/sisgedonew/app/main.php" target="_blank"><h4 style="color: blue;">Click Aquí para Realizar el Seguimiento de este Trámite en el SISGEDO: Debe de Ingresar el N° de Expediente</h4></a>
+      <a href="http://sisgedo.regionancash.gob.pe/sisgedonew/app/main.php?fbclid=IwAR1Rc3E_CzGvjVtTLXzYUULiug7D_Xieo7kCJB4s7JYWvZhtynzdhergfVA" target="_blank"><h4 style="color: blue;">Click Aquí para Realizar el Seguimiento de este Trámite en el SISGEDO: Debe de Ingresar el N° de Expediente</h4></a>
         </template>
    {{--   <button type="submit" class="btn btn-primary" id="btnGuardar"><i class="fa fa-save" aria-hidden="true"></i>  Registrar</button>
 
@@ -1152,7 +1152,7 @@
                  </tr>	
 
 
-
+{{-- 
                  <tr><td colspan="5" style="    " class="marco seccionblank">&nbsp;</td></tr>
                  <tr>
                      <td colspan="5" style="    "><table cellspacing="0" border="0" cellpadding="0"><tbody><tr><td width="10" background="{{ asset('/img/sisgedo/titulo1.jpg') }}" height="10">&nbsp;</td><td width="90%" align="left" class="marco seccion">&nbsp;DESTINO(S) - DERIVACION DEL DOCUMENTO</td><td background="{{ asset('/img/sisgedo/titulo3.jpg') }}" height="20" align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></tbody></table></td>
@@ -1212,7 +1212,7 @@
                      </td>
                        <td width="1%" class="objeto" style="    ">&nbsp;</td>
                  </tr>	
-
+--}}
                  <tr><td colspan="5" style="    " class="marco seccionblank">&nbsp;</td></tr>
 
 

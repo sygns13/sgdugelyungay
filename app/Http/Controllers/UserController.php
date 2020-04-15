@@ -109,7 +109,7 @@ class UserController extends Controller
         ];
     }
 
-    public function verpersona($dni)
+    public function verpersonaOld($dni)
     {
        $persona=Persona::where('dni',$dni)->where('borrado','0')->get();
 
@@ -151,6 +151,74 @@ class UserController extends Controller
 
        return response()->json(["datos"=>$datos,"res"=>$res, "idPersona"=>$idPersona]);
 
+    }
+
+    public function verpersona(Request $request)
+    {
+
+        $dni=$request->dni;
+
+        $persona=Persona::where('dni',$dni)->where('borrado','0')->get();
+
+       $idPersona="0";
+       $datos="";
+
+       $consulta="";
+
+
+       foreach ($persona as $key => $dato) {
+          $idPersona=$dato->id;
+       }
+
+        $res=0;
+
+        if( $idPersona=="0")
+       {
+
+        error_reporting(E_ALL ^ E_NOTICE);
+        //$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImNyaXN0aWFuXzdfNzBAaG90bWFpbC5jb20ifQ.tsIAAU8PPZNMnqf9uu79GF5kfERpoDhwLMpynkOVF-Y";
+        $token="Bearer 768f646027108db8a95c64a9b385c4b1d7bd92eb22c9213ba1c2f685794ef418";
+
+       // $consulta = file_get_contents('http://aplicaciones007.jne.gob.pe/srop_publico/Consulta/Afiliado/GetNombresCiudadano?DNI='.$dni);
+       // $consulta = file_get_contents('https://dniruc.apisperu.com/api/v1/dni/'.$dni.'?token='.$token);
+
+
+       $opts = [
+        "http" => [
+            "method" => "GET",
+            "header" => "Authorization: Bearer 768f646027108db8a95c64a9b385c4b1d7bd92eb22c9213ba1c2f685794ef418" .
+                ""
+        ]
+    ];
+
+    $context = stream_context_create($opts);
+
+      // $consulta = file_get_contents('https://dniruc.apisperu.com/api/v1/dni/'.$dni.'?token='.$token);
+       $consulta = file_get_contents('https://apiperu.dev/api/dni/'.$dni, false, $context);
+       // $partes = explode("|", $consulta);
+
+       $consulta=json_decode($consulta);
+
+         $datos = array(
+                0 => $dni, 
+                1 => $consulta->data->nombres, 
+                2 => $consulta->data->apellido_paterno,
+                3 => $consulta->data->apellido_materno,
+        ); 
+
+
+if($consulta->success){
+    $res=1;
+}
+
+
+}
+
+
+
+
+
+return response()->json(["datos"=>$datos,"res"=>$res,"consulta"=>$consulta, "idPersona"=>$idPersona]);
     }
 
     /**
